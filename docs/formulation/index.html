@@ -1005,7 +1005,7 @@
 <p>Formulation - AMPLE - A Material Point Learning Environment                     </p>
 <p><a href="/">AMPLE: A Material Point Learning Environment</a></p>
 <h1 id="formulation">Formulation<a class="headerlink" href="#formulation" title="Permanent link">&para;</a></h1>
-<p>AMPLE is based on a number of published papers that describe fully the underlying continuum mechanics framework, material point discretisation approach and the numerical solution method. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper [1] provides the scientific basis of AMPLE. Key aspects of the formulation are described below.</p>
+<p>AMPLE is based on a number of published papers that describe fully the underlying continuum mechanics framework, material point discretisation approach and the numerical solution method. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper<sup id="fnref:charlton2017"><a class="footnote-ref" href="#fn:charlton2017">1</a></sup> provides the scientific basis of AMPLE. Key aspects of the formulation are described below.</p>
 <h2 id="equilibrium">Equilibrium<a class="headerlink" href="#equilibrium" title="Permanent link">&para;</a></h2>
 <p>AMPLE adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
@@ -1046,7 +1046,7 @@
 <p>calculate the stiffness contribution, <span class="arithmatex">\([k^p]\)</span>, of all of the material points and assemble the individual contribution of each material point into the global stiffness matrix;</p>
 </li>
 <li>
-<p>calculate the internal force contribution, <span class="arithmatex">\(\{f^p\}\)</span>, of all of the material points and assemble the contributions into the global internal force vector;</p>
+<p>calculate the internal force contribution, <span class="arithmatex">\(\\{f^p\\}\)</span>, of all of the material points and assemble the contributions into the global internal force vector;</p>
 </li>
 <li>
 <p>increment the external tractions and/or body forces and solve for the nodal displacements within a loadstep, using the Newton-Raphson process until the out-of-balance force converges within a specified tolerance;</p>
@@ -1061,7 +1061,6 @@
 <p>These steps are shown schematically below.</p>
 <p><img alt="MPM steps" src="../../img/MPMsteps.jpg" /></p>
 <hr />
-<p>[1] TJ Charlton, WM Coombs &amp; CE Augarde, <a href="https://www.sciencedirect.com/science/article/pii/S0045794917303395?via%3Dihub">iGIMP: an implicit Generalised Interpolation Material Point Method for large deformations</a>, Computers and Structures, 190 (2017), 108-125. <em>Gold open access</em></p>
 <p><img alt="AMPLE:  A Material Point Learning Environment" src="/assets/img/plate.jpg" /></p>
 <h2 id="ample-a-material-point-learning-environment">AMPLE: A Material Point Learning Environment<a class="headerlink" href="#ample-a-material-point-learning-environment" title="Permanent link">&para;</a></h2>
 <p>AMPLE was developed to address the severe learning curve for researchers wishing to understand, and start using, the material point method. The software was developed at Durham University between 2014 and 2018 by Dr Will Coombs as a platform to test our new research ideas and understand the impact of adopting different material point variants. AMPLE was first released in January 2019 at the 2nd International Conference on the Material Point Method held at Cambridge University, UK.</p>
@@ -1071,6 +1070,14 @@
 <li><a href="https://twitter.com/@DU_comp_mech">DU Computational mechanics on X</a></li>
 </ul>
 <p>2020 © AMPLE: A Material Point Learning Environment</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:charlton2017">
+<p>TJ Charlton, WM Coombs &amp; CE Augarde, <a href="https://www.sciencedirect.com/science/article/pii/S0045794917303395?via%3Dihub">iGIMP: an implicit Generalised Interpolation Material Point Method for large deformations</a>, Computers and Structures, 190 (2017), 108-125. <em>Gold open access</em>&#160;<a class="footnote-backref" href="#fnref:charlton2017" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 
