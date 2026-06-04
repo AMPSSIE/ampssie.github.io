@@ -1324,42 +1324,42 @@
   
 
 
-<h1 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h1>
-<h2 id="why-the-material-point-method">Why the Material Point Method?<a class="headerlink" href="#why-the-material-point-method" title="Permanent link">&para;</a></h2>
+<h1 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">¶</a></h1>
+<h2 id="why-the-material-point-method">Why the Material Point Method?<a class="headerlink" href="#why-the-material-point-method" title="Permanent link">¶</a></h2>
 <p>Solid mechanics-based numerical analysis in the offshore renewable energy industry, and engineering in general, is dominated by the Finite Element Method (FEM). However, the FEM struggles to analyze problems involving very large deformation due to issues associated with:</p>
 <ul>
 <li>Mesh distortion</li>
 <li>Remeshing requirements</li>
 <li>Remapping of state variables (such as parameters for the history-dependent nature of soil)</li>
 </ul>
-<h3 id="alternative-methods-and-their-limitations">Alternative Methods and Their Limitations<a class="headerlink" href="#alternative-methods-and-their-limitations" title="Permanent link">&para;</a></h3>
+<h3 id="alternative-methods-and-their-limitations">Alternative Methods and Their Limitations<a class="headerlink" href="#alternative-methods-and-their-limitations" title="Permanent link">¶</a></h3>
 <p>Several alternative numerical methods exist, each with distinct advantages and limitations:</p>
-<h4 id="coupled-eulerian-lagrangian-method-celm">Coupled Eulerian-Lagrangian Method (CELM)<a class="headerlink" href="#coupled-eulerian-lagrangian-method-celm" title="Permanent link">&para;</a></h4>
+<h4 id="coupled-eulerian-lagrangian-method-celm">Coupled Eulerian-Lagrangian Method (CELM)<a class="headerlink" href="#coupled-eulerian-lagrangian-method-celm" title="Permanent link">¶</a></h4>
 <p>The CELM avoids many of the FEM's difficulties and is the primary numerical method that has been used to model large deformation problems to date, mainly due to its availability in commercial software (Abaqus). However:</p>
 <ul>
 <li>Requires fine meshes (high computational cost and time)</li>
 <li>Struggles with boundary conditions and tracking of free surfaces</li>
 <li>Has not achieved widespread use in the ORE industry</li>
 </ul>
-<h4 id="particle-finite-element-method-pfem">Particle Finite Element Method (PFEM)<a class="headerlink" href="#particle-finite-element-method-pfem" title="Permanent link">&para;</a></h4>
+<h4 id="particle-finite-element-method-pfem">Particle Finite Element Method (PFEM)<a class="headerlink" href="#particle-finite-element-method-pfem" title="Permanent link">¶</a></h4>
 <p>The PFEM relies on continuous and extensive remeshing, but:</p>
 <ul>
 <li>Is computationally expensive</li>
 <li>Unproven for 3D ORE problems</li>
 <li>Not available commercially</li>
 </ul>
-<h4 id="discrete-element-method-dem">Discrete Element Method (DEM)<a class="headerlink" href="#discrete-element-method-dem" title="Permanent link">&para;</a></h4>
+<h4 id="discrete-element-method-dem">Discrete Element Method (DEM)<a class="headerlink" href="#discrete-element-method-dem" title="Permanent link">¶</a></h4>
 <p>The DEM has been adopted by industry for some soil-structure interaction problems due to the availability of commercial and open source software (PFC, Yade, LAMMPS, etc.). However:</p>
 <ul>
 <li>Issues exist in calibrating suitable particle interaction models to represent bulk material behaviour</li>
 <li>Analyses are very expensive compared to continuum-based approaches</li>
 </ul>
-<h3 id="mpm-advantages">MPM Advantages<a class="headerlink" href="#mpm-advantages" title="Permanent link">&para;</a></h3>
+<h3 id="mpm-advantages">MPM Advantages<a class="headerlink" href="#mpm-advantages" title="Permanent link">¶</a></h3>
 <p><strong>The Material Point Method (MPM) overcomes the FEM/CELM/PFEM/DEM issues</strong> and has been demonstrated by researchers at Durham University to be viable for ORE industry-relevant, large deformation soil-structure interaction problems.</p>
 <p>We believe that the MPM is the ideal approach to tackle the large deformation soil-structure interaction problems faced by the ORE community.</p>
-<h2 id="building-on-previous-work">Building on Previous Work<a class="headerlink" href="#building-on-previous-work" title="Permanent link">&para;</a></h2>
+<h2 id="building-on-previous-work">Building on Previous Work<a class="headerlink" href="#building-on-previous-work" title="Permanent link">¶</a></h2>
 <p>Through existing EPSRC support, Durham University has developed the AMPLE code—an implicit implementation of the MPM designed to help people understand and use the method for problems ranging from small demonstrations to large-scale simulations.</p>
-<h3 id="key-features-of-durhams-mpm-implementation">Key Features of Durham's MPM Implementation<a class="headerlink" href="#key-features-of-durhams-mpm-implementation" title="Permanent link">&para;</a></h3>
+<h3 id="key-features-of-durhams-mpm-implementation">Key Features of Durham's MPM Implementation<a class="headerlink" href="#key-features-of-durhams-mpm-implementation" title="Permanent link">¶</a></h3>
 <p><strong>Implicit Formulation</strong>: As with all of Durham's MPM research, the governing equations controlling the physical response are solved implicitly. This is in contrast to most other open source codes, which are restricted to explicit analysis. These explicit implementations have performance limitations when solving coupled (soil-water) interaction problems due to the CFL condition severely constraining the maximum time step size.</p>
 <p><strong>Julia Language</strong>: The code has been implemented in the high-performance Julia programming language (julialang.org). Julia was selected as it provides a good balance between performance and readability, which allows accessible code to be written that is:</p>
 <ul>
@@ -1369,7 +1369,7 @@
 <li>Efficient across different operating systems and high-performance computing (HPC) hardware</li>
 </ul>
 <p><strong>Soil-Structure Interaction</strong>: The existing implementation already includes soil-structure interaction for coupled problems, providing the core base for this proposal.</p>
-<h3 id="the-transformation-challenge">The Transformation Challenge<a class="headerlink" href="#the-transformation-challenge" title="Permanent link">&para;</a></h3>
+<h3 id="the-transformation-challenge">The Transformation Challenge<a class="headerlink" href="#the-transformation-challenge" title="Permanent link">¶</a></h3>
 <p>The key progression offered by this project is making this academic, command-line accessed software accessible to engineers working in the ORE sector <strong>without a low-level coding requirement</strong>.</p>
 <p>The approach to transforming this academic software into an open source software environment will be informed by successful examples, such as:</p>
 <ul>
@@ -1380,9 +1380,9 @@
 <li>OpenSees</li>
 <li>OpenSCAD</li>
 </ul>
-<h2 id="work-packages">Work Packages<a class="headerlink" href="#work-packages" title="Permanent link">&para;</a></h2>
+<h2 id="work-packages">Work Packages<a class="headerlink" href="#work-packages" title="Permanent link">¶</a></h2>
 <p>The project has four Work Packages (WPs) designed to deliver a maintainable, useable, and industry-ready software tool.</p>
-<h3 id="wp1-maintainable-and-sustainable-base-code-environment">WP1: Maintainable and Sustainable Base Code Environment<a class="headerlink" href="#wp1-maintainable-and-sustainable-base-code-environment" title="Permanent link">&para;</a></h3>
+<h3 id="wp1-maintainable-and-sustainable-base-code-environment">WP1: Maintainable and Sustainable Base Code Environment<a class="headerlink" href="#wp1-maintainable-and-sustainable-base-code-environment" title="Permanent link">¶</a></h3>
 <p>This WP focuses on setting up an appropriate platform for long-term software sustainability. The developed software will be open access under a GPL License, allowing other users to develop new software features and capabilities beyond this project's scope.</p>
 <p><strong>Key Activities:</strong></p>
 <ul>
@@ -1399,7 +1399,7 @@
 <li>Maintainable base code</li>
 <li>Article in Advances in Engineering Software</li>
 </ul>
-<h3 id="wp2-software-scoping-through-user-engagement">WP2: Software Scoping Through User Engagement<a class="headerlink" href="#wp2-software-scoping-through-user-engagement" title="Permanent link">&para;</a></h3>
+<h3 id="wp2-software-scoping-through-user-engagement">WP2: Software Scoping Through User Engagement<a class="headerlink" href="#wp2-software-scoping-through-user-engagement" title="Permanent link">¶</a></h3>
 <p>End users' needs are core to the developed software. This WP focuses on scoping requirements through focused online workshops with participants from supporting offshore geotechnical stakeholders.</p>
 <p><strong>Focus Areas:</strong></p>
 <ul>
@@ -1416,9 +1416,9 @@
 <li>Software briefing/scoping notes</li>
 <li>Prioritization of tasks/features</li>
 </ul>
-<h3 id="wp3-software-interaction">WP3: Software Interaction<a class="headerlink" href="#wp3-software-interaction" title="Permanent link">&para;</a></h3>
+<h3 id="wp3-software-interaction">WP3: Software Interaction<a class="headerlink" href="#wp3-software-interaction" title="Permanent link">¶</a></h3>
 <p>This WP is split into three components:</p>
-<h4 id="front-end-development">Front-End Development<a class="headerlink" href="#front-end-development" title="Permanent link">&para;</a></h4>
+<h4 id="front-end-development">Front-End Development<a class="headerlink" href="#front-end-development" title="Permanent link">¶</a></h4>
 <ul>
 <li>Define workflow for running an analysis</li>
 <li>Facilitate the use of general material models for soil behaviour</li>
@@ -1430,9 +1430,9 @@
 <li>Anchor penetration</li>
 </ul>
 <p><strong>Python</strong> will be adopted as the industry-standard language for analysis scripting as a high-level software front end. The <strong>STL file format</strong> will be used to define rigid bodies interacting with deformable soil. Additional material constitutive models will be included via the widely used <strong>Abaqus UMAT file format</strong>.</p>
-<h4 id="code-deployment">Code Deployment<a class="headerlink" href="#code-deployment" title="Permanent link">&para;</a></h4>
+<h4 id="code-deployment">Code Deployment<a class="headerlink" href="#code-deployment" title="Permanent link">¶</a></h4>
 <p>Focused on making deployment as straightforward as possible across various operating systems and computational hardware, including local and cloud-based implementations.</p>
-<h4 id="outputs-and-visualization">Outputs and Visualization<a class="headerlink" href="#outputs-and-visualization" title="Permanent link">&para;</a></h4>
+<h4 id="outputs-and-visualization">Outputs and Visualization<a class="headerlink" href="#outputs-and-visualization" title="Permanent link">¶</a></h4>
 <ul>
 <li>Define workflow for visualizing analysis results</li>
 <li>Set output file formats</li>
@@ -1447,7 +1447,7 @@
 <li>Installation guides</li>
 <li>Deployment packages</li>
 </ul>
-<h3 id="wp4-training-and-learning-resources">WP4: Training and Learning Resources<a class="headerlink" href="#wp4-training-and-learning-resources" title="Permanent link">&para;</a></h3>
+<h3 id="wp4-training-and-learning-resources">WP4: Training and Learning Resources<a class="headerlink" href="#wp4-training-and-learning-resources" title="Permanent link">¶</a></h3>
 <p>This WP provides learning resources and training to facilitate use of the developed software. Resources will be provided for users to understand both the fundamental methods/techniques and how to use the software to conduct engineering analysis.</p>
 <p><strong>Learning Resources:</strong></p>
 <ul>
@@ -1463,7 +1463,7 @@
 <li>Comprehensive learning resources</li>
 <li>Training workshops</li>
 </ul>
-<h2 id="research-environment">Research Environment<a class="headerlink" href="#research-environment" title="Permanent link">&para;</a></h2>
+<h2 id="research-environment">Research Environment<a class="headerlink" href="#research-environment" title="Permanent link">¶</a></h2>
 <p>The Department of Engineering at Durham University is the ideal place from which to deliver this project. <strong>Computational Mechanics</strong> is one of the Department's strategic areas of research excellence (one of eight Research Nodes). It includes nine members of academic staff with broad, complementary experience of numerical methods applied to solving engineering problems.</p>
 <p>The project is also supported by Durham University's <strong>Advanced Research Computing (ARC)</strong> team, which provides:</p>
 <ul>
@@ -1473,17 +1473,17 @@
 <li>Understanding and experience of large-scale open source software projects</li>
 <li>Software project management proficiency</li>
 </ul>
-<h2 id="risk-management">Risk Management<a class="headerlink" href="#risk-management" title="Permanent link">&para;</a></h2>
-<h3 id="technical-risk-mitigation">Technical Risk Mitigation<a class="headerlink" href="#technical-risk-mitigation" title="Permanent link">&para;</a></h3>
+<h2 id="risk-management">Risk Management<a class="headerlink" href="#risk-management" title="Permanent link">¶</a></h2>
+<h3 id="technical-risk-mitigation">Technical Risk Mitigation<a class="headerlink" href="#technical-risk-mitigation" title="Permanent link">¶</a></h3>
 <p>All fundamental research objectives have already been achieved via previous EPSRC-funded projects. Technical risks are mitigated by:</p>
 <ul>
 <li>The experience of Durham's ARC team supporting the project</li>
 <li>Proven track record with the MPM approach</li>
 <li>Existing validated and benchmarked implementation</li>
 </ul>
-<h3 id="software-adoption-risk-mitigation">Software Adoption Risk Mitigation<a class="headerlink" href="#software-adoption-risk-mitigation" title="Permanent link">&para;</a></h3>
+<h3 id="software-adoption-risk-mitigation">Software Adoption Risk Mitigation<a class="headerlink" href="#software-adoption-risk-mitigation" title="Permanent link">¶</a></h3>
 <p>Software adoption risk is mitigated by stakeholder involvement from project inception to final delivery, ensuring the developed tool meets real industry needs.</p>
-<h3 id="recruitment-risk-mitigation">Recruitment Risk Mitigation<a class="headerlink" href="#recruitment-risk-mitigation" title="Permanent link">&para;</a></h3>
+<h3 id="recruitment-risk-mitigation">Recruitment Risk Mitigation<a class="headerlink" href="#recruitment-risk-mitigation" title="Permanent link">¶</a></h3>
 <p>Recruitment of suitable staff is mitigated by the named researcher on the proposal who developed the current MPM Julia code and is therefore ideally placed to deliver the proposed project.</p>
 
 

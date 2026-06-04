@@ -990,29 +990,29 @@
 
 <p>Formulation - AMPLE - A Material Point Learning Environment                     </p>
 <p><a href="/">AMPLE: A Material Point Learning Environment</a></p>
-<h1 id="formulation">Formulation<a class="headerlink" href="#formulation" title="Permanent link">&para;</a></h1>
+<h1 id="formulation">Formulation<a class="headerlink" href="#formulation" title="Permanent link">¶</a></h1>
 <p>AMPLE is based on a number of published papers that describe fully the underlying continuum mechanics framework, material point discretisation approach and the numerical solution method. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper [1] provides the scientific basis of AMPLE. Key aspects of the formulation are described below.</p>
-<h2 id="equilibrium">Equilibrium<a class="headerlink" href="#equilibrium" title="Permanent link">&para;</a></h2>
+<h2 id="equilibrium">Equilibrium<a class="headerlink" href="#equilibrium" title="Permanent link">¶</a></h2>
 <p>AMPLE adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
 <p>where <span class="arithmatex">\(\varphi_t\)</span> is the motion of the material body which is subjected to tractions, <span class="arithmatex">\(\{t\}\)</span>, on its boundary, <span class="arithmatex">\(\partial E\)</span> with surface, <span class="arithmatex">\(s\)</span>, and body forces, <span class="arithmatex">\(\{b\}\)</span>, acting over its volume, <span class="arithmatex">\(v\)</span>. These external forces lead to a Cauchy stress field, <span class="arithmatex">\(\{\sigma\}\)</span>, through the body. <span class="arithmatex">\([\nabla_x S_{vp}]\)</span> is the tensorial form of the strain-displacement matrix containing derivatives of the basis functions, <span class="arithmatex">\([S_{vp}]\)</span>, with respect to the updated coordinates, <span class="arithmatex">\(\{x\}\)</span>. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. The equilibrium equation is non-linear in terms of the unknown nodal displacements and can be efficiently solved using the standard implicit Newton-Raphson procedure (see below).</p>
-<h2 id="large-deformation-mechanics">Large deformation mechanics<a class="headerlink" href="#large-deformation-mechanics" title="Permanent link">&para;</a></h2>
+<h2 id="large-deformation-mechanics">Large deformation mechanics<a class="headerlink" href="#large-deformation-mechanics" title="Permanent link">¶</a></h2>
 <p>In large deformation analysis the deformation gradient provides the fundamental link between the original and the deformed states of a body. For elasto-plasticity this deformation gradient can be multiplicatively decomposed into elastic and plastic components. In AMPLE, this multiplicative decomposition is combined with a linear relationship between elastic logarithmic (or Hencky) strains and Kirchhoff stress. This allows any small strain constitutive model to be included within the code without modification.</p>
-<h2 id="constitutive-model">Constitutive model<a class="headerlink" href="#constitutive-model" title="Permanent link">&para;</a></h2>
+<h2 id="constitutive-model">Constitutive model<a class="headerlink" href="#constitutive-model" title="Permanent link">¶</a></h2>
 <p>Constitutive models provide the fundamental link between stress and strain within any stress analysis algorithm. Two constitutive models are included within AMPLE:</p>
 <ul>
 <li>linear elasticity; and</li>
 <li>linear elastic-perfectly plasticity with an associated flow von Mises yield envelope.</li>
 </ul>
 <p>It is straightforward to include other constitutive models.</p>
-<h2 id="material-point-discretisation">Material point discretisation<a class="headerlink" href="#material-point-discretisation" title="Permanent link">&para;</a></h2>
+<h2 id="material-point-discretisation">Material point discretisation<a class="headerlink" href="#material-point-discretisation" title="Permanent link">¶</a></h2>
 <p>In material point methods the physical domain is discretised by a number of material points. These points are used to numerically approximate the stiffness of the elements in the background mesh, essentially replacing the conventional Gauss points (or other integration method). The key difference between material point and finite element methods is that these integration points move relative to the background mesh rather than being directly coupled to the positions of the background grid nodes.</p>
 <p>The internal force contribution of a single material point to the background mesh can be expressed as</p>
 <div class="arithmatex">\[\{f^p\} = [\nabla_x S_{vp}]^{T}\{\sigma\}v_p\]</div>
 <p>where v_p the volume associated with the material point. Linearising the internal force with respect to the unknown nodal displacements gives the stiffness contribution of a single material point to the background mesh as</p>
 <div class="arithmatex">\[[k^p] = [\nabla_x S_{vp}]^{T}[D][\nabla_x S_{vp}]v_p\]</div>
 <p>where <span class="arithmatex">\([D]\)</span> is the stiffness associated with the material point. Note the constitutive models included within AMPLE return the algorithmic consistent tangent that ensures optimum convergence of the Newton process that minimises the global out of balance forces. As with the finite element method, in the material point method the individual contributions of the material points must be assembled into a global stiffness matrix and internal force vector.</p>
-<h2 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">&para;</a></h2>
+<h2 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h2>
 <p>As with other numerical methods that decouple the physical boundaries of the analysis domain with the computational mesh, boundary conditions are one of the more challenging aspects of the material point method.</p>
 <p>In implicit material point formulations <strong>displacement boundary conditions</strong> must, in some way, be imposed on the background mesh. In AMPLE displacement boundary conditions are imposed directly on the background mesh. This restricts the forms of boundaries that can be modelled in the method; see our publications on boundary conditions for how to extend to more complex cases.</p>
 <p>Two types of <strong>external loads</strong> are included within AMPLE:</p>
@@ -1021,11 +1021,11 @@
 <li>point forces that are held at material points.</li>
 </ul>
 <p>Traction boundary conditions are not included in the initial AMPLE release.</p>
-<h2 id="non-linear-solution">Non-linear solution<a class="headerlink" href="#non-linear-solution" title="Permanent link">&para;</a></h2>
+<h2 id="non-linear-solution">Non-linear solution<a class="headerlink" href="#non-linear-solution" title="Permanent link">¶</a></h2>
 <p>AMPLE adopts an implicit solution procedure based on a full Newton-Raphson method. In this iterative method, the stiffness of the background mesh is determined within each iteration of each loadstep based on the stiffness of each of the material points. The algorithm continues until the equilibrium equation converges within a given tolerance. Once equilibrium has been obtained the material points can be updated.</p>
-<h2 id="material-point-update">Material point update<a class="headerlink" href="#material-point-update" title="Permanent link">&para;</a></h2>
+<h2 id="material-point-update">Material point update<a class="headerlink" href="#material-point-update" title="Permanent link">¶</a></h2>
 <p>Once equilibrium has been found the position, volume, deformation gradient, stress and elastic strain at each of the material points needs to be updated by mapping the background grid displacement field to the material points using the basis functions. Once this is complete the background mesh can be replaced or reset as appropriate. In AMPLE the background mesh is simply reset to the original position.</p>
-<h2 id="computational-procedure">Computational procedure<a class="headerlink" href="#computational-procedure" title="Permanent link">&para;</a></h2>
+<h2 id="computational-procedure">Computational procedure<a class="headerlink" href="#computational-procedure" title="Permanent link">¶</a></h2>
 <p>The applied body forces and/or tractions are split into a number of loadsteps and for each of these steps the following process is adopted:</p>
 <ol>
 <li>
@@ -1045,11 +1045,11 @@
 </li>
 </ol>
 <p>These steps are shown schematically below.</p>
-<p><img alt="MPM steps" src="../../img/MPMsteps.jpg" /></p>
-<hr />
+<p><figure id="_figure-1"><img alt="MPM steps" src="../../img/MPMsteps.jpg"><figcaption>Figure 1: MPM steps</figcaption></figure></p>
+<hr>
 <p>[1] TJ Charlton, WM Coombs &amp; CE Augarde, <a href="https://www.sciencedirect.com/science/article/pii/S0045794917303395?via%3Dihub">iGIMP: an implicit Generalised Interpolation Material Point Method for large deformations</a>, Computers and Structures, 190 (2017), 108-125. <em>Gold open access</em></p>
-<p><img alt="AMPLE:  A Material Point Learning Environment" src="/assets/img/plate.jpg" /></p>
-<h2 id="ample-a-material-point-learning-environment">AMPLE: A Material Point Learning Environment<a class="headerlink" href="#ample-a-material-point-learning-environment" title="Permanent link">&para;</a></h2>
+<p><figure id="_figure-2"><img alt="AMPLE:  A Material Point Learning Environment" src="/assets/img/plate.jpg"><figcaption>Figure 2: AMPLE:  A Material Point Learning Environment</figcaption></figure></p>
+<h2 id="ample-a-material-point-learning-environment">AMPLE: A Material Point Learning Environment<a class="headerlink" href="#ample-a-material-point-learning-environment" title="Permanent link">¶</a></h2>
 <p>AMPLE was developed to address the severe learning curve for researchers wishing to understand, and start using, the material point method. The software was developed at Durham University between 2014 and 2018 by Dr Will Coombs as a platform to test our new research ideas and understand the impact of adopting different material point variants. AMPLE was first released in January 2019 at the 2nd International Conference on the Material Point Method held at Cambridge University, UK.</p>
 <ul>
 <li><a href="mailto:w.m.coombs@durham.ac.uk">Prof. Will Coombs</a></li>
