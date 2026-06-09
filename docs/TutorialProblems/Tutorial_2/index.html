@@ -18,7 +18,7 @@
         <link rel="prev" href="../Tutorial_1/">
       
       
-        <link rel="next" href="../Tutorial_1_input_data/">
+        <link rel="next" href="../Tutorial_3/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Tutorial 2 - MPM for Net Zero</title>
+        <title>compaction via a rigid body - MPM for Net Zero</title>
       
     
     
@@ -79,11 +79,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#quick-start-tutorial-2" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -113,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tutorial 2
+              compaction via a rigid body
             
           </span>
         </div>
@@ -867,8 +862,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -877,7 +870,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorial 2
+    compaction via a rigid body
   
 
     
@@ -887,6 +880,62 @@
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vertical penetration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    horizontal penetration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -910,10 +959,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_6" >
         
           
-          <label class="md-nav__link" for="__nav_4_3_4" id="__nav_4_3_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3_6" id="__nav_4_3_6_label" tabindex="0">
             
   
   
@@ -931,8 +980,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3_4">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1376,8 +1425,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -1397,41 +1444,9 @@
   
 
 
-<h1 id="quick-start-tutorial-2">Quick start tutorial 2<a class="headerlink" href="#quick-start-tutorial-2" title="Permanent link">¶</a></h1>
-<p>This quick start tutorial will go through the steps of running your first AMPSSIE problem.
-The problem being run is a convergence analysis of a column being deformed by self weight.
-It is simple problem that runs quick and uses nearly all aspects of the code, apart from contact and rigid body.</p>
-<p>all aspects of setting up a problem </p>
-<p>sdf  </p>
-<p>A short, end-to-end walkthrough of running your first AMPSSIE analysis - from setup to visualization.</p>
-<p>The implicit GIMPM (iGIMPM) convergence was first demonstrated by Charlton \emph{et al.} \cite{charlton_implicit_2018} on the 1D self-weight column. In the paper it was shown that the error in the stress solution, normalised with respect to the volume, converges with uniform refinement for a conforming mesh. Here the same general problem and GIMP domain update is considered as in Charlton \emph{et al.} \cite{charlton_implicit_2018}. The initial mesh, and a refinement step, are shown in Figure \ref{fig:example mesh}. 
-\begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.5\linewidth]{Figures/example_mesh_ref.pdf}
-   \caption{Compression under self weight: An example of the refinement scheme with hanging nodes.}
-    \label{fig:example mesh}
-\end{figure}
-The domain has dimensions <span class="arithmatex">\((x,y,z)\in[0,W]\times[0,W]\times[0,0.8]\)</span> m, where <span class="arithmatex">\(W\)</span> is the width of the domain and is equal to the side length of the largest element in the domain. The first mesh has <span class="arithmatex">\(W=0.4\)</span> m, and is divided by 2 each refinement step, as in Figure \ref{fig:example mesh}. When reporting on the convergence of the problem the \textit{size} of elements in the mesh is reported as <span class="arithmatex">\(W\)</span>. On all sides of the domain roller boundary conditions exist except the top domain where there is a homogeneous Neumann boundary condition, all nodes are at least fixed in <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> to make the problem one-dimensional. The validation uses slightly different material properties to that of Charlton \emph{et al.} \cite{charlton_implicit_2018} so that significant deformation occurs and overlap of GIMPs between elements of different sizes occurs. The material is Hencky elastic, with constant elastic parameters, Young's modulus <span class="arithmatex">\(E=10^3\)</span> Pa, Poisson's ratio <span class="arithmatex">\(\nu = 0.0\)</span>, and the material density is set to <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>, the domain is subject to a body force from gravitation loading <span class="arithmatex">\(g_i = [0,0,-9.81]\)</span> m/s<span class="arithmatex">\(^2\)</span>.  Last, the problem is solved using a Newton-Raphson scheme, where the load is incrementally increased over 20 load steps. </p>
-<p>To demonstrate convergence, the numerical stress solution is compared to the analytical solution and a stress error is defined which is normalised to the domain volume. The same error measure is similar to that of \cite{charlton_implicit_2018}, but normalised with respect to the stress at the bottom of the column,
-\begin{equation}
-    e_{\sigma} = \frac{1}{\sigma_g}\sum_{p\in P} |\sigma^z(z^0_p)-\sigma_p^z|V_p
-\end{equation}
-where <span class="arithmatex">\(\sigma_g = \rho g~0.8\)</span> is the stress at the bottom of the domain, <span class="arithmatex">\(\sigma^z(z_p^0) = \rho g(0.8-z_p)\)</span> is the vertical stress solution <span class="arithmatex">\(z_p^0\)</span> is the vertical position of the point at time <span class="arithmatex">\(t=0\)</span> and <span class="arithmatex">\(V_p\)</span> is the GIMP volume. For this problem in the smaller elements the GIMPs are initiated in a <span class="arithmatex">\(2\times2\times2\)</span> structure, whereas in the larger elements the structure is <span class="arithmatex">\(4\times4\times4\)</span>. This is to ensure no GIMP refinement occurs during the validation, focusing the study on the convegence of the method with an octree background mesh with hanging nodes.</p>
-<p>An example of a column, <span class="arithmatex">\(W=0.4\)</span> m, undergoing deformation over the 20 load steps is shown in Figure \ref{fig:column_stress_solution}. The mesh is the pink wire frame and the GIMPs are shown by the blue-to-red coloured cuboids, with blue being the most negative vertical displacement. The Figures shows that the GIMPs are traversing the element boundaries. Particularly at <span class="arithmatex">\(z=0.4\)</span> m, where hanging nodes exist.</p>
-<div class="arithmatex">\[\begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.7\textwidth]{Figures/column_self_weight.png}
-    \caption{Self weight: Displacement plot of the GIMPs and mesh for steps 1, 10 and 20, of 20.}
-    \label{fig:column_stress_solution}
-\end{figure}\]</div>
-<p>Convergence of the solution with mesh refinement is shown in Figure~\ref{fig:column_convergence}, plotted against a reference slope of one. As in Charlton \emph{et al.}~\cite{charlton_implicit_2018}, the observed convergence 
-rate of the stress solution is slightly greater than unity, whereas linear finite elements would yield exactly first-order convergence. This is caused by the GIMP basis functions having different orders when the domain of a material point is fully within an element (linear) or overlapping multiple elements (quadratic) \cite{coombs2020on}. </p>
-<div class="arithmatex">\[\begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Figures/column_convergence.pdf}
-    \caption{Self weight: Convergence of the error with mesh refinement.}
-    \label{fig:column_convergence}
-\end{figure}\]</div>
+  <h1>compaction via a rigid body</h1>
+
+
 
 
 
