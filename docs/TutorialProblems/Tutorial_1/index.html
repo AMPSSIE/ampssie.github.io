@@ -1020,7 +1020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../InputFormat/" class="md-nav__link">
+      <a href="../../UsingTheSoftware/InputFormat/" class="md-nav__link">
         
   
   
@@ -1048,7 +1048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../DeployingTheSoftware/" class="md-nav__link">
+      <a href="../../UsingTheSoftware/DeployingTheSoftware/" class="md-nav__link">
         
   
   
@@ -1076,7 +1076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ObtainingResults/" class="md-nav__link">
+      <a href="../../UsingTheSoftware/ObtainingResults/" class="md-nav__link">
         
   
   
@@ -1361,7 +1361,7 @@
 <p>This quick start tutorial walks through the steps of running your first AMPSSIE problem.
 The problem is a convergence analysis of a column deforming under self-weight.
 It is a simple problem that runs quickly and uses nearly all aspects of the code, apart from contact and rigid body interactions.</p>
-<p>The convergence of the implicit Generlised Interpolation Materail Point Method (iGIMPM) was first demonstrated by Charlton \emph{et al.} <sup id="fnref:charlton_implicit_2018"><a class="footnote-ref" href="#fn:charlton_implicit_2018">1</a></sup> on the 1D self-weight column, it is used to validate the material point code with a background mesh with hanging nodes against an analytical solution.</p>
+<p>The convergence of the implicit Generlised Interpolation Materail Point Method (iGIMPM) was first demonstrated by Charlton <em>et al.</em> <sup id="fnref:charlton_implicit_2018"><a class="footnote-ref" href="#fn:charlton_implicit_2018">1</a></sup> on the 1D self-weight column, it is used to validate the material point code with a background mesh with hanging nodes against an analytical solution.</p>
 <p>By the end of this tutorial, you will have:</p>
 <ul>
 <li>Set up the input .json file</li>
@@ -1369,7 +1369,8 @@ It is a simple problem that runs quickly and uses nearly all aspects of the code
 <li>Visualised the results</li>
 </ul>
 <h2 id="problem-description">Problem description<a class="headerlink" href="#problem-description" title="Permanent link">¶</a></h2>
-<p>You will define the geometry, mesh, boundary conditions, material, and solver in the input file. The values below give you a column that deforms significantly under self-weight. The deformation is large enough that the Generlised Interpolation Material Points (GIMPs) will trasverse several elements and will interact with hanging nodes.</p>
+<p>You will define the geometry, mesh, boundary conditions, material, and solver in the input file. All the inputs to the simulation are defined using the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
+<p>The values below give you a column that deforms significantly under self-weight. The deformation is large enough that the Generlised Interpolation Material Points (GIMPs) will trasverse several elements and will interact with hanging nodes.</p>
 <p><figure id="_figure-1"><img alt="Compression under self-weight, example of the refinement scheme with hanging nodes." id="fig-example-mesh" src="../../../img/example_mesh_ref.svg" width="90%"><figcaption>Figure 1: Compression under self-weight, example of the refinement scheme with hanging nodes.</figcaption></figure></p>
 <p><strong>Problem Domain:</strong> Set the geometry to a <span class="arithmatex">\(h \times h \times 0.8\)</span> m column, i.e. <span class="arithmatex">\((x,y,z)\in[0,h]\times[0,h]\times[0,0.8]\)</span> m. Start with <span class="arithmatex">\(h = 0.4\)</span> m. For the convergence study you will halve <span class="arithmatex">\(h\)</span> at each refinement step (see <a href="#fig-example-mesh">Figure 1</a>). The element <em>size</em> <span class="arithmatex">\(h\)</span> is what you will plot later against the stress error:</p>
 <div class="arithmatex">\[
