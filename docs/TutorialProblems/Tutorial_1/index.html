@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quick-start-tutorial-1" class="md-skip">
+        <a href="#tutorial-1-self-weight-column-convergence" class="md-skip">
           Skip to content
         </a>
       
@@ -918,6 +918,100 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#input-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mesh-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesh data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-and-running-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploying and running the problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewing-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing the results
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1356,21 +1450,18 @@
   
 
 
-<h1 id="quick-start-tutorial-1">Quick start tutorial 1<a class="headerlink" href="#quick-start-tutorial-1" title="Permanent link">¶</a></h1>
+<h1 id="tutorial-1-self-weight-column-convergence">Tutorial 1: Self-weight column convergence<a class="headerlink" href="#tutorial-1-self-weight-column-convergence" title="Permanent link">¶</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
-<p>This quick start tutorial walks through the steps of running your first AMPSSIE problem.
-The problem is a convergence analysis of a column deforming under self-weight.
-It is a simple problem that runs quickly and uses nearly all aspects of the code, apart from contact and rigid body interactions.</p>
-<p>The convergence of the implicit Generlised Interpolation Materail Point Method (iGIMPM) was first demonstrated by Charlton <em>et al.</em> <sup id="fnref:charlton_implicit_2018"><a class="footnote-ref" href="#fn:charlton_implicit_2018">1</a></sup> on the 1D self-weight column, it is used to validate the material point code with a background mesh with hanging nodes against an analytical solution.</p>
-<p>By the end of this tutorial, you will have:</p>
-<ul>
-<li>Set up the input .json file</li>
-<li>Run the analysis for a series of problems</li>
-<li>Visualised the results</li>
-</ul>
+<p>This quick start tutorial walks through the steps of running your first AMPSSIE problem. </p>
+<p>The problem is a convergence analysis of a column deforming under self-weight. It is a simple problem that runs quickly and uses nearly all aspects of the code, apart from contact and rigid body interactions.</p>
+<p>This tutorial has four sections:
+- <a href="#problem-description">Problem description</a>
+- <a href="#input-setup">Input setup</a>
+- <a href="#deploying-and-running-the-problem">Deploying and running the problem</a>
+- <a href="#viewing-the-results">Viewing the results</a></p>
 <h2 id="problem-description">Problem description<a class="headerlink" href="#problem-description" title="Permanent link">¶</a></h2>
 <p>You will define the geometry, mesh, boundary conditions, material, and solver in the input file. All the inputs to the simulation are defined using the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
-<p>The values below give you a column that deforms significantly under self-weight. The deformation is large enough that the Generlised Interpolation Material Points (GIMPs) will trasverse several elements and will interact with hanging nodes.</p>
+<p>The values below give you a column that deforms significantly under self-weight. The deformation is large enough that the Generalised Interpolation Material Points (GIMPs) will traverse several elements and will interact with hanging nodes.</p>
 <p><figure id="_figure-1"><img alt="Compression under self-weight, example of the refinement scheme with hanging nodes." id="fig-example-mesh" src="../../../img/example_mesh_ref.svg" width="90%"><figcaption>Figure 1: Compression under self-weight, example of the refinement scheme with hanging nodes.</figcaption></figure></p>
 <p><strong>Problem Domain:</strong> Set the geometry to a <span class="arithmatex">\(h \times h \times 0.8\)</span> m column, i.e. <span class="arithmatex">\((x,y,z)\in[0,h]\times[0,h]\times[0,0.8]\)</span> m. Start with <span class="arithmatex">\(h = 0.4\)</span> m. For the convergence study you will halve <span class="arithmatex">\(h\)</span> at each refinement step (see <a href="#fig-example-mesh">Figure 1</a>). The element <em>size</em> <span class="arithmatex">\(h\)</span> is what you will plot later against the stress error:</p>
 <div class="arithmatex">\[
@@ -1384,7 +1475,7 @@ e_{\sigma} = \frac{1}{\sigma_g\, V_\Omega} \sum_{p \in P} \left| \sigma^z(z^0_p)
 <li><span class="arithmatex">\(z_p^0\)</span> is the vertical position of the material point at time <span class="arithmatex">\(t = 0\)</span></li>
 <li><span class="arithmatex">\(V_p\)</span> is the GIMP volume</li>
 </ul>
-<p><strong>Material domain:</strong> The problem and material domain at <span class="arithmatex">\(t=0\)</span> do not normally conincide, however for this problem the GIMPs will be distributed in the volume <span class="arithmatex">\(V_\Omega = [0,h]\times[0,h]\times[0,0.8]\)</span> m.</p>
+<p><strong>Initial GIMP layout:</strong> The problem and material domain at <span class="arithmatex">\(t=0\)</span> do not normally coincide, however for this problem the GIMPs will be distributed in the volume <span class="arithmatex">\(V_\Omega = [0,h]\times[0,h]\times[0,0.8]\)</span> m.</p>
 <p><strong>Boundary conditions:</strong> Apply roller boundaries on the four sides and the base. Leave the top as a free surface. Fix every node in <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> so the problem stays one-dimensional.</p>
 <p><strong>Material:</strong> Use a Hencky elastic model with constant parameters:</p>
 <div class="centered-table">
@@ -1415,9 +1506,66 @@ e_{\sigma} = \frac{1}{\sigma_g\, V_\Omega} \sum_{p \in P} \left| \sigma^z(z^0_p)
 </tbody>
 </table>
 </div>
-<p>These properties differ slightly from Charlton et al. <sup id="fnref2:charlton_implicit_2018"><a class="footnote-ref" href="#fn:charlton_implicit_2018">1</a></sup> on purpose — they produce large enough deformation for GIMPs to span elements of different sizes, which is the point of the test.</p>
+<p>These properties differ slightly from Charlton et al. <sup id="fnref:charlton_implicit_2018"><a class="footnote-ref" href="#fn:charlton_implicit_2018">1</a></sup> on purpose - they produce large enough deformation for GIMPs to span elements of different sizes, which is the point of the test.</p>
 <p><strong>Loading:</strong> Apply gravity as a body force, <span class="arithmatex">\(g_i = [0,\,0,\,-9.81]\)</span> m/s<span class="arithmatex">\(^2\)</span>.</p>
 <p><strong>Solver:</strong> Use Newton-Raphson and ramp the load on incrementally over 20 load steps.</p>
+<h2 id="input-setup">Input setup<a class="headerlink" href="#input-setup" title="Permanent link">¶</a></h2>
+<p>The input file is a single JSON object with five top-level sections, broken out below alongside the <a href="#problem-description">Problem description</a>. Defaults (a face being free, a DOF being unconstrained, etc.) are not included in the file; only non-default settings are specified.</p>
+<h3 id="mesh-data">Mesh data<a class="headerlink" href="#mesh-data" title="Permanent link">¶</a></h3>
+<p>The geometry matches the <span class="arithmatex">\(h \times h \times 0.8\)</span> m column, with <span class="arithmatex">\(h = 0.4\)</span> m for the first run. The <code>Initial GIMP distribution</code> is set to fill the whole domain, so a GIMP exists at every initial location. <code>dx refined</code> sets the locally-refined cell size used near the hanging nodes; <code>Refinement type</code> selects the column-validation refinement preset.</p>
+<pre><code class="language-json">"mesh data": {
+    "domain size x": 0.4,
+    "domain size y": 0.4,
+    "domain size z": 0.8,
+    "Initial GIMP distribution x": 0.4,
+    "Initial GIMP distribution y": 0.4,
+    "Initial GIMP distribution z": 0.8,
+    "dx refined": 0.2,
+    "Refinement type": "column validation"
+}
+</code></pre>
+<h3 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h3>
+<p>Rollers are applied on the four side faces and the base (<span class="arithmatex">\(\pm x\)</span>, <span class="arithmatex">\(\pm y\)</span>, <span class="arithmatex">\(-z\)</span>). The top (<span class="arithmatex">\(+z\)</span>) face is left as a free surface, which is the default and so does not appear in the file. Every node has its <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> degrees of freedom fixed to keep the problem one-dimensional.</p>
+<pre><code class="language-json">"boundary conditions": {
+    "neg x-plane": "roller",
+    "neg y-plane": "roller",
+    "neg z-plane": "roller",
+    "pos x-plane": "roller",
+    "pos y-plane": "roller",
+    "x dof": "fixed",
+    "y dof": "fixed"
+}
+</code></pre>
+<h3 id="material">Material<a class="headerlink" href="#material" title="Permanent link">¶</a></h3>
+<p>The column is homogeneous, so a single layer is specified with the Hencky elastic model and the parameters from the Problem description (<span class="arithmatex">\(E = 10^3\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span>, <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>).</p>
+<pre><code class="language-json">"material": {
+    "number of layers": 1,
+    "layers": [
+        {
+            "type": "Elastic",
+            "emperical data": "homogeneous elastic",
+            "assigned material properties": {"E": 1000.0, "nu": 0.0, "rho": 50.0}
+        }
+    ]
+}
+</code></pre>
+<h3 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">¶</a></h3>
+<p>The self-weight load is ramped on quasi-statically over 20 increments using a Newton-Raphson scheme.</p>
+<pre><code class="language-json">"Solver": {
+    "solve type": "static",
+    "number of increments": 20
+}
+</code></pre>
+<h3 id="output-data">Output data<a class="headerlink" href="#output-data" title="Permanent link">¶</a></h3>
+<p>VTU and VTK output is enabled for visualisation in ParaView (or VisIt). The <code>text data</code> field tags the run as <code>column validation</code> for post-processing.</p>
+<pre><code class="language-json">"OutputData": {
+    "vtu data": "yes",
+    "vtk data": "yes",
+    "text data": "column validation"
+}
+</code></pre>
+<h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <!--
 The implicit GIMPM (iGIMPM) convergence was first demonstrated by Charlton \emph{et al.} \cite{charlton_implicit_2018} on the 1D self-weight column. In the paper it was shown that the error in the stress solution, normalised with respect to the volume, converges with uniform refinement for a conforming mesh. Here the same general problem and GIMP domain update is considered as in Charlton \emph{et al.} \cite{charlton_implicit_2018}. The initial mesh, and a refinement step, are shown in Figure \ref{fig:example mesh}. 
 \begin{figure}[ht!]
@@ -1457,7 +1605,7 @@ rate of the stress solution is slightly greater than unity, whereas linear finit
 <hr>
 <ol>
 <li id="fn:charlton_implicit_2018">
-<p>Timothy James Charlton. <em>An implicit generalised interpolation material point method for large deformation and gradient elasto-plasticity</em>. Doctoral Thesis, Durham University, 2018. <a class="footnote-backref" href="#fnref:charlton_implicit_2018" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:charlton_implicit_2018" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>Timothy James Charlton. <em>An implicit generalised interpolation material point method for large deformation and gradient elasto-plasticity</em>. Doctoral Thesis, Durham University, 2018. <a class="footnote-backref" href="#fnref:charlton_implicit_2018" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
