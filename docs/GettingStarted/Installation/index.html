@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#requirements" class="md-skip">
           Skip to content
         </a>
       
@@ -725,8 +725,24 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -744,6 +760,56 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-interaction-with-julia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct interaction with Julia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-via-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploying via Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1213,14 +1279,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../TechnicalReferences/Formulation/" class="md-nav__link">
+      <a href="../../TechnicalReferences/SaticSF_WF/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Formulation
+    Static weak form
   
 
     
@@ -1376,8 +1442,47 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-interaction-with-julia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct interaction with Julia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-via-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploying via Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1397,12 +1502,14 @@
   
 
 
+  <h1>Installation</h1>
+
 <hr>
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">¶</a></h1>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">¶</a></h2>
 <p>AMPSSIE is a Julia package and runs anywhere Julia is supported.</p>
-<p><strong>Operating system:</strong> Linux, macOS, and Windows are all supported. Most development and testing has been done on [insert here].</p>
-<p><strong>Julia version:</strong> [insert here] or newer. Earlier releases may work but are not actively tested.</p>
-<p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes, allow at least [insert here] GB of RAM and [insert here] GB of free disk for outputs.</p>
+<p><strong>Operating system:</strong> Linux, macOS, and Windows are all supported. Most development and testing has been done on Linux.</p>
+<p><strong>Julia version:</strong> 1.12 or newer. Earlier releases may work but are not actively tested.</p>
+<p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes it is recommend to use a HPc with at least 10 cores, allow at least 60Gb GB of RAM and 10 GB of free disk for outputs.</p>
 <p><strong>Required tooling:</strong></p>
 <ul>
 <li><a href="https://julialang.org/downloads/">Julia</a> - the language runtime itself.</li>
@@ -1414,7 +1521,7 @@
 <li><a href="https://git-scm.com/">Git</a> for cloning the source repository.</li>
 <li><a href="https://docs.docker.com/get-docker/">Docker</a> if you'd rather not install Julia directly - see <a href="#deploying-via-docker">Deploying via Docker</a>.</li>
 </ul>
-<h1 id="direct-interaction-with-julia">Direct interaction with Julia<a class="headerlink" href="#direct-interaction-with-julia" title="Permanent link">¶</a></h1>
+<h2 id="direct-interaction-with-julia">Direct interaction with Julia<a class="headerlink" href="#direct-interaction-with-julia" title="Permanent link">¶</a></h2>
 <p>The simplest deployment is to install Julia and run AMPSSIE from source.</p>
 <p><strong>1. Install Julia.</strong> Use the official installer from <a href="https://julialang.org/downloads/">julialang.org/downloads</a>, or on Linux/macOS use the <a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a> toolchain manager:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://install.julialang.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
@@ -1427,23 +1534,23 @@
 <p><strong>3. Instantiate the project environment.</strong> This installs the exact dependencies recorded in <code>Manifest.toml</code> into a local environment:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>.<span class="w"> </span>-e<span class="w"> </span><span class="s1">'using Pkg; Pkg.instantiate()'</span>
 </code></pre></div>
-<p><strong>4. Run a problem.</strong> Point AMPSSIE at your <a href="InputFormat.md"><code>input_data.json</code></a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>.<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span><span class="w"> </span>path/to/input_data.json
+<p><strong>4. Run a problem.</strong> The cloned repository includes its own example input file, so you can run a problem straight away:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>.<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
 </code></pre></div>
-<p>Output is written to [insert here]; open the resulting VTU files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and stress fields.</p>
-<h1 id="deploying-via-docker">Deploying via Docker<a class="headerlink" href="#deploying-via-docker" title="Permanent link">¶</a></h1>
+<p>Output is written to the same directory as the input file. Open the resulting VTU files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and stress fields.</p>
+<h2 id="deploying-via-docker">Deploying via Docker<a class="headerlink" href="#deploying-via-docker" title="Permanent link">¶</a></h2>
 <p>If you don't want to install Julia or manage package environments yourself, a Docker image bundles AMPSSIE and all its dependencies.</p>
 <p><strong>1. Install Docker.</strong> Follow the official instructions for your platform at <a href="https://docs.docker.com/get-docker/">docs.docker.com/get-docker</a>.</p>
 <p><strong>2. Pull the image.</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
 </code></pre></div>
-<p><strong>3. Run a problem.</strong> Mount the directory containing your <code>input_data.json</code> so the container can read it and write output back to your host:</p>
+<p><strong>3. Run a problem.</strong> Place your input file in any directory and mount that directory into the container - the output is written alongside the input file in the same directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>-v<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/work"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>/work/input_data.json
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>/work/<span class="o">[</span>insert<span class="w"> </span>input<span class="w"> </span>file<span class="o">]</span>
 </code></pre></div>
-<p>Output files appear in the mounted directory once the container exits. As above, open the VTU files in ParaView (or VisIt).</p>
+<p>Once the container exits, open the resulting VTU files in ParaView (or VisIt).</p>
 <p><strong>Building the image yourself.</strong> If you've cloned the repository and want a local build, a <code>Dockerfile</code> lives at the project root:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ampssie:local<span class="w"> </span>.
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/work"</span><span class="w"> </span>ampssie:local<span class="w"> </span>/work/input_data.json

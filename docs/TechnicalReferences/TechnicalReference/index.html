@@ -18,7 +18,7 @@
         <link rel="prev" href="../../UsingTheSoftware/ObtainingResults/">
       
       
-        <link rel="next" href="../Formulation/">
+        <link rel="next" href="../SaticSF_WF/">
       
       
         
@@ -78,6 +78,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#material-point-method-in-detail" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -1176,6 +1181,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1194,6 +1219,146 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#large-deformation-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Large deformation formulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meshing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meshing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basis-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basis functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material models
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#body-forces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Body forces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#small-cut-instability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Small cut instability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rigid-body-representation-and-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rigid body representation and kinematics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coupled-soil-structure-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupled soil-structure interaction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear solution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1206,14 +1371,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../Formulation/" class="md-nav__link">
+      <a href="../SaticSF_WF/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Formulation
+    Static weak form
   
 
     
@@ -1369,6 +1534,137 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#large-deformation-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Large deformation formulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meshing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meshing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basis-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basis functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material models
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#body-forces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Body forces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#small-cut-instability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Small cut instability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rigid-body-representation-and-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rigid body representation and kinematics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coupled-soil-structure-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupled soil-structure interaction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear solution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1388,119 +1684,66 @@
   
 
 
-  <h1>Overview</h1>
-
 <hr>
-<p>Material point method in detail</p>
+<h1 id="material-point-method-in-detail">Material point method in detail<a class="headerlink" href="#material-point-method-in-detail" title="Permanent link">¶</a></h1>
+<h2 id="large-deformation-formulation">Large deformation formulation<a class="headerlink" href="#large-deformation-formulation" title="Permanent link">¶</a></h2>
 <ul>
-<li>
-<p>Large deformation formulation</p>
-</li>
-<li>
-<p>Kinematics</p>
-</li>
-<li>
-<p>Stress and strain measures</p>
-</li>
-<li>
-<p>Static and Dynamic strong and weak forms</p>
-</li>
-<li>
-<p>Meshing</p>
-</li>
-<li>
-<p>Discretisation of the weak form on the background mesh</p>
-</li>
-<li>
-<p>Octree meshes</p>
-</li>
-<li>
-<p>Search algorithms</p>
-</li>
-<li>
-<p>Basis functions</p>
-</li>
-<li>
-<p>Standard linear finite element basis functions</p>
-</li>
-<li>
-<p>Generalised interpolation basis functions</p>
-</li>
-<li>
-<p>Octree modifications</p>
-</li>
-<li>
-<p>Material models</p>
-</li>
-<li>
-<p>Elasticity</p>
-</li>
-<li>
-<p>Elasto-plasticity</p>
-</li>
-<li>
-<p>Body forces</p>
-</li>
-<li>
-<p>Gravitational loads</p>
-</li>
-<li>
-<p>Discretisation on material points</p>
-</li>
-<li>
-<p>Boundary conditions</p>
-</li>
-<li>
-<p>Neumann boundary conditions: free surfaces and tractions</p>
-</li>
-<li>
-<p>Dirichlet boundary conditions: displacement constraints</p>
-</li>
-<li>
-<p>Small cut instability</p>
-</li>
-<li>
-<p>Ghost stabilisation</p>
-</li>
-<li>
-<p>Rigid body representation and kinematics</p>
-</li>
-<li>
-<p>Faceted rigid body representation</p>
-</li>
-<li>
-<p>Rigid body kinematics</p>
-</li>
-<li>
-<p>Coupled soil-structure interaction</p>
-</li>
-<li>
-<p>Contact detection</p>
-</li>
-<li>
-<p>Penalty contact formulation</p>
-</li>
-<li>
-<p>Coupled weak form equations</p>
-</li>
-<li>
-<p>Linear solution</p>
-</li>
-<li>
-<p>Direct solvers (included within AMPSSIE)</p>
-</li>
-<li>
-<p>Iterative solvers (included within AMPSSIE)</p>
-</li>
-<li>
-<p>Updating</p>
-</li>
-<li>
-<p>Material point updating</p>
-</li>
-<li>
-<p>Rigid body update</p>
-</li>
+<li>Kinematics</li>
+<li>Stress and strain measures</li>
+<li><a href="../SaticSF_WF/">Static strong and weak forms</a></li>
+<li>Dynamic strong and weak forms</li>
+</ul>
+<h2 id="meshing">Meshing<a class="headerlink" href="#meshing" title="Permanent link">¶</a></h2>
+<ul>
+<li>Discretisation of the weak form on the background mesh</li>
+<li>Octree meshes</li>
+<li>Search algorithms</li>
+</ul>
+<h2 id="basis-functions">Basis functions<a class="headerlink" href="#basis-functions" title="Permanent link">¶</a></h2>
+<ul>
+<li>Standard linear finite element basis functions</li>
+<li>Generalised interpolation basis functions</li>
+<li>Octree modifications</li>
+</ul>
+<h2 id="material-models">Material models<a class="headerlink" href="#material-models" title="Permanent link">¶</a></h2>
+<ul>
+<li>Elasticity</li>
+<li>Elasto-plasticity</li>
+</ul>
+<h2 id="body-forces">Body forces<a class="headerlink" href="#body-forces" title="Permanent link">¶</a></h2>
+<ul>
+<li>Gravitational loads</li>
+<li>Discretisation on material points</li>
+</ul>
+<h2 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h2>
+<ul>
+<li>Neumann boundary conditions: free surfaces and tractions</li>
+<li>Dirichlet boundary conditions: displacement constraints</li>
+</ul>
+<h2 id="small-cut-instability">Small cut instability<a class="headerlink" href="#small-cut-instability" title="Permanent link">¶</a></h2>
+<ul>
+<li>Ghost stabilisation</li>
+</ul>
+<h2 id="rigid-body-representation-and-kinematics">Rigid body representation and kinematics<a class="headerlink" href="#rigid-body-representation-and-kinematics" title="Permanent link">¶</a></h2>
+<ul>
+<li>Faceted rigid body representation</li>
+<li>Rigid body kinematics</li>
+</ul>
+<h2 id="coupled-soil-structure-interaction">Coupled soil-structure interaction<a class="headerlink" href="#coupled-soil-structure-interaction" title="Permanent link">¶</a></h2>
+<ul>
+<li>Contact detection</li>
+<li>Penalty contact formulation</li>
+<li>Coupled weak form equations</li>
+</ul>
+<h2 id="linear-solution">Linear solution<a class="headerlink" href="#linear-solution" title="Permanent link">¶</a></h2>
+<ul>
+<li>Direct solvers (included within AMPSSIE)</li>
+<li>Iterative solvers (included within AMPSSIE)</li>
+</ul>
+<h2 id="updating">Updating<a class="headerlink" href="#updating" title="Permanent link">¶</a></h2>
+<ul>
+<li>Material point updating</li>
+<li>Rigid body update</li>
 <li>
 <p>Background mesh update/reset</p>
 </li>
