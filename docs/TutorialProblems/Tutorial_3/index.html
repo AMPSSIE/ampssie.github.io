@@ -321,6 +321,8 @@
           
             
               
+                
+              
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -1923,7 +1925,9 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -2104,6 +2108,8 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
+
 
 
   
@@ -2150,8 +2156,19 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 <p>The input file is a single JSON object - a human-readable, editable text file. The complete file for this problem can be found <a href="../Tutorial_3_input_data/">here</a>.</p>
 <p>This problem has eight top-level sections, broken out below alongside the <a href="#problem-description">Problem description</a>.</p>
 <p>Defaults (a face being free, a DOF being unconstrained, etc.) are not included in the file; only non-default settings are specified. See the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a> for the full list of defaults.</p>
+<div class="json-side-header">
+<div>Description</div>
+<div><code>input_data.json</code></div>
+</div>
+
+<div class="json-side">
+<div class="js-text">
 <h3 id="mesh-data">Mesh data<a class="headerlink" href="#mesh-data" title="Permanent link">¶</a></h3>
 <p>The quarter-symmetric domain matches the <span class="arithmatex">\(12.8 \times 12.8 \times 24.6\)</span> m setup, with refinement driven by the rigid body.</p>
+<p><code>dx refined</code> is the smallest element size, used on elements intersecting the cone surface. <code>buffer multiplier</code> sets the element size in the surrounding region as a multiple of <code>dx refined</code>.</p>
+<p><code>Refinement type</code> is <code>rigid body adaptive</code> so the mesh re-refines as the cone descends.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">"Mesh"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"domain size x"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.8</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"domain size y"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.8</span><span class="p">,</span>
@@ -2161,18 +2178,28 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">"buffer multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
 </code></pre></div>
-<p><code>dx refined</code> is the smallest element size, used on elements intersecting the cone surface. <code>buffer multiplier</code> sets the element size in the surrounding region as a multiple of <code>dx refined</code>.</p>
-<p><code>Refinement type</code> is <code>rigid body adaptive</code> so the mesh re-refines as the cone descends.</p>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="initial-gimp-distribution">Initial GIMP distribution<a class="headerlink" href="#initial-gimp-distribution" title="Permanent link">¶</a></h3>
 <p>The default <span class="arithmatex">\(2\times2\times2\)</span> distribution per element, filling the soil domain.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"Initial GIMP distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution x"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.8</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution y"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.8</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution z"</span><span class="p">:</span><span class="w"> </span><span class="mf">24.6</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h3>
 <p>Rollers on the symmetry planes (<span class="arithmatex">\(-x\)</span>, <span class="arithmatex">\(-y\)</span>), the remaining lateral faces (<span class="arithmatex">\(+x\)</span>, <span class="arithmatex">\(+y\)</span>) and the base (<span class="arithmatex">\(-z\)</span>). The top face is left as a free surface (default).</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"Boundary conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"neg x-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"neg y-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
@@ -2181,8 +2208,14 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">"pos y-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="material">Material<a class="headerlink" href="#material" title="Permanent link">¶</a></h3>
 <p>A single layer of hyperelastic-perfectly plastic sand, calibrated to <span class="arithmatex">\(R_D = 32\%\)</span> Congleton sand via the Brinkgreve correlations.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"Material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">"number of layers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"layers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2203,8 +2236,14 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 <a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="rigid-body">Rigid body<a class="headerlink" href="#rigid-body" title="Permanent link">¶</a></h3>
 <p>A cone with radius <span class="arithmatex">\(0.4\)</span> m and apex angle <span class="arithmatex">\(60^\circ\)</span>, initially positioned just above the soil surface, given a prescribed downward displacement of <span class="arithmatex">\(4\)</span> m over the 300 load steps of step 2.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Rigid body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cone"</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"radius"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
@@ -2216,8 +2255,14 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">"tangential penalty factor"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="loading">Loading<a class="headerlink" href="#loading" title="Permanent link">¶</a></h3>
 <p>The two stages are processed in order: a single gravity step generates the initial stress field, then the cone is displaced over 300 load steps.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Loading"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="p">{</span>
@@ -2236,21 +2281,35 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 <a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">¶</a></h3>
 <p>Newton-Raphson, quasi-static. The same solver is applied to both stages.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">"Solver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">"solve type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"static"</span><span class="p">,</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Newton-Raphson"</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="output-data">Output data<a class="headerlink" href="#output-data" title="Permanent link">¶</a></h3>
 <p>VTU and VTK output is enabled for visualisation in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>). The <code>text data</code> field tags the run as <code>cone penetration test</code> for post-processing.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">"Output Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nt">"vtu data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">"vtk data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">"text data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cone penetration test"</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <p>The deformed mesh and GIMP displacement field at <span class="arithmatex">\(1.2\)</span> m penetration is shown below: the displacement magnitude rises from <span class="arithmatex">\(0\)</span> m (blue) at the far field to roughly <span class="arithmatex">\(0.5\)</span> m (red) immediately under the cone tip.</p>
@@ -2289,8 +2348,13 @@ E_{50}(z_p^0) = E^{ref}_{50} \left( \frac{K_0\, \sigma_v(z_p^0)}{p^{ref}} \right
 
 
 
+  
+  
 
 
+
+
+  
 
 
 

@@ -321,6 +321,8 @@
           
             
               
+                
+              
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -1901,7 +1903,9 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -2060,6 +2064,8 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
+
 
 
   
@@ -2069,7 +2075,7 @@
 <h1 id="tutorial-1-self-weight-column-convergence">Tutorial 1: Self-weight column convergence<a class="headerlink" href="#tutorial-1-self-weight-column-convergence" title="Permanent link">¶</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
 <p>This quick start tutorial walks through the steps of running your first AMPSSIE problem. </p>
-<p>The problem is a convergence analysis of a column deforming under self-weight. It is a simple problem that runs quickly and uses all componets of the code that are used to create the <a href="../../TechnicalReferences/StaticWeakForm/">deformable body's equations to be solved.</a></p>
+<p>The problem is a convergence analysis of a column deforming under self-weight. It is a simple problem that runs quickly and uses all components of the code that are used to create the <a href="../../TechnicalReferences/StaticWeakForm/">deformable body's equations to be solved.</a></p>
 <p>This tutorial has four sections:</p>
 <ul>
 <li><a href="#problem-description">Problem description</a></li>
@@ -2081,8 +2087,8 @@
 <p>You will define the geometry, mesh, boundary conditions, material, and solver in the input file. All the inputs to the simulation are defined using the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
 <p>The values below give you a column that deforms significantly under self-weight. The deformation is large enough that the Generalised Interpolation Material Points (GIMPs) will traverse several elements and will interact with hanging nodes.</p>
 <div class="grid">
-<p><figure id="_figure-1"><img alt="Compression under self-weight, example of the refinement scheme with hanging nodes." id="fig-example-mesh" src="../../../img/example_mesh_ref.svg" width="100%"><figcaption>Figure 1: Compression under self-weight, example of the refinement scheme with hanging nodes.</figcaption></figure></p>
-<p><figure id="_figure-2"><img alt="Compression under self-weight, example of GIMP distrubition in the mesh when h = 0.4 m." id="fig-example-mesh-gimp" src="../../../img/example_mesh_ref_GIMP.svg" width="100%"><figcaption>Figure 2: Compression under self-weight, example of GIMP distrubition in the mesh when h = 0.4 m.</figcaption></figure></p>
+<p><figure id="_figure-1"><img alt="Compression under self-weight, example of the refinement scheme with hanging nodes." id="fig-example-mesh" src="../../../img/example_mesh_ref.png" width="100%"><figcaption>Figure 1: Compression under self-weight, example of the refinement scheme with hanging nodes.</figcaption></figure></p>
+<p><figure id="_figure-2"><img alt="Compression under self-weight, example of GIMP distribution in the mesh when h = 0.4 m." id="fig-example-mesh-gimp" src="../../../img/example_mesh_ref_GIMP.png" width="100%"><figcaption>Figure 2: Compression under self-weight, example of GIMP distribution in the mesh when h = 0.4 m.</figcaption></figure></p>
 </div>
 <p><em>Figures reproduced from <sup id="fnref:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">1</a></sup>.</em></p>
 <p><strong>Mesh:</strong> Set the geometry to a <span class="arithmatex">\(h \times h \times 0.8\)</span> m column, i.e. <span class="arithmatex">\((x,y,z)\in[0,h]\times[0,h]\times[0,0.8]\)</span> m. Start with <span class="arithmatex">\(h = 0.4\)</span> m. For the convergence study you will halve <span class="arithmatex">\(h\)</span> at each refinement step (see <a href="#fig-example-mesh">Figure 1</a>). The initial GIMP layout filling that mesh is shown in <a href="#fig-example-mesh-gimp">Figure 2</a>. The element <em>size</em> <span class="arithmatex">\(h\)</span> is what you will plot later against the stress error:</p>
@@ -2107,9 +2113,20 @@ e_{\sigma} = \frac{1}{\sigma_g\, V_\Omega} \sum_{p \in P} \left| \sigma^z(z^0_p)
 <p>The input file is a single JSON object - a human-readable, editable text file. The complete file for this problem can be found <a href="../Tutorial_1_input_data/">here</a>.</p>
 <p>This problem has six top-level sections, broken out below alongside the <a href="#problem-description">Problem description</a>. </p>
 <p>Defaults (a face being free, a DOF being unconstrained, etc.) are not included in the file; only non-default settings are specified. See the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a> for the full list of defaults.</p>
+<div class="json-side-header">
+<div>Description</div>
+<div><code>input_data.json</code></div>
+</div>
+
+<div class="json-side">
+<div class="js-text">
 <h3 id="mesh-data">Mesh data<a class="headerlink" href="#mesh-data" title="Permanent link">¶</a></h3>
-<p>The mesh matches the <span class="arithmatex">\(h \times h \times 0.8\)</span> m column, with <span class="arithmatex">\(h = 0.4\)</span> m for the first run.
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w"> </span><span class="nt">"Mesh"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>The mesh matches the <span class="arithmatex">\(h \times h \times 0.8\)</span> m column, with <span class="arithmatex">\(h = 0.4\)</span> m for the first run.</p>
+<p><code>dx refined</code> always gives the smallest elements in the domain.</p>
+<p><code>Refinement type</code> is set to <code>column validation</code> for the bespoke refinement scheme for this problem; see <a href="#fig-example-mesh">Figure 1</a>.</p>
+</div>
+<div class="js-code">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w"> </span><span class="nt">"Mesh"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"domain size x"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"domain size y"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"domain size z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
@@ -2117,21 +2134,31 @@ e_{\sigma} = \frac{1}{\sigma_g\, V_\Omega} \sum_{p \in P} \left| \sigma^z(z^0_p)
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">"Refinement type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column validation"</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div>
-<code>dx refined</code> always gives the smallest elements in the domain.
-<p><code>Refinement type</code> is set to <code>column validation</code> for the bespoke refinement scheme for this problem; see <a href="#fig-example-mesh">Figure 1</a>.</p>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="initial-gimp-distribution">Initial GIMP distribution<a class="headerlink" href="#initial-gimp-distribution" title="Permanent link">¶</a></h3>
-<p>The <code>Initial GIMP distribution</code> is set to fill the whole domain and so is given the same parameters as the <code>Mesh data</code>.
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"Initial GIMP distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>The <code>Initial GIMP distribution</code> is set to fill the whole domain and so is given the same parameters as the <code>Mesh data</code>.</p>
+<p>The default initial GIMP distribution is <span class="arithmatex">\(2\times2\times2\)</span> within each element. However, for this problem larger elements will have <span class="arithmatex">\(4\times4\times4\)</span> whilst the smaller elements have <span class="arithmatex">\(2\times2\times2\)</span>. <code>Specialised distribution</code> is used to set up this distribution with <code>column validation</code>.</p>
+</div>
+<div class="js-code">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"Initial GIMP distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution x"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution y"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">"Specialised distribution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column validation"</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-The default initial GIMP distribution is <span class="arithmatex">\(2\times2\times2\)</span> within each element. However, for this problem larger elements will have <span class="arithmatex">\(4\times4\times4\)</span> whilst the smaller elements have <span class="arithmatex">\(2\times2\times2\)</span>. <code>Specialised distribution</code> is used to set up this distribution with <code>column validation</code>.
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h3>
-<p>Rollers are applied on the four side faces and the base (<span class="arithmatex">\(\pm x\)</span>, <span class="arithmatex">\(\pm y\)</span>, <span class="arithmatex">\(-z\)</span>). The top (<span class="arithmatex">\(+z\)</span>) face is left as a free surface, which is the default and so does not appear in the file. Every node has its <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> degrees of freedom fixed to keep the problem one-dimensional.
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"Boundary conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>Rollers are applied on the four side faces and the base (<span class="arithmatex">\(\pm x\)</span>, <span class="arithmatex">\(\pm y\)</span>, <span class="arithmatex">\(-z\)</span>). The top (<span class="arithmatex">\(+z\)</span>) face is left as a free surface, which is the default and so does not appear in the file. Every node has its <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> degrees of freedom fixed to keep the problem one-dimensional.</p>
+</div>
+<div class="js-code">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"Boundary conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"neg x-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"neg y-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">"neg z-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
@@ -2141,8 +2168,14 @@ The default initial GIMP distribution is <span class="arithmatex">\(2\times2\tim
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">"y dof"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed"</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="material">Material<a class="headerlink" href="#material" title="Permanent link">¶</a></h3>
 <p>The column is homogeneous, so a single layer is specified with the Hencky elastic model and the parameters from the Problem description (<span class="arithmatex">\(E = 10^3\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span>, <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>).</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"Material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">"number of layers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"layers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2154,28 +2187,42 @@ The default initial GIMP distribution is <span class="arithmatex">\(2\times2\tim
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">¶</a></h3>
 <p>The self-weight load is ramped on quasi-statically over 20 increments using a Newton-Raphson scheme.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Solver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"solve type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"static"</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"load type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"force"</span><span class="p">,</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"number of increments"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="output-data">Output data<a class="headerlink" href="#output-data" title="Permanent link">¶</a></h3>
 <p>VTU and VTK output is enabled for visualisation in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>). The <code>text data</code> field tags the run as <code>column validation</code> for post-processing.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Output Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">"vtu data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"vtk data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">"text data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column validation"</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
 <p>There are several methods for <a href="../../UsingTheSoftware/DeployingTheSoftware/">deploying</a>. </p>
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <div class="grid">
-<p><figure id="_figure-3"><img alt="Compression under self-weight, displacement plot of the GIMPs and mesh for steps 1, 10 and 20, of 20." id="fig-example-mesh" src="../../../img/gravity_result.png" width="100%"><figcaption>Figure 3: Compression under self-weight, displacement plot of the GIMPs and mesh for steps 1, 10 and 20, of 20.</figcaption></figure></p>
-<p><figure id="_figure-4"><img alt="Compression under self-weight, convergence of the error with mesh refinement." id="fig-example-mesh-gimp" src="../../../img/convergence_gravity.png" width="100%"><figcaption>Figure 4: Compression under self-weight, convergence of the error with mesh refinement.</figcaption></figure></p>
+<p><figure id="_figure-3"><img alt="Compression under self-weight, displacement plot of the GIMPs and mesh for steps 1, 10 and 20, of 20." id="fig-gravity-displacement" src="../../../img/gravity_result.png" width="100%"><figcaption>Figure 3: Compression under self-weight, displacement plot of the GIMPs and mesh for steps 1, 10 and 20, of 20.</figcaption></figure></p>
+<p><figure id="_figure-4"><img alt="Compression under self-weight, convergence of the error with mesh refinement." id="fig-gravity-convergence" src="../../../img/convergence_gravity.png" width="100%"><figcaption>Figure 4: Compression under self-weight, convergence of the error with mesh refinement.</figcaption></figure></p>
 </div>
 <p><em>Figures reproduced from <sup id="fnref2:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">1</a></sup>.</em></p>
 <div class="footnote">
@@ -2196,8 +2243,13 @@ The default initial GIMP distribution is <span class="arithmatex">\(2\times2\tim
 
 
 
+  
+  
 
 
+
+
+  
 
 
 

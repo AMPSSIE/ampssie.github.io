@@ -321,6 +321,8 @@
           
             
               
+                
+              
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -1923,7 +1925,9 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -2104,6 +2108,8 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
+
 
 
   
@@ -2154,7 +2160,17 @@ d_x(t) =
 <p>The input file is a single JSON object - a human-readable, editable text file. The complete file for this problem can be found <a href="../Tutorial_5_input_data/">here</a>.</p>
 <p>This problem has seven top-level sections, broken out below alongside the <a href="#problem-description">Problem description</a>.</p>
 <p>Defaults (a face being free, a DOF being unconstrained, etc.) are not included in the file; only non-default settings are specified. See the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a> for the full list of defaults.</p>
+<div class="json-side-header">
+<div>Description</div>
+<div><code>input_data.json</code></div>
+</div>
+
+<div class="json-side">
+<div class="js-text">
 <h3 id="mesh-data">Mesh data<a class="headerlink" href="#mesh-data" title="Permanent link">¶</a></h3>
+<p><code>dx refined</code> is the smallest element size, applied to elements intersecting the sphere. <code>dx coarse</code> is the maximum element size far from the sphere. <code>Refinement type</code> is <code>rigid body adaptive</code> so the refined patch follows the sphere along the slope.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">"Mesh"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"domain size x"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"domain size y"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
@@ -2165,16 +2181,27 @@ d_x(t) =
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">"buffer multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
 </code></pre></div>
-<p><code>dx refined</code> is the smallest element size, applied to elements intersecting the sphere. <code>dx coarse</code> is the maximum element size far from the sphere. <code>Refinement type</code> is <code>rigid body adaptive</code> so the refined patch follows the sphere along the slope.</p>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="initial-gimp-distribution">Initial GIMP distribution<a class="headerlink" href="#initial-gimp-distribution" title="Permanent link">¶</a></h3>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"Initial GIMP distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution x"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution y"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution z"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h3>
 <p>Rollers on all lateral and bottom faces. All nodes have their <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> DOFs fixed so the slope does not translate.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"Boundary conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"neg x-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"neg y-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
@@ -2185,8 +2212,14 @@ d_x(t) =
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">"y dof"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed"</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="material">Material<a class="headerlink" href="#material" title="Permanent link">¶</a></h3>
 <p>A single very-stiff Hencky elastic layer representing the slope.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"Material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">"number of layers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"layers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2198,8 +2231,14 @@ d_x(t) =
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="rigid-body">Rigid body<a class="headerlink" href="#rigid-body" title="Permanent link">¶</a></h3>
 <p>The sphere geometry is loaded from an external mesh file; the kinematic parameters (mass, inertia, initial position) and the friction coefficient <span class="arithmatex">\(\mu\)</span> are listed inline. Vary <code>friction coefficient</code> between runs to reproduce the slip/stick sweep.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Rigid body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mesh file"</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"mesh path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sphere.stl"</span><span class="p">,</span>
@@ -2212,8 +2251,15 @@ d_x(t) =
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">"tangential penalty factor"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="loading">Loading<a class="headerlink" href="#loading" title="Permanent link">¶</a></h3>
 <p>A single dynamic stage with tilted gravity. The tilt encodes the <span class="arithmatex">\(45^\circ\)</span> slope.</p>
+<p>The two non-zero components are <span class="arithmatex">\(9.81 / \sqrt{2} \approx 6.9367\)</span> m/s<span class="arithmatex">\(^2\)</span> each.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Loading"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="p">{</span>
@@ -2226,22 +2272,35 @@ d_x(t) =
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
 </code></pre></div>
-<p>The two non-zero components are <span class="arithmatex">\(9.81 / \sqrt{2} \approx 6.9367\)</span> m/s<span class="arithmatex">\(^2\)</span> each.</p>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">¶</a></h3>
 <p>Newton-Raphson, implicit dynamic.</p>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">"Solver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">"solve type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dynamic"</span><span class="p">,</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Newton-Raphson"</span><span class="p">,</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">"time integration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"implicit"</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+<div class="json-side">
+<div class="js-text">
 <h3 id="output-data">Output data<a class="headerlink" href="#output-data" title="Permanent link">¶</a></h3>
+</div>
+<div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">"Output Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nt">"vtu data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">"vtk data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">"text data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rolling sphere"</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <p>Below, the deformed slope and GIMP positions show how the refinement follows the sphere down the slope (left, <a href="#fig-sphere-3d">Figure 2</a>), and the simulated <span class="arithmatex">\(d_x(t)\)</span> traces are overlaid on the analytical solution for each friction coefficient, exercising both slipping and sticking regimes (right, <a href="#fig-sphere-results">Figure 3</a>).</p>
@@ -2266,8 +2325,13 @@ d_x(t) =
 
 
 
+  
+  
 
 
+
+
+  
 
 
 
