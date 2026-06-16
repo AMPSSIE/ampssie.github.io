@@ -2075,7 +2075,7 @@
 <div class="arithmatex">\[
 \sigma_g = \rho g (L - z_p),
 \]</div>
-<p>where <span class="arithmatex">\(g = 9.81\)</span> m/s<span class="arithmatex">\(^2\)</span> is the acceleration due to gravity, <span class="arithmatex">\(L = 0.8\)</span> m is the initial height of the domain and <span class="arithmatex">\(z_p\)</span> is the initial vertical position of the material point (m). The column is <span class="arithmatex">\(0.4 \times 0.4 \times 0.8\)</span> m (see <a href="#fig-example-mesh">Figure 2</a>), made of a homogeneous Hencky elastic material with Young's modulus <span class="arithmatex">\(E = 10^3\)</span> Pa, Poisson's ratio <span class="arithmatex">\(\nu = 0\)</span> and density <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>. The material domain is filled with a <span class="arithmatex">\(2\times2\times2\)</span> grid of GIMPs in each element (see <a href="#fig-example-mesh-gimp">Figure 3</a>). This problem is a load-controlled problem so the <code>Solver</code> divides the gravitational load into 20 increments, with each increment solved with a Newton-Raphson solver.</p>
+<p>where <span class="arithmatex">\(g = 9.81\)</span> m/s<span class="arithmatex">\(^2\)</span> is the acceleration due to gravity, <span class="arithmatex">\(L = 0.8\)</span> m is the initial height of the domain and <span class="arithmatex">\(z_p\)</span> is the initial vertical position of the material point (m). The column is <span class="arithmatex">\(0.4 \times 0.4 \times 0.8\)</span> m (see <a href="#fig-example-mesh">Figure 2</a>), made of a homogeneous Hencky elastic material with Young's modulus <span class="arithmatex">\(E = 10^3\)</span> Pa, Poisson's ratio <span class="arithmatex">\(\nu = 0\)</span> and density <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>. The material domain is filled with a <span class="arithmatex">\(2\times2\times2\)</span> grid of GIMPs in each element (see <a href="#fig-example-mesh-gimp">Figure 3</a>). This is a load-controlled problem so the gravitational load is divided into 20 increments, with each increment applied and then solved with a Newton-Raphson scheme.</p>
 <p>The input file is a single JSON object - a human-readable, editable text file. The complete file for this problem can be found <a href="../Tutorial_1_input_data/"><code>here</code></a> and for all input settings see the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
 <div class="grid">
 <p><figure id="_figure-2"><img alt="Compression under self-weight, example of the refinement scheme with hanging nodes." id="fig-example-mesh" src="../../../img/example_mesh_ref.png" width="100%"><figcaption>Figure 2: Compression under self-weight, example of the refinement scheme with hanging nodes.</figcaption></figure></p>
@@ -2156,7 +2156,7 @@
 <div class="json-side">
 <div class="js-text">
 <h3 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">¶</a></h3>
-<p>The self-weight load is ramped on quasi-statically over 20 increments using a Newton-Raphson scheme.</p>
+<p>The self-weight load is ramped quasi-statically over 20 increments using a Newton-Raphson scheme.</p>
 </div>
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Solver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
