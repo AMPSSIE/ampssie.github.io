@@ -958,17 +958,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-description" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Problem description
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#input-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1935,17 +1924,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-description" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Problem description
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#input-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2076,47 +2054,33 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
 <p>This quick start tutorial walks through the steps of running your first AMPSSIE problem.</p>
 <p>This tutorial analyses a column deforming under self-weight and solves the static weak-form <a href="../../TechnicalReferences/StaticWeakForm/">equations</a>. It is simple but introduces you to all components of the code: setting up, running and viewing the output data.</p>
-<p>This tutorial has four sections:</p>
+<p>This tutorial has three sections:</p>
 <ul>
-<li><a href="#problem-description">Problem description</a></li>
 <li><a href="#input-setup">Input setup</a></li>
 <li><a href="#deploying-and-running-the-problem">Deploying and running the problem</a></li>
 <li><a href="#viewing-the-results">Viewing the results</a></li>
 </ul>
-<h2 id="problem-description">Problem description<a class="headerlink" href="#problem-description" title="Permanent link">¶</a></h2>
-<p>The Generalised Interpolation Material Point Method (GIMPM) can be classed a fictious domain method. This means that the mesh and boundary conditions do not necessarily align with the material domain, the thing that is being modelled. This enables the GIMPM to avoiding distorted mesh issues normally associated with finite elements. </p>
+<p>The Generalised Interpolation Material Point Method (GIMPM) can be classed as a fictitious domain method. This means that the mesh and boundary conditions do not necessarily align with the material domain, the body that is being modelled by the material points. This enables the GIMPM to avoid distorted mesh issues normally associated with finite elements. </p>
 <p>The GIMPM broadly works in three steps:
 <figure id="_figure-1"><img alt="The three steps to a GIMPM solution step." id="fig-example-GIMPM" src="../../../img/GIMP_example.png" width="100%"><figcaption>Figure 1: The three steps to a GIMPM solution step.</figcaption></figure></p>
 <ul>
 <li>(a) initial state which loads the material point data on the background mesh</li>
 <li>(b) deforming the mesh and the material points together</li>
-<li>(c) reseting the mesh but not the material points, distorting the body relative to the mesh</li>
+<li>(c) resetting the mesh but not the material points, distorting the body relative to the mesh</li>
 </ul>
-<p>This framework means that you have to define the <code>Mesh</code> and the <code>Initial GIMP distribution</code>, the latter corressponds to the body being modelled. </p>
-<p><strong>Mesh:</strong> The column is <span class="arithmatex">\(0.4 \times 0.4 \times 0.8\)</span> m see <a href="#fig-example-mesh">Figure 2</a>.</p>
-<p><strong>Initial GIMP distribution:</strong> A <span class="arithmatex">\(2\times2\times2\)</span> grid of GIMPs is placed in each element; see <a href="#fig-example-mesh-gimp">Figure 3</a>.</p>
-<p><strong>Boundary conditions:</strong> Apply roller boundaries on the four sides and the base. Leave the top as a free surface. Fix every node in <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> so the problem stays one-dimensional.</p>
-<p><strong>Material:</strong> Use a Hencky elastic model with constant parameters: Young's modulus <span class="arithmatex">\(E = 10^3\)</span> Pa, Poisson's ratio <span class="arithmatex">\(\nu = 0\)</span> and density <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>.</p>
-<p><strong>Loading:</strong> Apply gravity as a body force, <span class="arithmatex">\(g_i = [0,\,0,\,-9.81]\)</span> m/s<span class="arithmatex">\(^2\)</span>.</p>
-<p><strong>Solver:</strong> Use Newton-Raphson and ramp the load on incrementally over 20 load steps.</p>
-<p><strong>Analytical solution:</strong> This problem has an analytical stress solution you can use to validate the numerical result:</p>
+<p>This framework means that you have to define the <code>Mesh</code> and the <code>Initial GIMP distribution</code>, the latter corresponds to the modelled body. </p>
+<p>The <code>Boundary conditions</code>, such as fixed or rolling nodes are applied to the <code>Mesh</code>, whereas force loads, such as gravity are applied to the material points directly. The  material points also contains all the material information</p>
+<h2 id="input-setup">Input setup<a class="headerlink" href="#input-setup" title="Permanent link">¶</a></h2>
+<p><strong>Problem summary:</strong> The aim is to recover the vertical stress field that develops through a column that deforms vertically and compare the stress solution against the analytical one</p>
 <div class="arithmatex">\[
 \sigma_g = \rho g (L - z_p),
 \]</div>
-<p>where:</p>
-<ul>
-<li><span class="arithmatex">\(g = 9.81\)</span> m/s<span class="arithmatex">\(^2\)</span> is the acceleration due to gravity</li>
-<li><span class="arithmatex">\(L = 0.8\)</span> m is the initial height of the domain</li>
-<li><span class="arithmatex">\(z_p\)</span> is the vertical position of the material point (m)</li>
-</ul>
-<h2 id="input-setup">Input setup<a class="headerlink" href="#input-setup" title="Permanent link">¶</a></h2>
+<p>where <span class="arithmatex">\(g = 9.81\)</span> m/s<span class="arithmatex">\(^2\)</span> is the acceleration due to gravity, <span class="arithmatex">\(L = 0.8\)</span> m is the initial height of the domain and <span class="arithmatex">\(z_p\)</span> is the initial vertical position of the material point (m). The column is <span class="arithmatex">\(0.4 \times 0.4 \times 0.8\)</span> m (see <a href="#fig-example-mesh">Figure 2</a>), made of a homogeneous Hencky elastic material with Young's modulus <span class="arithmatex">\(E = 10^3\)</span> Pa, Poisson's ratio <span class="arithmatex">\(\nu = 0\)</span> and density <span class="arithmatex">\(\rho = 50\)</span> kg/m<span class="arithmatex">\(^3\)</span>. The material domain is filled with a <span class="arithmatex">\(2\times2\times2\)</span> grid of GIMPs in each element (see <a href="#fig-example-mesh-gimp">Figure 3</a>). This problem is a load-controlled problem so the <code>Solver</code> divides the gravitational load into 20 increments, with each increment solved with a Newton-Raphson solver.</p>
 <p>The input file is a single JSON object - a human-readable, editable text file. The complete file for this problem can be found <a href="../Tutorial_1_input_data/"><code>here</code></a> and for all input settings see the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
-<p>You will define the geometry, mesh, boundary conditions, material, loading and solver in the input file. A reference for all input data can be found in the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
 <div class="grid">
 <p><figure id="_figure-2"><img alt="Compression under self-weight, example of the refinement scheme with hanging nodes." id="fig-example-mesh" src="../../../img/example_mesh_ref.png" width="100%"><figcaption>Figure 2: Compression under self-weight, example of the refinement scheme with hanging nodes.</figcaption></figure></p>
 <p><figure id="_figure-3"><img alt="Compression under self-weight, example of GIMP distribution in the mesh when h = 0.4 m." id="fig-example-mesh-gimp" src="../../../img/example_mesh_ref_GIMP.png" width="100%"><figcaption>Figure 3: Compression under self-weight, example of GIMP distribution in the mesh when h = 0.4 m.</figcaption></figure></p>
 </div>
-<p>This problem has six top-level sections, broken out below alongside the <a href="#problem-description">Problem description</a>. </p>
 <div class="json-side-header">
 <div>Description</div>
 <div><code>input_data.json</code></div>
@@ -2218,7 +2182,7 @@
 </div>
 </div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
-<p>There are several methods for <a href="../../UsingTheSoftware/DeployingTheSoftware/">deploying</a>. However as this problem is small, runs quickly and </p>
+<p>There are several methods for <a href="../../UsingTheSoftware/DeployingTheSoftware/">deploying</a>. However, as this problem is small, runs quickly and has modest resource requirements, running it locally on your own machine is sufficient.</p>
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <p>The deformed column under self-weight is shown in <a href="#fig-gravity-displacement">Figure 4</a> at load steps 1, 10 and 20 of 20. The vertical displacement reaches its maximum at the top, as expected for a column compressed under its own weight; the stress field through the column can be compared against the analytical solution introduced above to validate the simulation.</p>
 <p><figure id="_figure-4"><img alt="Compression under self-weight: displacement plot of the GIMPs and mesh for steps 1, 10 and 20 of 20." id="fig-gravity-displacement" src="../../../img/gravity_result.png" width="70%"><figcaption>Figure 4: Compression under self-weight: displacement plot of the GIMPs and mesh for steps 1, 10 and 20 of 20.</figcaption></figure></p>
