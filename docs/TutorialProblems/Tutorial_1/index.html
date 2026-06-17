@@ -2699,22 +2699,14 @@ to install the AMPSSIE package and start multiple parallel workers.
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>8. Show element edges.</strong> Change the representation to <em>Surface With Edges</em> to see the individual GIMP cells.</p>
+<p><strong>8. View the vertical displacement.</strong> Switch <em>Coloring</em> to <code>displacement magnitude</code>. Then press the green arrow marked with the red ring to advance to the final output, and scale the colours with the icon shown by the dashed ring. </p>
 </div>
 <div>
-<p><figure id="_figure-11"><img alt="Surface With Edges representation reveals the individual GIMP cells." id="fig-paraview-8" src="../../../img/screen_shot_8.png" width="100%"><figcaption>Figure 11: Surface With Edges representation reveals the individual GIMP cells.</figcaption></figure></p>
-</div>
-</div>
-<div class="walkthrough">
-<div>
-<p><strong>9. View the vertical stress.</strong> Switch <em>Coloring</em> to <code>displacement magnitude</code>. Then press the green arrow marked with the red ring to advance to the final output, and scale the colours with the icon shown by the dashed ring. </p>
-</div>
-<div>
-<p><figure id="_figure-12"><img alt="Final vertical displacement visualisation of the deformed column." id="fig-paraview-9" src="../../../img/screen_shot_9.png" width="100%"><figcaption>Figure 12: Final vertical displacement visualisation of the deformed column.</figcaption></figure></p>
+<p><figure id="_figure-11"><img alt="Final vertical displacement visualisation of the deformed column." id="fig-paraview-9" src="../../../img/screen_shot_9.png" width="100%"><figcaption>Figure 11: Final vertical displacement visualisation of the deformed column.</figcaption></figure></p>
 </div>
 </div>
 <h2 id="analysing-the-stress-variation-with-height">Analysing the stress variation with height<a class="headerlink" href="#analysing-the-stress-variation-with-height" title="Permanent link">¶</a></h2>
-<p>As this is a validation problem, the option <code>"text data": "self-weight column"</code> in <a href="#output-data">Output data</a> will provide the final stress magnitude with the original height in the text file <code>MaterialPoints/src/output/mp_data_dx_0.4.csv</code>. The minimum element size of <code>0.4</code> m is encoded in the file name. The result for this problem looks like:</p>
+<p>As this is a validation problem, the option <code>"text data": "self-weight column"</code> in <a href="#output-data">Output data</a> will provide the final stress magnitude in the <span class="arithmatex">\(z\)</span>-direction with the corresponding original GIMP centre height in the text file <code>MaterialPoints/src/output/mp_data_dx_0.4.csv</code>. The minimum element size of <code>0.4</code> m is encoded in the file name. The result for this problem looks like:</p>
 <div class="admonition note">
 <p class="admonition-title">Floating-point spellings in the raw CSV</p>
 <p>Coordinates that should be <code>0.3</code> appear as <code>0.30000000000000004</code> and <code>0.7</code> as <code>0.7000000000000001</code> - these are the exact binary representations Julia stores for those decimals. The position values have been simplified below for readability. The stress values are shown verbatim, but their trailing digits are floating-point noise.</p>
@@ -2737,8 +2729,8 @@ to install the AMPSSIE package and start multiple parallel workers.
 <a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>0.1, 0.3, 0.7 , 57.35273263933712
 <a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>0.3, 0.3, 0.7 , 57.352732639337134
 </code></pre></div>
-where <code>x</code>, <code>y</code> and <code>z</code> are the initial positions of the GIMPs and <code>abs_sig_zz</code> is the magnitude of the Cauchy stress in the <span class="arithmatex">\(z\)</span>-direction. When plotted as point data against the analytical solution from <a href="#output-data">Output data</a>, the result looks like <a href="#fig-stress-validation">Figure 13</a>:
-<p><figure id="_figure-13"><img alt="Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical solution \(\sigma_g = \rho g (L - z_p)\) from the Problem summary." id="fig-stress-validation" src="../../../img/self_weight_stress_validation.png" width="70%"><figcaption>Figure 13: Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical solution \(\sigma_g = \rho g (L - z_p)\) from the Problem summary.</figcaption></figure></p>
+where <code>x</code>, <code>y</code> and <code>z</code> are the initial positions of the GIMPs and <code>abs_sig_zz</code> is the magnitude of the Cauchy stress in the <span class="arithmatex">\(z\)</span>-direction. When plotted as point data against the analytical solution from <a href="#output-data">Output data</a>, the result looks like <a href="#fig-stress-validation">Figure 12</a>:
+<p><figure id="_figure-12"><img alt="Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical self-weight stress solution from the Problem summary." id="fig-stress-validation" src="../../../img/self_weight_stress_validation.png" width="70%"><figcaption>Figure 12: Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical self-weight stress solution from the Problem summary.</figcaption></figure></p>
 <p>This is a very coarse mesh, so the numerical points do not sit close to the analytical line. Refining the mesh closes that gap quickly: setting <code>dx refined</code> in <a href="#mesh-data">Mesh data</a> to <code>0.025</code> gives 32 elements in the vertical direction instead of 2. The result is the numerical stress is much closer to the analytical solution.</p>
 
 
