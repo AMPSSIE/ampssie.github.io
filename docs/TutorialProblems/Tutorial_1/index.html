@@ -955,6 +955,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-the-gimpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background: the GIMPM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -968,6 +985,17 @@
   
     <nav class="md-nav" aria-label="Input setup">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem summary
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#mesh-data" class="md-nav__link">
@@ -1071,6 +1099,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Running the problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1977,6 +2022,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-the-gimpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background: the GIMPM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1990,6 +2052,17 @@
   
     <nav class="md-nav" aria-label="Input setup">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem summary
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#mesh-data" class="md-nav__link">
@@ -2094,6 +2167,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Running the problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -2172,6 +2262,7 @@
 <li><a href="#deploying-and-running-the-problem">Deploying and running the problem</a></li>
 <li><a href="#viewing-the-results">Viewing the results</a></li>
 </ul>
+<h3 id="background-the-gimpm">Background: the GIMPM<a class="headerlink" href="#background-the-gimpm" title="Permanent link">¶</a></h3>
 <p>This tool introduces you to the Generalised Interpolation Material Point Method (GIMPM), and how it is different to methods such as finite element analysis. The GIMPM can be classed as a fictitious domain method, this means that the mesh and boundary conditions do not necessarily align with the material domain, the body that is being modelled by the material points. This enables the GIMPM to avoid distorted mesh issues normally associated with finite elements.</p>
 <p>The GIMPM broadly works in three steps:
 <figure id="_figure-1"><img alt="The three steps to a GIMPM solution step." id="fig-example-GIMPM" src="../../../img/GIMP_example.png" width="100%"><figcaption>Figure 1: The three steps to a GIMPM solution step.</figcaption></figure></p>
@@ -2180,9 +2271,10 @@
 <li>(b) deforming the mesh and the material points together</li>
 <li>(c) resetting the mesh but not the material points, distorting the body relative to the mesh</li>
 </ul>
-<p>This framework means that you have to define the <code>Mesh</code>, the discretisation on which the equations are solved, and the <code>Initial GIMP distribution</code>, the modelled body that carries all the material and kinematic data. This means that the <code>Boundary conditions</code>, such as fixed or rolling nodes are applied to the vertices of the <code>Mesh</code>, whereas force loads such as gravity are applied to the material points directly. </p>
+<p>Under this framework you define two things: the <code>Mesh</code> - the discretisation on which the equations are solved - and the <code>Initial GIMP distribution</code> - the modelled body that carries all the material and kinematic data. Boundary conditions (fixed or rolling nodes) are applied to the vertices of the <code>Mesh</code>, whereas body forces such as gravity are applied to the material points directly.</p>
 <h2 id="input-setup">Input setup<a class="headerlink" href="#input-setup" title="Permanent link">¶</a></h2>
-<p><strong>Problem summary:</strong> The aim is to recover the vertical stress field that develops through a column that deforms vertically and compare the stress solution against the analytical one</p>
+<h3 id="problem-summary">Problem summary<a class="headerlink" href="#problem-summary" title="Permanent link">¶</a></h3>
+<p>The aim is to recover the vertical stress field that develops through a column that deforms vertically and compare the stress solution against the analytical one</p>
 <div class="arithmatex">\[
 \sigma_g = \rho g (L - z_p),
 \]</div>
@@ -2282,7 +2374,7 @@
 <div class="json-side">
 <div class="js-text">
 <h3 id="output-data">Output data<a class="headerlink" href="#output-data" title="Permanent link">¶</a></h3>
-<p>VTU and VTK output is enabled for visualisation in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>). The <code>text data</code> field outputs the vertical stress GIMP data with the deformed and initial height.</p>
+<p>VTU and VTK output is enabled for visualisation in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>). The <code>text data</code> field writes a CSV of the vertical stress at each GIMP, listed against both its initial and deformed heights.</p>
 </div>
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Output Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2353,8 +2445,9 @@ to install the AMPSSIE package and start multiple parallel workers.
 <div class="json-side">
 <div class="js-text">
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
-<p>With the <code>input_data.json</code> in the correct place and Julia running with the AMPSSIE package loaded, the simulation can be started by calling the AMPSSIE entry point. This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under self-weight, and writes the <code>.vtu</code>, or <code>vtk</code>, output files for ParaView visualisation and a <code>.csv</code> file specific for this validation problem.</p>
-<p><strong>Reading the output.</strong> Each <code>time …</code> block in the terminal corresponds to one of the 20 load increments. For a static problem AMPSSIE uses a pseudo-time that runs from <span class="arithmatex">\(t = 0\)</span> to <span class="arithmatex">\(t = 1\)</span>, with the increment size <code>dt</code> calculated automatically as <span class="arithmatex">\(1 / \text{number of increments}\)</span> (so <code>dt</code> <span class="arithmatex">\(= 0.05\)</span> for this run). For each step the solver prints:</p>
+<p>With the <code>input_data.json</code> in the correct place and Julia running with the AMPSSIE package loaded, the simulation can be started by calling the AMPSSIE entry point. This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under self-weight, and writes <code>.vtu</code> and <code>.vtk</code> output files for ParaView visualisation along with a <code>.csv</code> file specific to this validation problem.</p>
+<h4 id="reading-the-output">Reading the output<a class="headerlink" href="#reading-the-output" title="Permanent link">¶</a></h4>
+<p>Each <code>time …</code> block in the terminal corresponds to one of the 20 load increments. For a static problem AMPSSIE uses a pseudo-time that runs from <span class="arithmatex">\(t = 0\)</span> to <span class="arithmatex">\(t = 1\)</span>, with the increment size <code>dt</code> calculated automatically as <span class="arithmatex">\(1 / \text{number of increments}\)</span> (so <code>dt</code> <span class="arithmatex">\(= 0.05\)</span> for this run). For each step the solver prints:</p>
 <ul>
 <li><code>time X.XXXXXe+XX ----</code> - the pseudo-time at the start of the step.</li>
 <li><code>number of isolated material points</code> - a connectivity check; should stay at <code>0</code> for this problem.</li>
@@ -2621,24 +2714,28 @@ to install the AMPSSIE package and start multiple parallel workers.
 </div>
 </div>
 <h2 id="analysing-the-stress-variation-with-height">Analysing the stress variation with height<a class="headerlink" href="#analysing-the-stress-variation-with-height" title="Permanent link">¶</a></h2>
-<p>As this is a validation problem, the option <code>"text data": "self-weight column"</code> in <a href="#output-data">Output data</a> will provide the final stress magnitude with the original height in the text file <code>MaterialPoints/src/output/mp_data_dx_0.4.csv</code>. The minimum element size of <code>0.4</code> m is encoded in the file name. The result for this problem looks like:
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>x                  , y                  , z                  , abs_sig_zz
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>0.1                , 0.1                , 0.1                , 309.6846764994379
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>0.30000000000000004, 0.1                , 0.1                , 309.6846764994377
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>0.1                , 0.30000000000000004, 0.1                , 309.68467649943767
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>0.30000000000000004, 0.30000000000000004, 0.1                , 309.6846764994379
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>0.1                , 0.1                , 0.30000000000000004, 309.6846764994379
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>0.30000000000000004, 0.1                , 0.30000000000000004, 309.6846764994377
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>0.1                , 0.30000000000000004, 0.30000000000000004, 309.68467649943767
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>0.30000000000000004, 0.30000000000000004, 0.30000000000000004, 309.6846764994379
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>0.1                , 0.1                , 0.5                , 110.43544439893448
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>0.30000000000000004, 0.1                , 0.5                , 110.43544439893448
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>0.1                , 0.30000000000000004, 0.5                , 110.43544439893448
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>0.30000000000000004, 0.30000000000000004, 0.5                , 110.43544439893454
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>0.1                , 0.1                , 0.7000000000000001 , 57.352732639336985
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>0.30000000000000004, 0.1                , 0.7000000000000001 , 57.35273263933691
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>0.1                , 0.30000000000000004, 0.7000000000000001 , 57.35273263933712
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>0.30000000000000004, 0.30000000000000004, 0.7000000000000001 , 57.352732639337134
+<p>As this is a validation problem, the option <code>"text data": "self-weight column"</code> in <a href="#output-data">Output data</a> will provide the final stress magnitude with the original height in the text file <code>MaterialPoints/src/output/mp_data_dx_0.4.csv</code>. The minimum element size of <code>0.4</code> m is encoded in the file name. The result for this problem looks like:</p>
+<div class="admonition note">
+<p class="admonition-title">Floating-point spellings in the raw CSV</p>
+<p>Coordinates that should be <code>0.3</code> appear as <code>0.30000000000000004</code> and <code>0.7</code> as <code>0.7000000000000001</code> - these are the exact binary representations Julia stores for those decimals. The position values have been simplified below for readability. The stress values are shown verbatim, but their trailing digits are floating-point noise.</p>
+</div>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>x  , y  , z   , abs_sig_zz
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>0.1, 0.1, 0.1 , 309.6846764994379
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>0.3, 0.1, 0.1 , 309.6846764994377
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>0.1, 0.3, 0.1 , 309.68467649943767
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>0.3, 0.3, 0.1 , 309.6846764994379
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>0.1, 0.1, 0.3 , 309.6846764994379
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>0.3, 0.1, 0.3 , 309.6846764994377
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>0.1, 0.3, 0.3 , 309.68467649943767
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>0.3, 0.3, 0.3 , 309.6846764994379
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>0.1, 0.1, 0.5 , 110.43544439893448
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>0.3, 0.1, 0.5 , 110.43544439893448
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>0.1, 0.3, 0.5 , 110.43544439893448
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>0.3, 0.3, 0.5 , 110.43544439893454
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>0.1, 0.1, 0.7 , 57.352732639336985
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>0.3, 0.1, 0.7 , 57.35273263933691
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>0.1, 0.3, 0.7 , 57.35273263933712
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>0.3, 0.3, 0.7 , 57.352732639337134
 </code></pre></div>
 where <code>x</code>, <code>y</code> and <code>z</code> are the initial positions of the GIMPs and <code>abs_sig_zz</code> is the magnitude of the Cauchy stress in the <span class="arithmatex">\(z\)</span>-direction. When plotted as point data against the analytical solution from <a href="#output-data">Output data</a>, the result looks like <a href="#fig-stress-validation">Figure 13</a>:
 <p><figure id="_figure-13"><img alt="Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical solution \(\sigma_g = \rho g (L - z_p)\) from the Problem summary." id="fig-stress-validation" src="../../../img/self_weight_stress_validation.png" width="70%"><figcaption>Figure 13: Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical solution \(\sigma_g = \rho g (L - z_p)\) from the Problem summary.</figcaption></figure></p>
