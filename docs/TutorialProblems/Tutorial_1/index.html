@@ -2659,10 +2659,10 @@ to install the AMPSSIE package and start multiple parallel workers.
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>3. Apply the readers.</strong> Click <em>Apply</em> in the Properties panel for each reader. The full GIMP domain appears as a solid grey cube and the cell/point arrays <code>displacement</code>, <code>strain</code>, <code>E</code> and <code>rho</code> become available.</p>
+<p><strong>3. Apply the readers.</strong> Click <em>Apply</em> in the Properties panel for each reader. The full mesh domain appears as a solid grey cube which covers all the GIMPM data under it.</p>
 </div>
 <div>
-<p><figure id="_figure-6"><img alt="Both VTU files loaded; the solid grey cube is the full GIMP domain." id="fig-paraview-3" src="../../../img/screen_shot_3.png" width="100%"><figcaption>Figure 6: Both VTU files loaded; the solid grey cube is the full GIMP domain.</figcaption></figure></p>
+<p><figure id="_figure-6"><img alt="Both VTU files loaded; the solid grey cube is the full mesh domain." id="fig-paraview-3" src="../../../img/screen_shot_3.png" width="100%"><figcaption>Figure 6: Both VTU files loaded; the solid grey cube is the full mesh domain.</figcaption></figure></p>
 </div>
 </div>
 <div class="walkthrough">
@@ -2683,7 +2683,7 @@ to install the AMPSSIE package and start multiple parallel workers.
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>6. Colour the GIMPs by displacement.</strong> Select <code>mpDataV..vtu</code>, change <em>Coloring</em> to <code>displacement</code> → <code>Magnitude</code>. At step 0 (undeformed) the GIMPs sit near the low end of the colour bar.</p>
+<p><strong>6. Colour the GIMPs by displacement.</strong> Select <code>mpDataV..vtu</code>, change <em>Coloring</em> to <code>displacement</code> → <code>Magnitude</code>. At the end of step 0 (undeformed) the GIMPs are only marginally displaced.</p>
 </div>
 <div>
 <p><figure id="_figure-9"><img alt="GIMP data coloured by displacement magnitude at the initial step." id="fig-paraview-6" src="../../../img/screen_shot_6.png" width="100%"><figcaption>Figure 9: GIMP data coloured by displacement magnitude at the initial step.</figcaption></figure></p>
@@ -2691,7 +2691,7 @@ to install the AMPSSIE package and start multiple parallel workers.
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>7. Advance to the final step.</strong> Use the time controls at the top (set time to the maximum, <code>19</code>, for the last of the 20 increments). The GIMPs shift to the high end of the colour bar, showing the maximum self-weight deformation.</p>
+<p><strong>7. Advance to the final step.</strong> Use the time controls at the top, maked by the red box, abd set time to the maximum, <code>19</code>, for the last of the 20 increments. The GIMPs shift to the high end of the colour bar, showing the maximum self-weight deformation.</p>
 </div>
 <div>
 <p><figure id="_figure-10"><img alt="GIMP data at the final step - column fully deformed." id="fig-paraview-7" src="../../../img/screen_shot_7.png" width="100%"><figcaption>Figure 10: GIMP data at the final step - column fully deformed.</figcaption></figure></p>
