@@ -2297,7 +2297,7 @@ to install the AMPSSIE package and start multiple parallel workers.
 <div class="json-side">
 <div class="js-text">
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
-<p>With the <code>input_data.json</code> in the correct place and Julia running with the AMPSSIE package loaded, the simulation can be started by calling the AMPSSIE entry point. This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under self-weight, and writes the VTU output files for ParaView visualisation.</p>
+<p>With the <code>input_data.json</code> in the correct place and Julia running with the AMPSSIE package loaded, the simulation can be started by calling the AMPSSIE entry point. This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under self-weight, and writes the <code>.vtu</code>, or <code>vtk</code>, output files for ParaView visualisation and a <code>.csv</code> file specific for this validation problem.</p>
 <p><strong>Reading the output.</strong> Each <code>time …</code> block in the terminal corresponds to one of the 20 load increments. For a static problem AMPSSIE uses a pseudo-time that runs from <span class="arithmatex">\(t = 0\)</span> to <span class="arithmatex">\(t = 1\)</span>, with the increment size <code>dt</code> calculated automatically as <span class="arithmatex">\(1 / \text{number of increments}\)</span> (so <code>dt</code> <span class="arithmatex">\(= 0.05\)</span> for this run). For each step the solver prints:</p>
 <ul>
 <li><code>time X.XXXXXe+XX ----</code> - the pseudo-time at the start of the step.</li>
@@ -2489,6 +2489,8 @@ to install the AMPSSIE package and start multiple parallel workers.
 </div>
 </div>
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
+<p>The simulation results will appear as the simulation is running, so it is not necessary to wait until the simulation has finished. When the problem is run using your local Julia installiation the <code>.csv</code>, <code>.vtk</code> and <code>.vtu</code> files are all stored in <code>MaterialPoints/src/output</code>. </p>
+<p>In the <a href="#output-data"><code>output data</code></a> </p>
 <p>The deformed column under self-weight is shown in <a href="#fig-gravity-displacement">Figure 4</a> at load steps 1, 10 and 20 of 20. The vertical displacement reaches its maximum at the top, as expected for a column compressed under its own weight; the stress field through the column can be compared against the analytical solution introduced above to validate the simulation.</p>
 <p><figure id="_figure-4"><img alt="Compression under self-weight: displacement plot of the GIMPs and mesh for steps 1, 10 and 20 of 20." id="fig-gravity-displacement" src="../../../img/gravity_result.png" width="70%"><figcaption>Figure 4: Compression under self-weight: displacement plot of the GIMPs and mesh for steps 1, 10 and 20 of 20.</figcaption></figure></p>
 <p><em>Figure reproduced from <sup id="fnref:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">1</a></sup>.</em></p>
