@@ -2194,7 +2194,7 @@ to install the AMPSSIE package and start multiple parallel workers.
 <p>With the <code>input_data.json</code> in the correct place and Julia running with the AMPSSIE package loaded, the simulation can be started by calling the AMPSSIE entry point.
 </p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Ampse.run("input_data.json");
 </code></pre></div>
-This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under self-weight, and writes <code>.vtu</code> and <code>.vtk</code> output files for ParaView visualisation along with a <code>.csv</code> file specific to this validation problem.
+This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under self-weight, and writes <code>.vtu</code> and <code>.vtk</code> output files for ParaView visualisation along with a <code>.csv</code> file specific to this validation problem. 
 <h4 id="reading-the-output">Reading the output<a class="headerlink" href="#reading-the-output" title="Permanent link">¶</a></h4>
 <p>Each <code>time …</code> block in the terminal corresponds to one of the 20 load increments. For a static problem AMPSSIE uses a pseudo-time that runs from <span class="arithmatex">\(t = 0\)</span> to <span class="arithmatex">\(t = 1\)</span>, with the increment size <code>dt</code> calculated automatically as <span class="arithmatex">\(1 / \text{number of increments}\)</span> (so <code>dt</code> <span class="arithmatex">\(= 0.05\)</span> for this run). For each step the solver prints:</p>
 <ul>
@@ -2389,7 +2389,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <p>The simulation results appear as the simulation runs, so you do not need to wait until it has finished to view the results. When the problem is run using your local Julia installation, the <code>.csv</code>, <code>.vtk</code> and <code>.vtu</code> files are stored in <code>MaterialPoints/src/output</code> (as configured in the <a href="#output-data"><code>output data</code></a> section of the input file).</p>
 <h3 id="visualising-the-output-in-paraview">Visualising the output in ParaView<a class="headerlink" href="#visualising-the-output-in-paraview" title="Permanent link">¶</a></h3>
-<p>The output files can be opened in <a href="https://www.paraview.org/">ParaView</a> to inspect the deformed column and any data associated with the GIMPs (stress, strain, material properties, velocity etc.). The walkthrough below opens the GIMP data (<code>mpDataV..vtu</code>) and the background mesh (<code>Octree..vtu</code>), thresholds the mesh to the active region and colours the GIMPs by displacement. Finally, the numerical stress solution is compared against the analytical.</p>
+<p>The output files can be opened in <a href="https://www.paraview.org/">ParaView</a> to inspect the deformed column and any data associated with the GIMPs (stress, strain, material properties, velocity etc.). The walkthrough below opens the GIMP data (<code>mpDataV..vtu</code>) and the background mesh (<code>Octree..vtu</code>), thresholds the mesh to the active region and colours the GIMPs by displacement. Finally, the numerical stress solution is compared against the analytical. Paraview has using viewing tools which can be used to orientated the view, this is achieved by left-clicking and draging to rotate, and scrolling to zoom.</p>
 <div class="walkthrough">
 <div>
 <p><strong>1. Open ParaView.</strong> Launch ParaView from your applications menu or terminal; you should see an empty render view.</p>
@@ -2413,6 +2413,17 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <div>
 <p><figure id="_figure-6"><img alt="Both VTU files loaded; the solid grey cube is the full mesh domain." id="fig-paraview-3" src="../../../img/screen_shot_3.png" width="100%"><figcaption>Figure 6: Both VTU files loaded; the solid grey cube is the full mesh domain.</figcaption></figure></p>
 </div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Navigating the 3D view</p>
+<p>Once a dataset is rendered you can move the camera with the mouse inside the <em>RenderView</em>:</p>
+<ul>
+<li><strong>Left-click and drag</strong> to rotate the view about the focal point.</li>
+<li><strong>Middle-click and drag</strong> (or <code>Shift</code>+left-drag) to pan.</li>
+<li><strong>Scroll wheel</strong> (or right-click and drag) to zoom in and out.</li>
+<li>Press <code>R</code> or use <em>View → Reset Camera</em> to reframe the scene if you get lost.</li>
+</ul>
+<p>The screenshots in the following steps were taken from a slightly rotated viewpoint so that the GIMPs at the back of the column are visible; feel free to rotate to whatever angle is most useful for inspecting your own run.</p>
 </div>
 <div class="walkthrough">
 <div>

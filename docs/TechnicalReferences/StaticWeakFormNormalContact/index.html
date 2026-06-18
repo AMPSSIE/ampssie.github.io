@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#weak-statement-of-equilibrium-with-normal-contact" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1319,6 +1324,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Static weak form with normal contact
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1335,6 +1358,56 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#weak-statement-of-equilibrium-with-normal-contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak statement of equilibrium with normal contact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gap-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penalty-regularisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penalty regularisation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1484,6 +1557,47 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#weak-statement-of-equilibrium-with-normal-contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak statement of equilibrium with normal contact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gap-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#penalty-regularisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penalty regularisation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1504,7 +1618,33 @@
 
   <h1>Static weak form with normal contact</h1>
 
-
+<hr>
+<p>This page extends the <a href="../StaticWeakForm/">Static weak form</a> used in AMPLE/AMPSSIE to include a normal-contact contribution between the deformable material and a rigid body. The presentation here is deliberately minimal - only the ingredients needed to state and penalise the normal-contact constraint are reproduced - and follows the static restriction of the dynamic 3D contact approach of Bird <em>et al.</em> <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>.</p>
+<h2 id="weak-statement-of-equilibrium-with-normal-contact">Weak statement of equilibrium with normal contact<a class="headerlink" href="#weak-statement-of-equilibrium-with-normal-contact" title="Permanent link">¶</a></h2>
+<p>The Galerkin weak statement of equilibrium given on the <a href="../StaticWeakForm/">Static weak form</a> page is augmented with a contact term that collects the normal tractions exerted by the rigid body on the boundary of the material:</p>
+<div class="arithmatex">\[\int_{\varphi_t(K)}[\nabla_x S_{vp}]^{T}\{\sigma\}\,\text{d}v - \int_{\varphi_t(K)}[S_{vp}]^{T}\{b\}\,\text{d}v - \int_{\varphi_t(\partial\Omega)}\{F_{N,v}^{\partial\Omega}\}\,\text{d}s = \{0\}\]</div>
+<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first two terms remain the internal force from the Cauchy stress field <span class="arithmatex">\(\{\sigma\}\)</span> and the body force <span class="arithmatex">\(\{b\}\)</span>; the third is the new contact contribution. Tangential (frictional) contact is omitted here; see Bird <em>et al.</em> <sup id="fnref2:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup> for the full normal-and-tangential formulation.</p>
+<h2 id="gap-function">Gap function<a class="headerlink" href="#gap-function" title="Permanent link">¶</a></h2>
+<p>The geometric measure of overlap between the deformable material and the rigid body is the <em>normal gap function</em>, <span class="arithmatex">\(g_N\)</span>, defined as the signed projection of a material-point position, <span class="arithmatex">\(\mathbf{x}\)</span>, onto its closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, on the rigid-body surface along the outward surface normal, <span class="arithmatex">\(\mathbf{n}\)</span>:</p>
+<div class="arithmatex">\[g_N = (\mathbf{x} - \mathbf{x}') \cdot \mathbf{n}.\]</div>
+<p>The closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, is obtained by Closest Point Projection (CPP) of <span class="arithmatex">\(\mathbf{x}\)</span> onto the discretised rigid-body surface. With this sign convention <span class="arithmatex">\(g_N &gt; 0\)</span> corresponds to separation, <span class="arithmatex">\(g_N = 0\)</span> to a closed contact and <span class="arithmatex">\(g_N &lt; 0\)</span> to penetration.</p>
+<p>Non-penetration and complementarity between the gap and the normal contact pressure, <span class="arithmatex">\(p_N\)</span>, are expressed through the Signorini-Hertz-Moreau conditions</p>
+<div class="arithmatex">\[g_N \geq 0, \quad p_N \leq 0, \quad g_N\, p_N = 0,\]</div>
+<p>i.e. the gap can only open (<span class="arithmatex">\(g_N &gt; 0\)</span>) when there is no compressive contact pressure (<span class="arithmatex">\(p_N = 0\)</span>), and a compressive contact pressure (<span class="arithmatex">\(p_N &lt; 0\)</span>) can only arise when the gap is closed (<span class="arithmatex">\(g_N = 0\)</span>).</p>
+<h2 id="penalty-regularisation">Penalty regularisation<a class="headerlink" href="#penalty-regularisation" title="Permanent link">¶</a></h2>
+<p>The hard inequality <span class="arithmatex">\(g_N \geq 0\)</span> is regularised by a penalty method: when a material point penetrates the rigid body, the normal contact pressure is taken to be linear in the (negative) gap,</p>
+<div class="arithmatex">\[p_N = \epsilon_N\, g_N,\]</div>
+<p>with <span class="arithmatex">\(\epsilon_N\)</span> the <em>normal penalty stiffness</em>. In AMPSSIE the penalty stiffness for each GIMP in contact is built from the GIMP's own material and geometry,</p>
+<div class="arithmatex">\[\epsilon_N = p_f\, E_p\, A_p^0,\]</div>
+<p>where <span class="arithmatex">\(E_p\)</span> is the GIMP's Young's modulus, <span class="arithmatex">\(A_p^0 = (V_p^0)^{2/3}\)</span> is a representative undeformed contact area constructed from the initial GIMP volume, <span class="arithmatex">\(V_p^0\)</span>, and <span class="arithmatex">\(p_f\)</span> is a user-controlled penalty factor that trades off interpenetration against conditioning of the global stiffness matrix. This penalty pressure is the contact force per unit area that enters the weak form above through <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span>. A worked study of <span class="arithmatex">\(p_f\)</span> on a stiff penalty problem is presented in <a href="../../TutorialProblems/Tutorial_2/">Tutorial 2</a>.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:bird_dynamic_2025">
+<p>Robert E. Bird, Giuliano Pretti, William M. Coombs, Charles E. Augarde, Yaseen U. Sharif, Michael J. Brown, Gareth Carter, Catriona Macdonald, and Kirstin Johnson. A dynamic implicit 3D material point-to-rigid body contact approach for large deformation analysis. <em>International Journal for Numerical Methods in Engineering</em>, 2025. <a class="footnote-backref" href="#fnref:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
 
 
 

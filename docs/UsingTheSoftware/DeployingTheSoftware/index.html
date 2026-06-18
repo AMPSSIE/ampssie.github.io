@@ -1526,7 +1526,6 @@
 <p><strong>Optional:</strong></p>
 <ul>
 <li><a href="https://git-scm.com/">Git</a> for cloning the source repository.</li>
-<li><a href="https://docs.docker.com/get-docker/">Docker</a> if you'd rather not install Julia directly - see <a href="#deploying-via-docker">Deploying via Docker</a>.</li>
 </ul>
 <h1 id="direct-interaction-with-julia">Direct interaction with Julia<a class="headerlink" href="#direct-interaction-with-julia" title="Permanent link">¶</a></h1>
 <p>The simplest deployment is to install Julia and run AMPSSIE from source.</p>
@@ -1545,24 +1544,6 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>.<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span><span class="w"> </span>path/to/input_data.json
 </code></pre></div>
 <p>Output is written to [insert here]; open the resulting VTU files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and stress fields.</p>
-<h1 id="deploying-via-docker">Deploying via Docker<a class="headerlink" href="#deploying-via-docker" title="Permanent link">¶</a></h1>
-<p>If you don't want to install Julia or manage package environments yourself, a Docker image bundles AMPSSIE and all its dependencies.</p>
-<p><strong>1. Install Docker.</strong> Follow the official instructions for your platform at <a href="https://docs.docker.com/get-docker/">docs.docker.com/get-docker</a>.</p>
-<p><strong>2. Pull the image.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
-</code></pre></div>
-<p><strong>3. Run a problem.</strong> Mount the directory containing your <code>input_data.json</code> so the container can read it and write output back to your host:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>-v<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/work"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>/work/input_data.json
-</code></pre></div>
-<p>Output files appear in the mounted directory once the container exits. As above, open the VTU files in ParaView (or VisIt).</p>
-<p><strong>Building the image yourself.</strong> If you've cloned the repository and want a local build, a <code>Dockerfile</code> lives at the project root:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ampssie:local<span class="w"> </span>.
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/work"</span><span class="w"> </span>ampssie:local<span class="w"> </span>/work/input_data.json
-</code></pre></div>
-<hr>
 
 
 
