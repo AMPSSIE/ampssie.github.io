@@ -1749,43 +1749,43 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Mesh</code></td>
+<td><code>"Mesh"</code></td>
 <td>object</td>
 <td>Domain extents and the background-grid element size.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>Initial GIMP distribution</code></td>
+<td><code>"Initial GIMP distribution"</code></td>
 <td>object</td>
 <td>Extent of the initial material-point fill.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>Boundary conditions</code></td>
+<td><code>"Boundary conditions"</code></td>
 <td>object</td>
 <td>Per-face kinematic conditions and optional per-DOF fixes.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>Material</code></td>
+<td><code>"Material"</code></td>
 <td>object</td>
 <td>Constitutive type and properties for each soil layer.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>Rigid body</code></td>
+<td><code>"Rigid body"</code></td>
 <td>object</td>
 <td>Geometry, kinematics and contact parameters for the rigid body.</td>
 <td>Optional</td>
 </tr>
 <tr>
-<td><code>Solver</code></td>
+<td><code>"Solver"</code></td>
 <td>object</td>
 <td>Solve type, load type and the number of increments.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>Output Data</code></td>
+<td><code>"Output Data"</code></td>
 <td>object</td>
 <td>VTU / VTK switches and a stem string for text output.</td>
 <td>Yes</td>
@@ -1825,8 +1825,9 @@
 </code></pre></div>
 where the <code>...</code> indicating text.
 <h2 id="mesh">Mesh<a class="headerlink" href="#mesh" title="Permanent link">¶</a></h2>
-<p>The <code>Mesh</code> object sets the size of the cuboidal background grid and the element size.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"Mesh"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>The <code>Mesh</code> object sets the size of the background grid and the element size.</p>
+<p>Example:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"Mesh"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">"domain size x"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"domain size y"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">"domain size z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
@@ -1844,26 +1845,22 @@ where the <code>...</code> indicating text.
 </thead>
 <tbody>
 <tr>
-<td><code>domain size x</code>, <code>y</code>, <code>z</code></td>
+<td><code>"domain size x"</code>, <code>"domain size y"</code>, <code>"domain size z"</code></td>
 <td>number (m)</td>
 <td>Length of the computational domain along each axis.</td>
 </tr>
 <tr>
-<td><code>dx refined</code></td>
+<td><code>"dx refined"</code></td>
 <td>number (m)</td>
-<td>Element size. Used uniformly unless <code>Refinement type</code> is set.</td>
-</tr>
-<tr>
-<td><code>Refinement type</code></td>
-<td>string</td>
-<td>Optional bespoke refinement scheme. Tutorial 1 uses <code>"column validation"</code> for the self-weight column convergence study; Tutorial 2 omits the key and runs on a uniform mesh.</td>
+<td>Element size, uniform in <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span> and <span class="arithmatex">\(z\)</span>.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="initial-gimp-distribution">Initial GIMP distribution<a class="headerlink" href="#initial-gimp-distribution" title="Permanent link">¶</a></h2>
 <p>Specifies the volume in which material points are initially placed. Each element contains a <span class="arithmatex">\(2 \times 2 \times 2\)</span> grid of GIMPs by default.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"Initial GIMP distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>Example:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"Initial GIMP distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution x"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution y"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">"Initial GIMP distribution z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span>
@@ -1880,16 +1877,22 @@ where the <code>...</code> indicating text.
 </thead>
 <tbody>
 <tr>
-<td><code>Initial GIMP distribution x</code>, <code>y</code>, <code>z</code></td>
+<td><code>"Initial GIMP distribution x"</code>, <code>"Initial GIMP distribution y"</code>, <code>"Initial GIMP distribution z"</code></td>
 <td>number (m)</td>
-<td>Extent of the GIMP-filled volume along each axis. In both tutorials this matches <code>Mesh.domain size *</code>, i.e. the GIMPs fill the whole domain.</td>
+<td>Extent of the GIMP-filled volume along each axis.</td>
+</tr>
+<tr>
+<td><code>"number GIMP"</code></td>
+<td>number</td>
+<td>Optional, defines the number of GIMPs in each direction per element.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h2>
-<p>Per-face kinematic conditions and optional per-DOF fixes. Faces or DOFs that are not listed fall back to their default (<code>"free"</code> for faces, <code>"free"</code> for DOFs).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"Boundary conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>Mesh face and DOF boundary conditions. If the faces or DOFs are not listed, the default for both is <code>"free"</code>.</p>
+<p>Example:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"Boundary conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">"neg x-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"neg y-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roller"</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">"neg z-plane"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free"</span><span class="p">,</span>
@@ -1908,26 +1911,30 @@ where the <code>...</code> indicating text.
 <th>Field</th>
 <th>Type</th>
 <th>Options</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>neg x-plane</code>, <code>pos x-plane</code>, <code>neg y-plane</code>, <code>pos y-plane</code></td>
+<td><code>"neg x-plane"</code>, <code>"neg y-plane"</code>, <code>"neg z-plane"</code></td>
 <td>string</td>
 <td><code>"roller"</code>, <code>"free"</code>, <code>"fixed"</code></td>
-<td>Condition on each lateral face. <code>"roller"</code> fixes the displacement normal to the face and leaves in-plane motion free.</td>
+<td><code>"free"</code></td>
+<td>Optional condition on each negative mesh face; the face location is set by the <code>domain size x/y/z</code> extents in <a href="#mesh">Mesh</a>.</td>
 </tr>
 <tr>
-<td><code>neg z-plane</code>, <code>pos z-plane</code></td>
+<td><code>"pos x-plane"</code>, <code>"pos y-plane"</code>, <code>"pos z-plane"</code></td>
 <td>string</td>
 <td><code>"roller"</code>, <code>"free"</code>, <code>"fixed"</code></td>
-<td>Condition on the base and top face. Faces default to <code>"free"</code> if omitted from the JSON.</td>
+<td><code>"free"</code></td>
+<td>Optional condition on each positive mesh face. Faces default to <code>"free"</code> if omitted from the JSON.</td>
 </tr>
 <tr>
-<td><code>x dof</code>, <code>y dof</code></td>
+<td><code>"x dof"</code>, <code>"y dof"</code>, <code>"z dof"</code></td>
 <td>string</td>
 <td><code>"fixed"</code>, <code>"free"</code></td>
+<td><code>"free"</code></td>
 <td>Optional global DOF constraint applied to every node. Useful for keeping the problem one-dimensional in compression.</td>
 </tr>
 </tbody>
@@ -1935,7 +1942,8 @@ where the <code>...</code> indicating text.
 </div>
 <h2 id="material">Material<a class="headerlink" href="#material" title="Permanent link">¶</a></h2>
 <p>Specifies how many soil layers the model contains and, for each layer, the constitutive type and properties.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>Example:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"number of layers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"layers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="p">{</span>
@@ -1957,46 +1965,47 @@ where the <code>...</code> indicating text.
 </thead>
 <tbody>
 <tr>
-<td><code>number of layers</code></td>
+<td><code>"number of layers"</code></td>
 <td>integer</td>
-<td>Number of distinct material layers. Both tutorials use <code>1</code>.</td>
+<td>Number of distinct material layers.</td>
 </tr>
 <tr>
-<td><code>layers</code></td>
+<td><code>"layers"</code></td>
 <td>array of objects</td>
 <td>One object per layer; the sub-fields below apply to each entry.</td>
 </tr>
 <tr>
-<td><code>type</code></td>
+<td><code>"type"</code></td>
 <td>string</td>
-<td>Constitutive model. Both tutorials use <code>"Elastic"</code>.</td>
+<td>Constitutive model.</td>
 </tr>
 <tr>
-<td><code>empirical data</code></td>
+<td><code>"empirical data"</code></td>
 <td>string</td>
-<td>Preset that supplies any empirically-calibrated parameters not listed below. Both tutorials use <code>"homogeneous elastic"</code>.</td>
+<td>Preset that supplies any empirically-calibrated parameters not listed below.</td>
 </tr>
 <tr>
-<td><code>assigned material properties.E</code></td>
+<td><code>"assigned material properties.E"</code></td>
 <td>number (Pa)</td>
-<td>Young's modulus. Tutorial 1: <code>1000.0</code>. Tutorial 2: <code>1.0e6</code>.</td>
+<td>Young's modulus. (Pa)</td>
 </tr>
 <tr>
-<td><code>assigned material properties.nu</code></td>
+<td><code>"assigned material properties.nu"</code></td>
 <td>number</td>
-<td>Poisson's ratio. Both tutorials use <code>0.0</code>.</td>
+<td>Poisson's ratio.</td>
 </tr>
 <tr>
-<td><code>assigned material properties.rho</code></td>
+<td><code>"assigned material properties.rho"</code></td>
 <td>number (kg/m³)</td>
-<td>Density. Tutorial 1: <code>50.0</code> (gravity-driven). Omitted in Tutorial 2 (no gravity).</td>
+<td>Density (kg/m<span class="arithmatex">\(^3\)</span>).</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="rigid-body">Rigid body<a class="headerlink" href="#rigid-body" title="Permanent link">¶</a></h2>
-<p>Optional. Describes the geometry, position and contact parameters of a rigid body in contact with the deformable material. Used by <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a> only.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Rigid body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p>Optional. Describes the geometry, position and contact parameters of a rigid body.</p>
+<p>Example:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Rigid body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cube.stl"</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"initial position z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">"prescribed displacement z"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2</span><span class="p">,</span>
@@ -2009,29 +2018,34 @@ where the <code>...</code> indicating text.
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>geometry</code></td>
+<td><code>"geometry"</code></td>
 <td>string</td>
-<td>Path to the STL describing the body, relative to the input file. Tutorial 2 uses <code>"cube.stl"</code>.</td>
+<td></td>
+<td>.stl file name, relative to the top-level AMPPSIE folder.</td>
 </tr>
 <tr>
-<td><code>initial position z</code></td>
+<td><code>"initial position min x"</code>, <code>"initial position min y"</code>, <code>"initial position min z"</code></td>
 <td>number (m)</td>
-<td>Initial z-position of the rigid body's lower face.</td>
+<td>.stl file location</td>
+<td>Initial x/y/z-position of the rigid body's lowest point in the <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span> and <span class="arithmatex">\(z\)</span> direction.</td>
 </tr>
 <tr>
-<td><code>prescribed displacement z</code></td>
+<td><code>"prescribed displacement x"</code>, <code>"prescribed displacement y"</code>, <code>"prescribed displacement z"</code></td>
 <td>number (m)</td>
+<td></td>
 <td>Total vertical displacement applied over <code>Solver.number of increments</code> steps.</td>
 </tr>
 <tr>
-<td><code>normal penalty factor</code></td>
+<td><code>"normal penalty factor"</code></td>
 <td>number</td>
-<td>Penalty stiffness scaling that enforces non-penetration. Definition and tuning discussed in <a href="../../TutorialProblems/Tutorial_2/#background-rigid-body-contact">Tutorial 2's Background</a> and the <a href="../../TechnicalReferences/StaticWeakFormNormalContact/">normal-contact weak form</a>.</td>
+<td></td>
+<td>Penalty stiffness scaling that enforces non-penetration.</td>
 </tr>
 </tbody>
 </table>
@@ -2050,24 +2064,28 @@ where the <code>...</code> indicating text.
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Options</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>solve type</code></td>
+<td><code>"solve type"</code></td>
 <td>string</td>
-<td>Both tutorials use <code>"static"</code>.</td>
+<td><code>"static"</code></td>
+<td>Turns on and off interia terms</td>
 </tr>
 <tr>
-<td><code>load type</code></td>
+<td><code>"load type"</code></td>
 <td>string</td>
-<td>How the load is applied. Tutorial 1: <code>"force"</code> (gravity body force). Tutorial 2: <code>"rigid body displacement"</code>.</td>
+<td><code>"force"</code>,<code>"displacement"</code></td>
+<td>How the load is applied.</td>
 </tr>
 <tr>
-<td><code>number of increments</code></td>
+<td><code>"number of increments"</code></td>
 <td>integer</td>
-<td>Number of pseudo-time / load increments. Both tutorials use <code>20</code>.</td>
+<td></td>
+<td>Number of pseudo-time / load increments.</td>
 </tr>
 </tbody>
 </table>
@@ -2086,24 +2104,28 @@ where the <code>...</code> indicating text.
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Options</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>vtu data</code></td>
+<td><code>"vtu data"</code></td>
 <td>string</td>
-<td>Set to <code>"yes"</code> to write VTU files for visualisation in ParaView / VisIt.</td>
+<td><code>"yes"</code>, <code>"no"</code></td>
+<td>Set to <code>"yes"</code> to write VTU files.</td>
 </tr>
 <tr>
-<td><code>vtk data</code></td>
+<td><code>"vtk data"</code></td>
 <td>string</td>
+<td><code>"yes"</code>, <code>"no"</code></td>
 <td>Set to <code>"yes"</code> to write VTK files.</td>
 </tr>
 <tr>
-<td><code>text data</code></td>
+<td><code>"text data"</code></td>
 <td>string</td>
-<td>Stem used for tabulated text output. Tutorial 1: <code>"column validation"</code>. Tutorial 2: <code>"contact cube"</code>.</td>
+<td><code>"contact cube"</code>, <code>"self-weight column"</code></td>
+<td>Stem used for tabulated text output. <a href="../../TutorialProblems/Tutorial_1_input_data/">Tutorial 1</a>: <code>"column validation"</code>. <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a>: <code>"contact cube"</code>.</td>
 </tr>
 </tbody>
 </table>
