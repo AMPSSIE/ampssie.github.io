@@ -2034,12 +2034,12 @@
 <div class="json-side">
 <div class="js-text">
 <p>This tutorial extends <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> to include normal contact. A brief overview is provided here for context; see the <a href="../../TechnicalReferences/StaticWeakFormNormalContact/">normal-contact weak form</a> for the full technical details. <a href="#fig-contact-schematic">Figure 1</a> provides a schematic overview of how the contact between the rigid body and the material points works. </p>
-<p>When contact is detected between a GIMP and the rigid body, (a) initial state, a normal contact force is applied at the corners of the GIMP to resist the overlap. This force is proportional to the amount of overlap and can be thought of as a spring whose stiffness resists the overlap. The spring stiffness is a function of the GIMP size and material properties, calculated as</p>
+<p>When contact is detected between a GIMP and the rigid body - (a) initial state - a normal contact force is applied at the corners of the GIMP to resist the overlap. This force is proportional to the amount of overlap and can be thought of as a spring whose stiffness resists the overlap. The spring stiffness is a function of the GIMP size and material properties, calculated as</p>
 <div class="arithmatex">\[
 \epsilon_N = p_f\, E_p\, A_p^0,
 \]</div>
 <p>where <span class="arithmatex">\(E_p\)</span> is the Young's modulus of the GIMP in contact, <span class="arithmatex">\(A_p^0 = (V_p^0)^{2/3}\)</span> is a representation of the contact area with <span class="arithmatex">\(V_p^0\)</span> the initial GIMP volume, and <span class="arithmatex">\(p_f\)</span> is the penalty factor. The penalty factor controls how stiffly the contact constraint is enforced; for this stiff problem <span class="arithmatex">\(p_f = 1000\)</span> gives a stress error of around <span class="arithmatex">\(3\%\)</span> (see <a href="#analysing-the-stress-variation-with-height">Analysing the stress variation with height</a>) and is used throughout this tutorial. For less constrained problems <span class="arithmatex">\(p_f = 50\)</span> is typically sufficient.</p>
-<p>After the spring has been activated the GIMPs and the mesh deform due to the contact forces created by the springs, (b) deformed state, and once convergence is obtained the mesh is reset, (c) mesh reset.</p>
+<p>After the spring has been activated the GIMPs and the mesh deform due to the contact forces created by the springs - (b) deformed state - and once convergence is obtained the mesh is reset - (c) mesh reset.</p>
 </div>
 <div class="js-code">
 <p><figure id="_figure-1"><img alt="Schematic of the steps for penalty contact between a rigid body and a deformable GIMP domain." id="fig-contact-schematic" src="../../../img/contact_example_image.png" width="100%"><figcaption>Figure 1: Schematic of the steps for penalty contact between a rigid body and a deformable GIMP domain.</figcaption></figure></p>
@@ -2051,14 +2051,14 @@
 <div class="arithmatex">\[
 \sigma_{zz} = E \ln\!\left(\frac{L}{L_0}\right) \frac{L_0}{L} = \frac{10^6}{0.75} \ln(0.75) \approx -3.84 \times 10^5 \text{ Pa},
 \]</div>
-<p>where <span class="arithmatex">\(L_0 = 0.8\)</span> m is the initial cube height, <span class="arithmatex">\(\Delta z = -0.2\)</span> is how much the cube is deformed, <span class="arithmatex">\(L = L_0 + \Delta z = 0.6\)</span> m is the final height after the <span class="arithmatex">\(25\%\)</span> axial compression. </p>
-<p>Similar to <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> the material is  homogeneous Hencky elastic material (<span class="arithmatex">\(E = 10^6\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span>) discretised by a uniform <span class="arithmatex">\(0.4\)</span> m mesh (<span class="arithmatex">\(2 \times 2 \times 2 = 8\)</span> elements) with a <span class="arithmatex">\(2 \times 2 \times 2\)</span> grid of GIMPs per element. The boundary conditions on the mesh are imposed as roller boundaries are imposed on the four side faces and the base, the top face is left as a free surface, and every node has its <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> degrees of freedom fixed to keep the problem one-dimensional in compression.</p>
-<p>For this problem the position of the rigid body cube is setup correctly so the user only has to import the file. A future tutorial will over the details of designing the rigid body, making it accesible to the code and positioning it correctly.</p>
+<p>where <span class="arithmatex">\(L_0 = 0.8\)</span> m is the initial cube height, <span class="arithmatex">\(\Delta z = -0.2\)</span> m is the prescribed compression and <span class="arithmatex">\(L = L_0 + \Delta z = 0.6\)</span> m is the final height after the <span class="arithmatex">\(25\%\)</span> axial compression.</p>
+<p>As in <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> the material is a homogeneous Hencky elastic (<span class="arithmatex">\(E = 10^6\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span>) discretised by a uniform <span class="arithmatex">\(0.4\)</span> m mesh (<span class="arithmatex">\(2 \times 2 \times 2 = 8\)</span> elements) with a <span class="arithmatex">\(2 \times 2 \times 2\)</span> grid of GIMPs per element. Roller boundaries are imposed on the four side faces and the base, the top face is left as a free surface, and every node has its <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> degrees of freedom fixed to keep the problem one-dimensional in compression.</p>
+<p>For this problem the position of the rigid body cube is set up correctly so the user only has to import the file. A future tutorial will cover the details of designing the rigid body, making it accessible to the code and positioning it correctly.</p>
 <div class="grid">
 <p><figure id="_figure-2"><img alt="Initial uniform mesh for the contact-cube problem, with \(0.4\) m elements giving a \(2 \times 2 \times 2\) discretisation of the cube." id="fig-cube-mesh" src="../../../img/example_mesh_ref_GIMPM_contact.png" style="width: 100%; height: 30em; object-fit: contain;"><figcaption>Figure 2: Initial uniform mesh for the contact-cube problem, with \(0.4\) m elements giving a \(2 \times 2 \times 2\) discretisation of the cube.</figcaption></figure></p>
 <p><figure id="_figure-3"><img alt="Boundary conditions and rigid-body imposition: the red line marks the 0.2 m compression imposed by the rigid body across 20 load steps." id="fig-cube-bcs" src="../../../img/example_mesh_ref_GIMP_cube.png" style="width: 100%; height: 20em; object-fit: contain;"><figcaption>Figure 3: Boundary conditions and rigid-body imposition: the red line marks the 0.2 m compression imposed by the rigid body across 20 load steps.</figcaption></figure></p>
 </div>
-<p>The simulation is configured through a single JSON object - a human-readable, editable text file, it is extended from <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> to also contain the rigid body information and boundary conditions. The complete file for this problem can be found <a href="../Tutorial_2_input_data/"><code>here</code></a> and for all input settings see the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
+<p>The simulation is configured through a single JSON object - a human-readable, editable text file. It is extended from <a href="../Tutorial_1/#input-setup">Tutorial 1</a> to also contain the rigid body information and boundary conditions. The complete file for this problem can be found <a href="../Tutorial_2_input_data/"><code>here</code></a> and for all input settings see the <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> file format</a>.</p>
 <div class="json-side-header">
 <div>Description</div>
 <div><code>input_data.json</code></div>
@@ -2148,7 +2148,7 @@
 <div class="json-side">
 <div class="js-text">
 <h3 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">¶</a></h3>
-<p>The rigid-body displacement is ramped on quasi-statically over 20 increments using a Newton-Raphson scheme.</p>
+<p>The rigid-body displacement is ramped quasi-statically over 20 increments using a Newton-Raphson scheme.</p>
 </div>
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Solver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2188,7 +2188,7 @@
 </p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cp path/to/input_data_location/input_data.json path/to/AMPSSIE/MaterialPoints
 </code></pre></div>
 where the first path is the location of your <code>input_data.json</code> and the second is the top-level AMPSSIE directory.
-<p>The next steps are for starting julia and loading up the AMPSSIE package. Open a terminal (command line or PowerShell on Windows) and start Julia with the command:
+<p>The next steps are to start Julia and load the AMPSSIE package. Open a terminal (command line or PowerShell on Windows) and start Julia with the command:
 </p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>julia
 </code></pre></div>
 <p>Then change into the top-level AMPSSIE directory
@@ -2198,7 +2198,7 @@ where the first path is the location of your <code>input_data.json</code> and th
 </p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>include("setup_workers.jl")
 </code></pre></div>
 to install the AMPSSIE package and start multiple parallel workers.
-<p>If it works correctly the output should match something similar to the corresponding terminal window. If there are issues, see the <a href="../../UsingTheSoftware/DeployingTheSoftware/">deployment page</a> for troubleshooting.</p>
+<p>If it works correctly the output should resemble the corresponding terminal window. If there are issues, see the <a href="../../UsingTheSoftware/DeployingTheSoftware/">deployment page</a> for troubleshooting.</p>
 </div>
 <div class="js-code">
 <div class="terminal">
@@ -2493,7 +2493,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>3. Apply the readers.</strong> Click <em>Apply</em> in the Properties panel for each reader. The deformable cube appears as a solid grey block with the rigid cube sitting directly on top of it. In the current view it is difficult to see which body is which, try rotating by click-and-drag inside the <em>Layout #1</em> render view to inspect the geometry.</p>
+<p><strong>3. Apply the readers.</strong> Click <em>Apply</em> in the Properties panel for each reader. The deformable cube appears as a solid grey block with the rigid cube sitting directly on top of it. In the current view it is difficult to see which body is which; try rotating by click-and-drag inside the <em>Layout #1</em> render view to inspect the geometry.</p>
 </div>
 <div>
 <p><figure id="_figure-6"><img alt="All three datasets loaded; the rigid cube sits on top of the deformable cube." id="fig-compress-4" src="../../../img/compress_4.png" width="100%"><figcaption>Figure 6: All three datasets loaded; the rigid cube sits on top of the deformable cube.</figcaption></figure></p>
@@ -2510,7 +2510,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <div class="walkthrough">
 <div>
 <p><strong>5. Make the mesh a Wireframe.</strong> Change the representation of the <code>Threshold1</code> filter to <em>Wireframe</em> so the active mesh edges are drawn as lines instead of filled surfaces. This lets the GIMPs underneath become visible. </p>
-<p>Additionally try pressing the <code>Reset</code> button, marked by the red circle, to obtain a better view.</p>
+<p>Additionally, try pressing the <code>Reset</code> button, marked by the red circle, to obtain a better view.</p>
 </div>
 <div>
 <p><figure id="_figure-8"><img alt="Wireframe representation of the thresholded background mesh." id="fig-compress-6" src="../../../img/compress_6.png" width="100%"><figcaption>Figure 8: Wireframe representation of the thresholded background mesh.</figcaption></figure></p>
@@ -2553,9 +2553,9 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pen_factor,       final_height,      avg_stress_zz,         min_rb_pos
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>      1000, 0.6037299414518334, -372994.2487099074, 0.5999999989999916
 </code></pre></div>
-<p>Each time you run this problem with different parameters the results will be appended to the bottom row of the file.</p>
+<p>Each time you run this problem with different parameters a new row will be appended to the bottom of the file.</p>
 <p>For these results the simulated stress <span class="arithmatex">\(\bar{\sigma}_{zz}^{\text{sim}} \approx -3.73 \times 10^{5}\)</span> Pa matches the analytical Hencky-Cauchy value <span class="arithmatex">\(-3.84 \times 10^{5}\)</span> Pa from the <a href="#problem-summary">Problem summary</a> to within <span class="arithmatex">\(\approx 2.8\%\)</span>. The contact overlap <code>final_height - min_rb_pos</code> <span class="arithmatex">\(\approx 3.7 \times 10^{-3}\)</span> m (<span class="arithmatex">\(\approx 0.6\%\)</span> of the cube height) shows that the penalty spring is doing a good job at minimising the overlap between the two bodies.</p>
-<p>Raise <code>normal penalty factor</code> in the <a href="#rigid-body">Rigid body</a> JSON block to reduce both these errors further and observe the additions to the text file.</p>
+<p>Raise <code>normal penalty factor</code> in the <a href="#rigid-body">Rigid body</a> JSON block to reduce both of these errors further and observe the additions to the text file.</p>
 <div class="footnote">
 <hr>
 <ol>

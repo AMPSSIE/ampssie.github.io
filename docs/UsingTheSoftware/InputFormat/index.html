@@ -1733,7 +1733,7 @@
 
 
 <h1 id="the-input_datajson-format">The <code>input_data.json</code> format<a class="headerlink" href="#the-input_datajson-format" title="Permanent link">¶</a></h1>
-<p>AMPSSIE drives every analysis from a single <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> file, named <code>input_data.json</code>. The file is one JSON object whose top-level keys correspond to the components of the model: the <a href="#mesh">mesh</a>, the <a href="#initial-gimp-distribution">initial material-point distribution</a>, the <a href="#boundary-conditions">boundary conditions</a>, the <a href="#material">constitutive description</a>, the <a href="#rigid-body">rigid body</a>, the <a href="#solver">solver settings</a> and the <a href="#output-data">requested outputs</a>.</p>
+<p>AMPSSIE drives every analysis from a single <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> file, named <code>input_data.json</code>. The file is one JSON object whose top-level keys correspond to the components of the model: the <a href="#mesh">Mesh</a>, the <a href="#initial-gimp-distribution">Initial GIMP distribution</a>, the <a href="#boundary-conditions">Boundary conditions</a>, the <a href="#material">Material</a> properties and models, the <a href="#rigid-body">Rigid body</a>, the <a href="#solver">Solver</a> and the <a href="#output-data">Output data</a>.</p>
 <p>This page describes each of the sections in turn and gives a description of each of the options available for each section. This page is designed to act as a reference for constructing your own simulations, however for worked examples please see the <a href="../../TutorialProblems/TutorialProblems/">tutorial page</a>.</p>
 <h2 id="overall-file-format">Overall file format<a class="headerlink" href="#overall-file-format" title="Permanent link">¶</a></h2>
 <p>The <code>input_data.json</code> file is split into seven section provided in the table below:</p>
@@ -1823,7 +1823,7 @@
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="err">...</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">}</span>
 </code></pre></div>
-where the <code>...</code> indicating text.
+where the <code>...</code> indicates text.
 <h2 id="mesh">Mesh<a class="headerlink" href="#mesh" title="Permanent link">¶</a></h2>
 <p>The <code>Mesh</code> object sets the size of the background grid and the element size.</p>
 <p>Example:
@@ -1872,6 +1872,7 @@ where the <code>...</code> indicating text.
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -1879,11 +1880,13 @@ where the <code>...</code> indicating text.
 <tr>
 <td><code>"Initial GIMP distribution x"</code>, <code>"Initial GIMP distribution y"</code>, <code>"Initial GIMP distribution z"</code></td>
 <td>number (m)</td>
+<td></td>
 <td>Extent of the GIMP-filled volume along each axis.</td>
 </tr>
 <tr>
 <td><code>"number GIMP"</code></td>
 <td>number</td>
+<td>2</td>
 <td>Optional, defines the number of GIMPs in each direction per element.</td>
 </tr>
 </tbody>

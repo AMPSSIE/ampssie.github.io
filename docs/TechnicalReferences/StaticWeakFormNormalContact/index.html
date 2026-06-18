@@ -1405,6 +1405,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#computational-proceedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computational proceedure
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1596,6 +1607,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#computational-proceedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computational proceedure
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1623,7 +1645,7 @@
 <h2 id="weak-statement-of-equilibrium-with-normal-contact">Weak statement of equilibrium with normal contact<a class="headerlink" href="#weak-statement-of-equilibrium-with-normal-contact" title="Permanent link">¶</a></h2>
 <p>The Galerkin weak statement of equilibrium given on the <a href="../StaticWeakForm/">Static weak form</a> is extended with a normal contact term which imposes a load on the material points. The weak form which includes contact is defined:</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s- \int_{\varphi_t(\partial\Omega)}\{F_{N,v}^{\partial\Omega}\}\,\text{d}s  = \{0\}\]</div>
-<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first two terms remain the internal force from the Cauchy stress field <span class="arithmatex">\(\{\sigma\}\)</span> and the body force <span class="arithmatex">\(\{b\}\)</span>; the third is the new contact contribution. Tangential (frictional) contact is omitted here; see Bird <em>et al.</em> <sup id="fnref2:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup> for the full normal-and-tangential formulation.</p>
+<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first three are terms are repeated and described on the <a href="../StaticWeakForm/">Static weak form</a> page. </p>
 <h2 id="gap-function">Gap function<a class="headerlink" href="#gap-function" title="Permanent link">¶</a></h2>
 <p>The geometric measure of overlap between the deformable material and the rigid body is the <em>normal gap function</em>, <span class="arithmatex">\(g_N\)</span>, defined as the signed projection of a material-point position, <span class="arithmatex">\(\mathbf{x}\)</span>, onto its closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, on the rigid-body surface along the outward surface normal, <span class="arithmatex">\(\mathbf{n}\)</span>:</p>
 <div class="arithmatex">\[g_N = (\mathbf{x} - \mathbf{x}') \cdot \mathbf{n}.\]</div>
@@ -1637,11 +1659,13 @@
 <p>with <span class="arithmatex">\(\epsilon_N\)</span> the <em>normal penalty stiffness</em>. In AMPSSIE the penalty stiffness for each GIMP in contact is built from the GIMP's own material and geometry,</p>
 <div class="arithmatex">\[\epsilon_N = p_f\, E_p\, A_p^0,\]</div>
 <p>where <span class="arithmatex">\(E_p\)</span> is the GIMP's Young's modulus, <span class="arithmatex">\(A_p^0 = (V_p^0)^{2/3}\)</span> is a representative undeformed contact area constructed from the initial GIMP volume, <span class="arithmatex">\(V_p^0\)</span>, and <span class="arithmatex">\(p_f\)</span> is a user-controlled penalty factor that trades off interpenetration against conditioning of the global stiffness matrix. This penalty pressure is the contact force per unit area that enters the weak form above through <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span>. A worked study of <span class="arithmatex">\(p_f\)</span> on a stiff penalty problem is presented in <a href="../../TutorialProblems/Tutorial_2/">Tutorial 2</a>.</p>
+<h2 id="computational-proceedure">Computational proceedure<a class="headerlink" href="#computational-proceedure" title="Permanent link">¶</a></h2>
+<p>(<em>coming soon</em>)</p>
 <div class="footnote">
 <hr>
 <ol>
 <li id="fn:bird_dynamic_2025">
-<p>Robert E. Bird, Giuliano Pretti, William M. Coombs, Charles E. Augarde, Yaseen U. Sharif, Michael J. Brown, Gareth Carter, Catriona Macdonald, and Kirstin Johnson. A dynamic implicit 3D material point-to-rigid body contact approach for large deformation analysis. <em>International Journal for Numerical Methods in Engineering</em>, 2025. <a class="footnote-backref" href="#fnref:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>Robert E. Bird, Giuliano Pretti, William M. Coombs, Charles E. Augarde, Yaseen U. Sharif, Michael J. Brown, Gareth Carter, Catriona Macdonald, and Kirstin Johnson. A dynamic implicit 3D material point-to-rigid body contact approach for large deformation analysis. <em>International Journal for Numerical Methods in Engineering</em>, 2025. <a class="footnote-backref" href="#fnref:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
