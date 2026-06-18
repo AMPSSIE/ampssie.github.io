@@ -1589,6 +1589,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TechnicalReferences/StaticWeakFormNormalContact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Static weak form with normal contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1994,8 +2022,8 @@
 
 <h1 id="tutorial-2-compaction-via-a-rigid-body">Tutorial 2: Compaction via a rigid body<a class="headerlink" href="#tutorial-2-compaction-via-a-rigid-body" title="Permanent link">¶</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
-<p>This quick start tutorial walks through an AMPSSIE problem with rigid-body contact.</p>
-<p>This tutorial analyses a cube compressed by a rigid plate through 25% of its height. It exercises the normal-contact penalty formulation and the hanging-node formulation simultaneously; convergence of the stress error with the penalty factor <code>pf</code> validates the implementation. The original contact validation is from <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>; this tutorial reapplies it to a mesh with hanging nodes.</p>
+<p>This quick start tutorial introduces the concept of a rigid body interacting with the material points.</p>
+<p>This tutorial analyses a cube compressed by a rigid cube through 25% of its height and is used to validate that the contact formulation is correct. This problem has been used to validate our contact formulation <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup> and our adaptive-octree extension <sup id="fnref:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</p>
 <p>This tutorial has three main sections after the introduction:</p>
 <ul>
 <li><a href="#input-setup">Input setup</a></li>
@@ -2003,7 +2031,8 @@
 <li><a href="#viewing-the-results">Viewing the results</a></li>
 </ul>
 <h3 id="background-rigid-body-contact">Background: rigid-body contact<a class="headerlink" href="#background-rigid-body-contact" title="Permanent link">¶</a></h3>
-<p>The GIMPM is introduced in <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a>. This tutorial extends it by adding a rigid body: a flat plate is brought into contact with the deformable cube and pushed downward by a prescribed displacement. Contact between the rigid body and the GIMPs is enforced through a penalty method - the normal contact penalty is</p>
+<p>This tutorial extends <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> for including normal contact, see  <a href="../TechnicalReferencesStaticWeakFormNormalContact.md">Tutorial 1</a> for the technical explanation.</p>
+<p>This tutorial extends the forit by adding a rigid body: a flat plate is brought into contact with the deformable cube and pushed downward by a prescribed displacement. Contact between the rigid body and the GIMPs is enforced through a penalty method - the normal contact penalty is</p>
 <div class="arithmatex">\[
 \epsilon_N = p_f\, E_p\, A_p^0,
 \]</div>
@@ -2018,7 +2047,7 @@
 <p><figure id="_figure-1"><img alt="Initial mesh for the contact-cube problem, with hanging nodes visible at the refined contact face." id="fig-cube-mesh" src="../../../img/column_compression_series.png" width="100%"><figcaption>Figure 1: Initial mesh for the contact-cube problem, with hanging nodes visible at the refined contact face.</figcaption></figure></p>
 <p><figure id="_figure-2"><img alt="Boundary conditions and rigid-body imposition: the red line marks the 0.2 m compression imposed by the rigid body across 20 load steps." id="fig-cube-bcs" src="../../../img/column_compression_series_2.png" width="100%"><figcaption>Figure 2: Boundary conditions and rigid-body imposition: the red line marks the 0.2 m compression imposed by the rigid body across 20 load steps.</figcaption></figure></p>
 </div>
-<p><em>Figures reproduced from <sup id="fnref:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</em></p>
+<p><em>Figures reproduced from <sup id="fnref2:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</em></p>
 <div class="json-side-header">
 <div>Description</div>
 <div><code>input_data.json</code></div>
@@ -2026,6 +2055,7 @@
 
 <div class="json-side">
 <div class="js-text">
+<p>W</p>
 <h3 id="mesh-data">Mesh data<a class="headerlink" href="#mesh-data" title="Permanent link">¶</a></h3>
 <p>The mesh matches the <span class="arithmatex">\(0.8 \times 0.8 \times 0.8\)</span> m cube, with refinement at the contact face. <code>dx refined</code> gives the smallest element size, used near the rigid-body contact face; <code>Refinement type</code> selects the bespoke refinement scheme for this validation (see <a href="#fig-cube-mesh">Figure 1</a>).</p>
 </div>
@@ -2034,9 +2064,7 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"domain size x"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"domain size y"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"domain size z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"dx refined"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">"Refinement type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact cube"</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"dx refined"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
 </code></pre></div>
 </div>
 </div>
@@ -2098,7 +2126,7 @@
 </div>
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"Rigid body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plate"</span><span class="p">,</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cube.stl"</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"initial position z"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"prescribed displacement z"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2</span><span class="p">,</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">"normal penalty factor"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span>
@@ -2114,7 +2142,7 @@
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">"Solver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">"solve type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"static"</span><span class="p">,</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"load type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"displacement"</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"load type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rigid body displacement"</span><span class="p">,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">"number of increments"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
 </code></pre></div>
@@ -2255,11 +2283,11 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <p><figure id="_figure-3"><img alt="Uniform vertical stress field (Pa) through the deformed cube at the end of the simulation." id="fig-cube-stress" src="../../../img/contact_stress.png" width="100%"><figcaption>Figure 3: Uniform vertical stress field (Pa) through the deformed cube at the end of the simulation.</figcaption></figure></p>
 <p><figure id="_figure-4"><img alt="Final rigid body and GIMP positions for \(p_f=100\), mesh shown in pink." id="fig-cube-final" src="../../../img/contact_cube_3d_plot.png" width="100%"><figcaption>Figure 4: Final rigid body and GIMP positions for \(p_f=100\), mesh shown in pink.</figcaption></figure></p>
 </div>
-<p><em>Figures reproduced from <sup id="fnref2:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</em></p>
+<p><em>Figures reproduced from <sup id="fnref3:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</em></p>
 <h2 id="analysing-the-contact-penalty-convergence">Analysing the contact penalty convergence<a class="headerlink" href="#analysing-the-contact-penalty-convergence" title="Permanent link">¶</a></h2>
 <p>The penalty factor <span class="arithmatex">\(p_f\)</span> (<code>normal penalty factor</code> in the <a href="#rigid-body">Rigid body</a> JSON block) controls how stiffly the contact constraint is enforced. As <span class="arithmatex">\(p_f\)</span> increases, both stress and displacement errors decrease - this convergence validates the formulation. Sweep <span class="arithmatex">\(p_f \in \{50, 100, 1000, 10000\}\)</span> and plot the resulting errors against the analytical contact reference; the result is shown in <a href="#fig-cube-convergence">Figure 5</a>.</p>
 <p><figure id="_figure-5"><img alt="Convergence of the stress and displacement error with the penalty factor \(p_f\)." id="fig-cube-convergence" src="../../../img/cube_summary.png" width="70%"><figcaption>Figure 5: Convergence of the stress and displacement error with the penalty factor \(p_f\).</figcaption></figure></p>
-<p><em>Figure reproduced from <sup id="fnref3:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</em></p>
+<p><em>Figure reproduced from <sup id="fnref4:bird2026implicitoctreebasedadaptivematerial"><a class="footnote-ref" href="#fn:bird2026implicitoctreebasedadaptivematerial">2</a></sup>.</em></p>
 <p>For this stiff problem <span class="arithmatex">\(p_f &gt; 1000\)</span> is required for stress error below 1%. For less constrained problems <span class="arithmatex">\(p_f = 50\)</span> is typically sufficient <sup id="fnref2:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>. Convergence with mesh refinement can be explored by reducing <code>dx refined</code> in the <a href="#mesh-data">Mesh data</a> block.</p>
 <div class="footnote">
 <hr>
@@ -2268,7 +2296,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <p>Robert E. Bird, Giuliano Pretti, William M. Coombs, Charles E. Augarde, Yaseen U. Sharif, Michael J. Brown, Gareth Carter, Catriona Macdonald, and Kirstin Johnson. A dynamic implicit 3D material point-to-rigid body contact approach for large deformation analysis. <em>International Journal for Numerical Methods in Engineering</em>, 2025. <a class="footnote-backref" href="#fnref:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 <li id="fn:bird2026implicitoctreebasedadaptivematerial">
-<p>Robert E. Bird, William M. Coombs, Charles E. Augarde, Giuliano Pretti, and Ted J. O'Hare. An implicit octree-based adaptive material point method. 2026. URL: <a href="https://arxiv.org/abs/2606.09275">https://arxiv.org/abs/2606.09275</a>, <a href="https://arxiv.org/abs/2606.09275">arXiv:2606.09275</a>. <a class="footnote-backref" href="#fnref:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref3:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a></p>
+<p>Robert E. Bird, William M. Coombs, Charles E. Augarde, Giuliano Pretti, and Ted J. O'Hare. An implicit octree-based adaptive material point method. 2026. URL: <a href="https://arxiv.org/abs/2606.09275">https://arxiv.org/abs/2606.09275</a>, <a href="https://arxiv.org/abs/2606.09275">arXiv:2606.09275</a>. <a class="footnote-backref" href="#fnref:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref3:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref4:bird2026implicitoctreebasedadaptivematerial" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
