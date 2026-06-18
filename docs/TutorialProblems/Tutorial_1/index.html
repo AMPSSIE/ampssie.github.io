@@ -2361,7 +2361,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">¶</a></h2>
 <p>The simulation results appear as the simulation runs, so you do not need to wait until it has finished to view the results. When the problem is run using your local Julia installation, the <code>.csv</code>, <code>.vtk</code> and <code>.vtu</code> files are stored in <code>MaterialPoints/src/output</code> (as configured in the <a href="#output-data"><code>output data</code></a> section of the input file).</p>
 <h3 id="visualising-the-output-in-paraview">Visualising the output in ParaView<a class="headerlink" href="#visualising-the-output-in-paraview" title="Permanent link">¶</a></h3>
-<p>The output files can be opened in <a href="https://www.paraview.org/">ParaView</a> to inspect the deformed column and any data assocaited with the GIMPs (stress, strain, material properties, velcicty etv). The walkthrough below opens the GIMP data (<code>mpDataV..vtu</code>) and the background mesh (<code>Octree..vtu</code>), thresholds the mesh to the active region and colours the GIMPs by displacement. Last a comparison of the numerical stress solution with the analytical is presented.</p>
+<p>The output files can be opened in <a href="https://www.paraview.org/">ParaView</a> to inspect the deformed column and any data associated with the GIMPs (stress, strain, material properties, velocity etc.). The walkthrough below opens the GIMP data (<code>mpDataV..vtu</code>) and the background mesh (<code>Octree..vtu</code>), thresholds the mesh to the active region and colours the GIMPs by displacement. Finally, the numerical stress solution is compared against the analytical.</p>
 <div class="walkthrough">
 <div>
 <p><strong>1. Open ParaView.</strong> Launch ParaView from your applications menu or terminal; you should see an empty render view.</p>
@@ -2380,7 +2380,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>3. Apply the readers.</strong> Click <em>Apply</em> in the Properties panel for each reader. The full mesh domain appears as a solid grey cube which covers all the GIMPM data under it.</p>
+<p><strong>3. Apply the readers.</strong> Click <em>Apply</em> in the Properties panel for each reader. The full mesh domain appears as a solid grey cube which covers all the GIMP data under it.</p>
 </div>
 <div>
 <p><figure id="_figure-6"><img alt="Both VTU files loaded; the solid grey cube is the full mesh domain." id="fig-paraview-3" src="../../../img/screen_shot_3.png" width="100%"><figcaption>Figure 6: Both VTU files loaded; the solid grey cube is the full mesh domain.</figcaption></figure></p>
@@ -2412,7 +2412,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 </div>
 <div class="walkthrough">
 <div>
-<p><strong>7. Advance and view the final step.</strong> Switch <em>Coloring</em> to <code>displacement magnitude</code>. Then press the green arrow marked with the red ring to advance to the final output, and scale the colours with the icon shown by the dashed ring. </p>
+<p><strong>7. Advance and view the final step.</strong> Click the <em>Go to Last</em> button (<code>▶|</code>) in the time toolbar (marked with the solid red circle) at the top to jump to the final increment, then click <em>Rescale to Data Range</em> (marked with the dashed red circle) in the colour-bar toolbar so the colour scale matches the deformed configuration. The GIMPs near the base of the column move into the high end of the colour bar, showing the maximum self-weight deformation.</p>
 </div>
 <div>
 <p><figure id="_figure-10"><img alt="Final vertical displacement visualisation of the deformed column." id="fig-paraview-9" src="../../../img/screen_shot_9.png" width="100%"><figcaption>Figure 10: Final vertical displacement visualisation of the deformed column.</figcaption></figure></p>
@@ -2444,7 +2444,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 </code></pre></div>
 where <code>x</code>, <code>y</code> and <code>z</code> are the initial positions of the GIMPs and <code>abs_sig_zz</code> is the magnitude of the Cauchy stress in the <span class="arithmatex">\(z\)</span>-direction. When plotted as point data against the analytical solution from <a href="#output-data">Output data</a>, the result looks like <a href="#fig-stress-validation">Figure 11</a>:
 <p><figure id="_figure-11"><img alt="Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical self-weight stress solution from the Problem summary." id="fig-stress-validation" src="../../../img/self_weight_stress_validation.png" width="70%"><figcaption>Figure 11: Numerical GIMP stress magnitudes from mp_data_dx_0.4.csv plotted against the analytical self-weight stress solution from the Problem summary.</figcaption></figure></p>
-<p>This is a very coarse mesh, so the numerical stress solution is not close to the analytical solution. Refining the mesh reduces the difference, known as the numercial error. To do this set <code>dx refined</code> in <a href="#mesh-data">Mesh data</a> to <code>0.025</code>, this will increase the number of elements and GIMPs in the vertical direction improving the solution accuracy.</p>
+<p>This is a very coarse mesh, so the numerical stress solution is not close to the analytical solution. Refining the mesh reduces the difference, known as the numerical error. To do this set <code>dx refined</code> in <a href="#mesh-data">Mesh data</a> to <code>0.025</code>, this will increase the number of elements and GIMPs in the vertical direction improving the solution accuracy.</p>
 
 
 
