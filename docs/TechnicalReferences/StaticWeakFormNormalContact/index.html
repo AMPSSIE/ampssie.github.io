@@ -1647,14 +1647,15 @@
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s- \int_{\varphi_t(\partial\Omega)}\{F_{N,v}^{\partial\Omega}\}\,\text{d}s  = \{0\}\]</div>
 <p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first three are terms are repeated and described on the <a href="../StaticWeakForm/">Static weak form</a> page. </p>
 <h2 id="gap-function">Gap function<a class="headerlink" href="#gap-function" title="Permanent link">¶</a></h2>
+<p>The <em>gap function</em> is used to both detect contact and measure the overlap between contact surfaces. Here a point-to-surface formulation is used, see Wriggers <sup id="fnref:wriggers2006computational"><a class="footnote-ref" href="#fn:wriggers2006computational">2</a></sup> and the work of Curnier and coworkers <sup id="fnref:pietrzak1999large"><a class="footnote-ref" href="#fn:pietrzak1999large">3</a></sup><sup id="fnref:curnier1995continuum"><a class="footnote-ref" href="#fn:curnier1995continuum">4</a></sup> for exceptional pieces of literature.</p>
 <p>The geometric measure of overlap between the deformable material and the rigid body is the <em>normal gap function</em>, <span class="arithmatex">\(g_N\)</span>, defined as the signed projection of a material-point position, <span class="arithmatex">\(\mathbf{x}\)</span>, onto its closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, on the rigid-body surface along the outward surface normal, <span class="arithmatex">\(\mathbf{n}\)</span>:</p>
 <div class="arithmatex">\[g_N = (\mathbf{x} - \mathbf{x}') \cdot \mathbf{n}.\]</div>
 <p>The closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, is obtained by Closest Point Projection (CPP) of <span class="arithmatex">\(\mathbf{x}\)</span> onto the discretised rigid-body surface. With this sign convention <span class="arithmatex">\(g_N &gt; 0\)</span> corresponds to separation, <span class="arithmatex">\(g_N = 0\)</span> to a closed contact and <span class="arithmatex">\(g_N &lt; 0\)</span> to penetration.</p>
-<p>Non-penetration and complementarity between the gap and the normal contact pressure, <span class="arithmatex">\(p_N\)</span>, are expressed through the Signorini-Hertz-Moreau conditions</p>
+<p>The gap function and the normal contact pressure values are governed by the Signorini-Hertz-Moreau conditions</p>
 <div class="arithmatex">\[g_N \geq 0, \quad p_N \leq 0, \quad g_N\, p_N = 0,\]</div>
 <p>i.e. the gap can only open (<span class="arithmatex">\(g_N &gt; 0\)</span>) when there is no compressive contact pressure (<span class="arithmatex">\(p_N = 0\)</span>), and a compressive contact pressure (<span class="arithmatex">\(p_N &lt; 0\)</span>) can only arise when the gap is closed (<span class="arithmatex">\(g_N = 0\)</span>).</p>
 <h2 id="penalty-regularisation">Penalty regularisation<a class="headerlink" href="#penalty-regularisation" title="Permanent link">¶</a></h2>
-<p>The hard inequality <span class="arithmatex">\(g_N \geq 0\)</span> is regularised by a penalty method: when a material point penetrates the rigid body, the normal contact pressure is taken to be linear in the (negative) gap,</p>
+<p>The penalty regulation softens the Signorini-Hertz-Moreau conditions as a small amount of penetration is needed to generate a contact force to resist contact. The penalty force is calculated like this,</p>
 <div class="arithmatex">\[p_N = \epsilon_N\, g_N,\]</div>
 <p>with <span class="arithmatex">\(\epsilon_N\)</span> the <em>normal penalty stiffness</em>. In AMPSSIE the penalty stiffness for each GIMP in contact is built from the GIMP's own material and geometry,</p>
 <div class="arithmatex">\[\epsilon_N = p_f\, E_p\, A_p^0,\]</div>
@@ -1666,6 +1667,15 @@
 <ol>
 <li id="fn:bird_dynamic_2025">
 <p>Robert E. Bird, Giuliano Pretti, William M. Coombs, Charles E. Augarde, Yaseen U. Sharif, Michael J. Brown, Gareth Carter, Catriona Macdonald, and Kirstin Johnson. A dynamic implicit 3D material point-to-rigid body contact approach for large deformation analysis. <em>International Journal for Numerical Methods in Engineering</em>, 2025. <a class="footnote-backref" href="#fnref:bird_dynamic_2025" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:wriggers2006computational">
+<p>Peter Wriggers. <em>Computational Contact Mechanics</em>. Springer, 2nd edition, 2006. <a class="footnote-backref" href="#fnref:wriggers2006computational" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:pietrzak1999large">
+<p>G. Pietrzak and A. Curnier. Large deformation frictional contact mechanics: continuum formulation and augmented Lagrangian treatment. <em>Computer Methods in Applied Mechanics and Engineering</em>, 177(3-4):351–381, 1999. <a class="footnote-backref" href="#fnref:pietrzak1999large" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:curnier1995continuum">
+<p>A. Curnier, Q.-C. He, and A. Klarbring. Continuum mechanics modelling of large deformation contact with friction. In <em>Contact Mechanics</em>, pages 145–158. Springer, 1995. <a class="footnote-backref" href="#fnref:curnier1995continuum" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
 </ol>
 </div>
