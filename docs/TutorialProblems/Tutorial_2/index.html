@@ -2114,7 +2114,7 @@
 <div class="json-side">
 <div class="js-text">
 <h3 id="material">Material<a class="headerlink" href="#material" title="Permanent link">¶</a></h3>
-<p>The cube is homogeneous, so a single layer is specified with the Hencky elastic model and the parameters from the Problem summary (<span class="arithmatex">\(E = 10^6\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span>).</p>
+<p>The cube is homogeneous, so a single layer is specified with the Hencky elastic model and the parameters from the <a href="#problem-summary">Problem summary</a> (<span class="arithmatex">\(E = 10^6\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span>).</p>
 </div>
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">"Material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2554,7 +2554,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 </code></pre></div>
 <p>Each time you run this problem with different parameters a new row will be appended to the bottom of the file.</p>
 <p>For these results the simulated stress <span class="arithmatex">\(\bar{\sigma}_{zz}^{\text{sim}} \approx -3.73 \times 10^{5}\)</span> Pa matches the analytical Hencky-Cauchy value <span class="arithmatex">\(-3.84 \times 10^{5}\)</span> Pa from the <a href="#problem-summary">Problem summary</a> to within <span class="arithmatex">\(\approx 2.8\%\)</span>. The contact overlap <code>final_height - min_rb_pos</code> <span class="arithmatex">\(\approx 3.7 \times 10^{-3}\)</span> m (<span class="arithmatex">\(\approx 0.6\%\)</span> of the cube height) shows that the penalty spring is doing a good job at minimising the overlap between the two bodies.</p>
-<p>Raise <code>normal penalty factor</code> in the <a href="#rigid-body">Rigid body</a> JSON block to reduce both of these errors further and observe the additions to the text file.</p>
+<p>Raise <code>normal penalty factor</code> in the <a href="#rigid-body">Rigid body</a> JSON block to reduce both of these errors further and observe the additional rows added to the end of the text file.</p>
 <div class="footnote">
 <hr>
 <ol>
