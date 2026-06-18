@@ -1601,7 +1601,7 @@
 <p>AMPSSIE is a Julia package and runs anywhere Julia is supported.</p>
 <p><strong>Operating system:</strong> Linux, macOS, and Windows are all supported. Most development and testing has been done on Linux.</p>
 <p><strong>Julia version:</strong> 1.12 or newer. Earlier releases may work but are not actively tested.</p>
-<p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes it is recommend to use a HPc with at least 10 cores, allow at least 60Gb GB of RAM and 10 GB of free disk for outputs.</p>
+<p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes it is recommended to use an HPC with at least 10 cores, at least 60 GB of RAM and 10 GB of free disk for outputs.</p>
 <p><strong>Required tooling:</strong></p>
 <ul>
 <li><a href="https://julialang.org/downloads/">Julia</a> - the language runtime itself.</li>
@@ -1611,7 +1611,7 @@
 <p><strong>Optional:</strong></p>
 <ul>
 <li><a href="https://git-scm.com/">Git</a> for cloning the source repository.</li>
-<li>[Docker] <em>(coming soon)</em> if you'd rather not install Julia directly - see <a href="#deploying-via-docker">Deploying via Docker</a>.</li>
+<li><a href="https://www.docker.com/">Docker</a> <em>(coming soon)</em> if you'd rather not install Julia directly - see <a href="#deploying-via-docker">Deploying via Docker</a>.</li>
 </ul>
 <h2 id="direct-interaction-with-julia">Direct interaction with Julia<a class="headerlink" href="#direct-interaction-with-julia" title="Permanent link">¶</a></h2>
 <p>The simplest deployment is to install Julia and run AMPSSIE from source.</p>
@@ -1623,13 +1623,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
 </code></pre></div>
-<p><strong>3. Instantiate the project environment.</strong> This installs the exact dependencies recorded in <code>Manifest.toml</code> into a local environment:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>.<span class="w"> </span>-e<span class="w"> </span><span class="s1">'using Pkg; Pkg.instantiate()'</span>
+<p><strong>3. Start Julia and install the AMPSSIE package.</strong> Open a Julia REPL, change into the <code>MaterialPoints</code> directory of the cloned repository and <code>include</code> the setup script. This installs the exact dependencies recorded in <code>Manifest.toml</code> and starts the parallel workers that AMPSSIE uses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cd</span><span class="p">(</span><span class="s">"path/to/AMPSSIE/MaterialPoints"</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">include</span><span class="p">(</span><span class="s">"setup_workers.jl"</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>4. Run a problem.</strong> The cloned repository includes its own example input file, so you can run a problem straight away:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>.<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
+<p>If everything succeeds the REPL prints the package versions being resolved, the activated project path and a <code>starting sim</code> line; see the <a href="../../TutorialProblems/Tutorial_1/#setting-up-and-running-the-problem">Tutorial 1 terminal output</a> (or <a href="../../TutorialProblems/Tutorial_2/#setting-up-and-running-the-problem">Tutorial 2</a>) for the expected console.</p>
+<p><strong>4. Run a problem.</strong> Copy a tutorial <code>input_data.json</code> (for example from <a href="../../TutorialProblems/Tutorial_1_input_data/">Tutorial 1</a> or <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a>) into the <code>MaterialPoints</code> directory and call the AMPSSIE entry point from the same Julia REPL:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Ampse</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">"input_data.json"</span><span class="p">);</span>
 </code></pre></div>
-<p>Output is written to the same directory as the input file. Open the resulting VTU files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and stress fields.</p>
+<p>This steps through the load increments configured in the JSON and writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> output files to <code>MaterialPoints/src/output</code>. Open the VTU/VTK files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and the stress / displacement fields.</p>
 
 
 
