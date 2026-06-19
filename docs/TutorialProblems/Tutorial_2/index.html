@@ -2228,7 +2228,7 @@ to install the AMPSSIE package and start multiple parallel workers.
 <div class="js-text">
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
 <p>With the <code>input_data.json</code> in the correct place and Julia running with the AMPSSIE package loaded, the simulation can be started by calling the AMPSSIE entry point.
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Ampse.run("input_data.json");
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>AMPSSIE.run("input_data.json");
 </code></pre></div>
 This reads <code>input_data.json</code> from the current directory, steps through the 20 load increments under the prescribed rigid-body displacement, and writes <code>.vtu</code> and <code>.vtk</code> output files for ParaView visualisation along with a <code>.csv</code> file specific to this validation problem.
 <h4 id="reading-the-output">Reading the output<a class="headerlink" href="#reading-the-output" title="Permanent link">¶</a></h4>
@@ -2253,7 +2253,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 </div>
 <div class="js-code">
 <div class="terminal">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">julia&gt; Ampse.run("input_data.json");</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">julia&gt; AMPSSIE.run("input_data.json");</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Making rbdata</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">...</span>
