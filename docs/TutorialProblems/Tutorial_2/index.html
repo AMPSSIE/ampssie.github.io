@@ -2048,7 +2048,7 @@
 </div>
 <h2 id="input-setup">Input setup<a class="headerlink" href="#input-setup" title="Permanent link">¶</a></h2>
 <h3 id="problem-summary">Problem summary<a class="headerlink" href="#problem-summary" title="Permanent link">¶</a></h3>
-<p>The aim is to introduce the set-up and modelling of soil-structure interaction problems. The problem is a deformable cube compressed by a rigid cube; although simple, it is essential as it validates the contact formulation by confirming that the contact overlap stays small and the resulting vertical stress field is uniform throughout the cube and matches the analytical Hencky solution</p>
+<p>The aim is to introduce the set-up and modelling of soil-structure interaction problems. The problem is a deformable cube compressed by a rigid cube; although simple, it is essential as it validates the contact formulation by confirming that the contact overlap stays small and the resulting vertical stress field is uniform throughout the cube and matches the analytical Hencky solution for the Cauchy stress in the vertical direction</p>
 <div class="arithmatex">\[
 \sigma_{zz} = E \ln\!\left(\frac{L}{L_0}\right) \frac{L_0}{L} = \frac{10^6}{0.75} \ln(0.75) \approx -3.84 \times 10^5 \text{ Pa},
 \]</div>
@@ -2477,7 +2477,7 @@ This reads <code>input_data.json</code> from the current directory, steps throug
 <p>The walkthrough below follows the same pattern as the <a href="../Tutorial_1/#visualising-the-output-in-paraview">ParaView walkthrough from Tutorial 1</a>, but loads the additional rigid-body output (<code>rbData..vtk</code>) alongside the GIMP and background-mesh data, and finishes by hiding the rigid body so the deformed cube can be inspected on its own. The same <a href="../Tutorial_1/#visualising-the-output-in-paraview">3D-navigation controls</a> (left-drag to rotate, scroll to zoom) apply throughout.</p>
 <div class="walkthrough">
 <div>
-<p><strong>1. Open ParaView.</strong> Launch ParaView from your applications menu or terminal. You should see an empty render view with the orientation triad in the bottom-left corner.</p>
+<p><strong>1. Open ParaView.</strong> Launch ParaView from your applications menu or terminal. You should see an empty render view with the orientation axis in the bottom-left corner.</p>
 </div>
 <div>
 <p><figure id="_figure-4"><img alt="ParaView on launch - empty render view." id="fig-compress-1" src="../../../img/compress_1.png" width="100%"><figcaption>Figure 4: ParaView on launch - empty render view.</figcaption></figure></p>
