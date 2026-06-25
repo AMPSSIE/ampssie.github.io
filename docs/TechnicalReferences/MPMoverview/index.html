@@ -12,7 +12,7 @@
         <meta name="author" content="Durham University">
       
       
-        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/Overview/">
+        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/MPMoverview/">
       
       
       
@@ -1585,6 +1585,7 @@
 <h2 id="material-point-discretisation">Material point discretisation<a class="headerlink" href="#material-point-discretisation" title="Permanent link">¶</a></h2>
 <p>In material point methods the physical domain is discretised by a number of material points. These points are used to numerically approximate the stiffness of the elements in the background mesh, essentially replacing the conventional Gauss points (or other integration method). The key difference between material point and finite element methods is that these integration points move relative to the background mesh rather than being directly coupled to the positions of the background grid nodes.</p>
 <h2 id="background-mesh">Background mesh<a class="headerlink" href="#background-mesh" title="Permanent link">¶</a></h2>
+<p>The material point method requires a finite element-like background mesh that covers the full extent of the physical material being analysed, that is, the full extent of the material points in the analysis. It is on this background mesh that the governing equations of the problem being analysed are assembled and solved, before the information is mapped back to the material points. AMPSSIE uses an octree background mesh. </p>
 <h2 id="boundary-conditions">Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permanent link">¶</a></h2>
 <p>As with other numerical methods that decouple the physical boundaries of the analysis domain with the computational mesh, boundary conditions are one of the more challenging aspects of the material point method.</p>
 <p>In implicit material point formulations <strong>displacement boundary conditions</strong> must, in some way, be imposed on the background mesh. In AMPSSIE displacement boundary conditions are imposed directly on the background mesh. This restricts the forms of boundaries that can be modelled in the method.</p>

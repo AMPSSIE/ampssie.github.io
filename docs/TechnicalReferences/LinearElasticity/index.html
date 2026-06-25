@@ -25,7 +25,7 @@
     
     
       
-        <title>Linear elasticity - MPM for Net Zero</title>
+        <title>Isotropic linear elasticity - MPM for Net Zero</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#linear-elasticity" class="md-skip">
+        <a href="#isotropic-linear-elasticity" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Linear elasticity
+              Isotropic linear elasticity
             
           </span>
         </div>
@@ -1477,6 +1477,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stress-update-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stress update algorithm
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1495,8 +1514,27 @@
   
 
 
-<h1 id="linear-elasticity">Linear elasticity<a class="headerlink" href="#linear-elasticity" title="Permanent link">¶</a></h1>
-<p>The linear elastic constitutive formulation in AMPSSIE assumes a Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>.</p>
+<h1 id="isotropic-linear-elasticity">Isotropic linear elasticity<a class="headerlink" href="#isotropic-linear-elasticity" title="Permanent link">¶</a></h1>
+<p>The linear elastic constitutive formulation in AMPSSIE assumes an isotropic Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon^\text{e}\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>.</p>
+<p>The stresses and strains are defined in Vogt notation with, using <span class="arithmatex">\(\{\tau\}\)</span> as an example, the following ordering of the components
+$<span class="arithmatex">\(\{\tau\} = \{\begin{array}{cccccc}
+    \tau_{xx} &amp; \tau_{yy} &amp; \tau_{zz} &amp; \tau_{xy} &amp; \tau_{yz} &amp; \tau_{zx}
+  \end{array}\}^T\)</span>$</p>
+<h2 id="stress-update-algorithm">Stress update algorithm<a class="headerlink" href="#stress-update-algorithm" title="Permanent link">¶</a></h2>
+<p>Given an initial elastic logarithmic strain, <span class="arithmatex">\(\{\varepsilon^\text{e}_{n}\}\)</span>, or the converged logarithmic elastic strain from the previous time step, and an increment in the logarithmic strain, <span class="arithmatex">\(\{\Delta \varepsilon\}\)</span>, the new logarithmic elastic strain is defined as</p>
+<div class="arithmatex">\[\{\varepsilon^\text{e}_{n+1}\}= \{\varepsilon^\text{e}_{n}\} + \{\Delta \varepsilon\}\]</div>
+<p>and the updated Kirchhoff stress calculated using</p>
+<div class="arithmatex">\[\{\tau_{n+1}\} = [D^{\text{e}}]\{\varepsilon^\text{e}_{n+1}\}\]</div>
+<p>where <span class="arithmatex">\([D^{\text{e}}]\)</span> is the isotropic elastic stiffness matrix of the material. This stiffness matrix can be expressed as</p>
+<div class="arithmatex">\[ [D^{\text{e}}] =  \frac{E}{(1+\nu)(1-2\nu)}\left[\begin{array}{cccccc}
+    (1-\nu) &amp; \nu &amp; \nu &amp; 0 &amp; 0 &amp; 0\\
+    \nu &amp; (1-\nu) &amp; \nu &amp; 0 &amp; 0 &amp; 0\\
+    \nu &amp; \nu &amp; (1-\nu) &amp; 0 &amp; 0 &amp; 0\\
+    0&amp; 0&amp; 0&amp; \frac{\displaystyle (1-2\nu)}{\displaystyle 2} &amp; 0 &amp; 0\\
+    0&amp; 0&amp; 0&amp; 0&amp; \frac{\displaystyle (1-2\nu)}{\displaystyle 2} &amp; 0\\
+    0&amp; 0&amp; 0&amp; 0&amp; 0&amp; \frac{\displaystyle (1-2\nu)}{\displaystyle 2}
+  \end{array}\right]\]</div>
+<p>where <span class="arithmatex">\(E\)</span> is Young's modulus and <span class="arithmatex">\(\nu\)</span> is Poisson's ratio. </p>
 
 
 
