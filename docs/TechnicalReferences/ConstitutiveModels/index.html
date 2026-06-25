@@ -1477,64 +1477,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#linear-elasticity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Linear elasticity
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#linear-elastic-perfectly-plasticity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Linear elastic-perfectly plasticity
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Linear elastic-perfectly plasticity">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pressure-insensititve-yield-surfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pressure insensititve yield surfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pressure-sensititve-yield-surfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pressure sensititve yield surfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1556,15 +1498,10 @@
 <h1 id="constitutive-models">Constitutive models<a class="headerlink" href="#constitutive-models" title="Permanent link">¶</a></h1>
 <p>Constitutive models provide the fundamental link between stress and strain within any stress analysis algorithm. The following forms constitutive models are included within AMPSSIE:</p>
 <ul>
-<li>linear elasticity</li>
-<li>linear elastic-perfectly plasticity</li>
+<li><a href="../LinearElasticity/">linear elasticity</a></li>
+<li><a href="ElastoPlasticity.md">linear elasticity-perfect plasticity</a></li>
 </ul>
 <p>All of the constitutive models adopt a Hencky material assumption, where the stress-strain relationship is formulated in terms of logarithmic (or Hencky) strain and Kirchhoff stress. This choice of stress and strain measures, along with an exponential map of the plastic flow, allows small strain constitutive model implementations to be used in large deformation analysis without modifying the core stress update algorithm. </p>
-<h2 id="linear-elasticity">Linear elasticity<a class="headerlink" href="#linear-elasticity" title="Permanent link">¶</a></h2>
-<p>The linear elastic constitutive formulation in AMPSSIE assumes a Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>.</p>
-<h2 id="linear-elastic-perfectly-plasticity">Linear elastic-perfectly plasticity<a class="headerlink" href="#linear-elastic-perfectly-plasticity" title="Permanent link">¶</a></h2>
-<h3 id="pressure-insensititve-yield-surfaces">Pressure insensititve yield surfaces<a class="headerlink" href="#pressure-insensititve-yield-surfaces" title="Permanent link">¶</a></h3>
-<h3 id="pressure-sensititve-yield-surfaces">Pressure sensititve yield surfaces<a class="headerlink" href="#pressure-sensititve-yield-surfaces" title="Permanent link">¶</a></h3>
 
 
 
