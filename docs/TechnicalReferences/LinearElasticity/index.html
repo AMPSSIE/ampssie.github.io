@@ -1516,10 +1516,10 @@
 
 <h1 id="isotropic-linear-elasticity">Isotropic linear elasticity<a class="headerlink" href="#isotropic-linear-elasticity" title="Permanent link">¶</a></h1>
 <p>The linear elastic constitutive formulation in AMPSSIE assumes an isotropic Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon^\text{e}\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>.</p>
-<p>The stresses and strains are defined in Vogt notation with, using <span class="arithmatex">\(\{\tau\}\)</span> as an example, the following ordering of the components
-$<span class="arithmatex">\(\{\tau\} = \{\begin{array}{cccccc}
+<p>The stresses and strains are defined in Vogt notation with, using <span class="arithmatex">\(\{\tau\}\)</span> as an example, the following ordering of the components</p>
+<div class="arithmatex">\[\{\tau\} = \{\begin{array}{cccccc}
     \tau_{xx} &amp; \tau_{yy} &amp; \tau_{zz} &amp; \tau_{xy} &amp; \tau_{yz} &amp; \tau_{zx}
-  \end{array}\}^T\)</span>$</p>
+  \end{array}\}^T\]</div>
 <h2 id="stress-update-algorithm">Stress update algorithm<a class="headerlink" href="#stress-update-algorithm" title="Permanent link">¶</a></h2>
 <p>Given an initial elastic logarithmic strain, <span class="arithmatex">\(\{\varepsilon^\text{e}_{n}\}\)</span>, or the converged logarithmic elastic strain from the previous time step, and an increment in the logarithmic strain, <span class="arithmatex">\(\{\Delta \varepsilon\}\)</span>, the new logarithmic elastic strain is defined as</p>
 <div class="arithmatex">\[\{\varepsilon^\text{e}_{n+1}\}= \{\varepsilon^\text{e}_{n}\} + \{\Delta \varepsilon\}\]</div>
