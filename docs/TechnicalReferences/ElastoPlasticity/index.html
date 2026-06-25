@@ -12,7 +12,7 @@
         <meta name="author" content="Durham University">
       
       
-        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/ConstitutiveModels/">
+        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/ElastoPlasticity/">
       
       
       
@@ -25,7 +25,7 @@
     
     
       
-        <title>Constitutive models - MPM for Net Zero</title>
+        <title>Linear elasto-plasticity - MPM for Net Zero</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#constitutive-models" class="md-skip">
+        <a href="#linear-elasto-plasticity" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Constitutive models
+              Linear elasto-plasticity
             
           </span>
         </div>
@@ -1477,6 +1477,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pressure-insensititve-yield-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pressure insensititve yield surfaces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pressure-sensititve-yield-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pressure sensititve yield surfaces
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1495,13 +1525,10 @@
   
 
 
-<h1 id="constitutive-models">Constitutive models<a class="headerlink" href="#constitutive-models" title="Permanent link">¶</a></h1>
-<p>Constitutive models provide the fundamental link between stress and strain within any stress analysis algorithm. The following forms constitutive models are included within AMPSSIE:</p>
-<ul>
-<li><a href="../LinearElasticity/">linear elasticity</a></li>
-<li><a href="../ElastoPlasticity/">linear elasticity-perfect plasticity</a></li>
-</ul>
-<p>All of the constitutive models adopt a Hencky material assumption, where the stress-strain relationship is formulated in terms of logarithmic (or Hencky) strain and Kirchhoff stress. This choice of stress and strain measures, along with an exponential map of the plastic flow, allows small strain constitutive model implementations to be used in large deformation analysis without modifying the core stress update algorithm. </p>
+<h1 id="linear-elasto-plasticity">Linear elasto-plasticity<a class="headerlink" href="#linear-elasto-plasticity" title="Permanent link">¶</a></h1>
+<p>The linear elastic constitutive formulation in AMPSSIE assumes a Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>.</p>
+<h2 id="pressure-insensititve-yield-surfaces">Pressure insensititve yield surfaces<a class="headerlink" href="#pressure-insensititve-yield-surfaces" title="Permanent link">¶</a></h2>
+<h2 id="pressure-sensititve-yield-surfaces">Pressure sensititve yield surfaces<a class="headerlink" href="#pressure-sensititve-yield-surfaces" title="Permanent link">¶</a></h2>
 
 
 
