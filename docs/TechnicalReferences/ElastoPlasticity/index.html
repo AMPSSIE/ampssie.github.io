@@ -1484,6 +1484,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#linear-isotropic-elasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear isotropic elasticity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pressure-insensitive-yield-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1491,6 +1502,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Pressure insensitive yield surfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plastic-flow-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plastic flow direction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1529,7 +1557,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#plastic-flow-direction" class="md-nav__link">
+  <a href="#plastic-flow-direction_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Plastic flow direction
@@ -1552,6 +1580,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Stress update algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backward-euler-elasto-plastic-stress-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backward Euler elasto-plastic stress update
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1576,9 +1621,17 @@
 
 
 <h1 id="isotropic-elasto-plasticity">Isotropic elasto-plasticity<a class="headerlink" href="#isotropic-elasto-plasticity" title="Permanent link">¶</a></h1>
-<p>The elasto-plastic constitutive formulation in AMPSSIE assumes an isotropic Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>.</p>
+<p>The elasto-plastic constitutive formulation assumes an isotropic Hencky material with a linear relationship between elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon^{\text{e}}\}\)</span>, and Kirchhoff stress, <span class="arithmatex">\(\{\tau\}\)</span>, combined with a perfect plasticity (fixed) yield surface.</p>
+<h2 id="linear-isotropic-elasticity">Linear isotropic elasticity<a class="headerlink" href="#linear-isotropic-elasticity" title="Permanent link">¶</a></h2>
 <p>The elastic behaviour of the material is detailed <a href="../LinearElasticity/">here</a>.</p>
 <h2 id="pressure-insensitive-yield-surfaces">Pressure insensitive yield surfaces<a class="headerlink" href="#pressure-insensitive-yield-surfaces" title="Permanent link">¶</a></h2>
+<p>The allowable stress states are bounded by a perfectly-plastic von Mises yield surface defined by</p>
+<div class="arithmatex">\[f= \varrho - \varrho_y = 0\]</div>
+<p>where <span class="arithmatex">\(\varrho=\sqrt{2J_2}\)</span>, <span class="arithmatex">\(J_2=\frac{1}{2}\text{tr}([s][s])\)</span>, <span class="arithmatex">\([s]=[\tau]-\frac{\xi}{\sqrt{3}}[I]\)</span> and <span class="arithmatex">\(\varrho_y\)</span> is the deviatoric shear strength of the material. </p>
+<h3 id="plastic-flow-direction">Plastic flow direction<a class="headerlink" href="#plastic-flow-direction" title="Permanent link">¶</a></h3>
+<p>Associated plastic flow is assumed for pressure insensitive, where the plastic potential surface, <span class="arithmatex">\(g=0\)</span>, is equal to the yield surface and the plastic strains evolve according to</p>
+<div class="arithmatex">\[ \{\dot{\varepsilon}^{\text{p}}\} = \dot{\gamma} \left\{\frac{\partial g}{\partial \tau} \right\} = \dot{\gamma} \left\{\frac{\partial f}{\partial \tau} \right\}\]</div>
+<p>where <span class="arithmatex">\(\dot{\gamma}\)</span> is the plastic consistency parameter. </p>
 <h2 id="pressure-sensitive-yield-surfaces">Pressure sensitive yield surfaces<a class="headerlink" href="#pressure-sensitive-yield-surfaces" title="Permanent link">¶</a></h2>
 <p>The allowable stress states are bounded by a perfectly-plastic yield surface defined by</p>
 <div class="arithmatex">\[f = \varrho - \alpha\bar{\varrho}\bigl( \xi - \xi_c \bigr) = 0\]</div>
@@ -1594,18 +1647,83 @@
 <p>It is possible to specify <span class="arithmatex">\(\bar{\varrho}_e\)</span> by making the assumption that the  Willam-Warnke section coincides with a <strong>Mohr-Columb</strong> deviatoric section at the compression and extension meridians. This allows  <span class="arithmatex">\(\bar{\varrho}_e\)</span> to be defined in terms of the friction angle as</p>
 <div class="arithmatex">\[\bar{\varrho}_e = \frac{3-\sin(\phi)}{3+\sin(\phi)}\]</div>
 <p>and does not introduce an additional constitutive parameter. </p>
-<h3 id="plastic-flow-direction">Plastic flow direction<a class="headerlink" href="#plastic-flow-direction" title="Permanent link">¶</a></h3>
+<h3 id="plastic-flow-direction_1">Plastic flow direction<a class="headerlink" href="#plastic-flow-direction_1" title="Permanent link">¶</a></h3>
 <p>Non-associated flow is included by the specification of an independent plastic potential surface</p>
 <div class="arithmatex">\[g = \varrho - \beta \bigl( \xi - \xi_\beta \bigr) = 0\]</div>
 <p>where <span class="arithmatex">\(\xi_\beta=c\sqrt{3}\cot(\psi)\)</span>, <span class="arithmatex">\(\beta=-\tan(\psi)\)</span> and <span class="arithmatex">\(\psi\in[0,\phi]\)</span> is the dilation angle of the material. This plastic potential surface has a circular deviatoric section and therefore results in non-associated plastic flow for a yield surface with a non-circular deviatoric section even if <span class="arithmatex">\(\psi=\phi\)</span>. </p>
 <h2 id="stress-update-algorithm">Stress update algorithm<a class="headerlink" href="#stress-update-algorithm" title="Permanent link">¶</a></h2>
 <p>The stress update algorithm used in the software is based on the approached detailed in Coombs (2011). </p>
-<p>The primary unknowns for the stress update procedure are the updated elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon^{\text{e}}_{n+1}\}\)</span>, and the increment in the plastic consistency parameter, <span class="arithmatex">\(\Delta \gamma\)</span>. </p>
-<p>The residual equations for this implicit stress update procedure are</p>
+<p>The first step is to determine the trial elastic strain state by assuming that the increment in the logarithmic strain associated with the current time step <span class="arithmatex">\(\{\Delta \varepsilon\}\)</span>, results in elastic behaviour</p>
+<div class="arithmatex">\[\{\varepsilon^\text{e}_{tr}\}= \{\varepsilon^\text{e}_{n}\} + \{\Delta \varepsilon\}\]</div>
+<p>where <span class="arithmatex">\(\{\varepsilon^\text{e}_{n}\}\)</span> is the initial logarithmic elastic strain or the converged logarithmic elastic strain from the previous time step.  This elastic trail strain state can be used to determine an estimate of the stress state by assuming linear isotropic material behaviour </p>
+<div class="arithmatex">\[\{\tau_{tr}\} = [D^{\text{e}}]\{\varepsilon^\text{e}_{tr}\}\]</div>
+<p>where <span class="arithmatex">\([D^{\text{e}}]\)</span> is the isotropic elastic stiffness matrix of the material. This stiffness matrix can be expressed as</p>
+<div class="arithmatex">\[ [D^{\text{e}}] =  \frac{E}{(1+\nu)(1-2\nu)}\left[\begin{array}{cccccc}
+    (1-\nu) &amp; \nu &amp; \nu &amp; 0 &amp; 0 &amp; 0\\
+    \nu &amp; (1-\nu) &amp; \nu &amp; 0 &amp; 0 &amp; 0\\
+    \nu &amp; \nu &amp; (1-\nu) &amp; 0 &amp; 0 &amp; 0\\
+    0&amp; 0&amp; 0&amp; \frac{\displaystyle (1-2\nu)}{\displaystyle 2} &amp; 0 &amp; 0\\
+    0&amp; 0&amp; 0&amp; 0&amp; \frac{\displaystyle (1-2\nu)}{\displaystyle 2} &amp; 0\\
+    0&amp; 0&amp; 0&amp; 0&amp; 0&amp; \frac{\displaystyle (1-2\nu)}{\displaystyle 2}
+  \end{array}\right]\]</div>
+<p>where <span class="arithmatex">\(E\)</span> is Young's modulus and <span class="arithmatex">\(\nu\)</span> is Poisson's ratio. </p>
+<p>The next step is to check <span class="arithmatex">\(\{\tau_{tr}\}\)</span> against the selected yield criteria. </p>
+<ul>
+<li><strong>If <span class="arithmatex">\(f(\{\tau_{tr}\})\leq 0\)</span></strong>: the material is undergoing elastic behaviour and the updated stress and elastic strain states at equal to the trail values. The material stiffness is the elastic stiffness matrix, <span class="arithmatex">\([D^{\text{e}}]\)</span></li>
+<li><strong>Else <span class="arithmatex">\(f(\{\tau_{tr}\})&gt; 0\)</span></strong>: the trial state is outside of the yield surface, which is not admissible. This means that the material will be undergoing elasto-plastic behaviour and the trial stress state needs to be returned to an admissible state of stress on the yield surface, $f=0. </li>
+</ul>
+<h3 id="backward-euler-elasto-plastic-stress-update">Backward Euler elasto-plastic stress update<a class="headerlink" href="#backward-euler-elasto-plastic-stress-update" title="Permanent link">¶</a></h3>
+<p>When undergoing elasto-plastic behaviour, the total strain increment associated the the current time step needs to be split into an elastic, <span class="arithmatex">\(\{\Delta \varepsilon^{\text{e}}\}\)</span>, and a plastic, <span class="arithmatex">\(\{\Delta \varepsilon^{\text{p}}\}\)</span>, component</p>
+<div class="arithmatex">\[\{\Delta \varepsilon\} = \{\Delta \varepsilon^{\text{e}}\} + \{\Delta \varepsilon^{\text{p}}\}\]</div>
+<p>The increment in the elastic strains is unknown, whereas the increment in the plastic strains can be expressed in terms of the plastic flow direction and an increment in the plastic consistency parameter</p>
+<div class="arithmatex">\[ \{\Delta {\varepsilon}^{\text{p}}\} = \Delta{\gamma} \left\{\frac{\partial g}{\partial \tau} \right\}\]</div>
+<p>The flow direction, <span class="arithmatex">\(\left\{\frac{\partial g}{\partial \sigma} \right\}\)</span>, depends on the position on the plastic potential surface and therefore the updated stress (or elastic strain) state. The increment in the plastic consistency parameter, <span class="arithmatex">\(\Delta \gamma \geq 0\)</span>, is taken to be an independent scalar unknown that controls the magnitude of the plastic strain increment. </p>
+<p><strong>Unknowns</strong>: The primary unknowns, <span class="arithmatex">\(\{x\}\)</span>, for the stress update procedure are taken to be the updated elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon^{\text{e}}_{n+1}\}\)</span>, and the increment in the plastic consistency parameter, <span class="arithmatex">\(\Delta \gamma\)</span>. </p>
+<p><strong>Residuals</strong>: The residual equations, <span class="arithmatex">\(\{R\}\)</span> associated with the unknowns are </p>
 <p><strong>Strain balance</strong>\
 $<span class="arithmatex">\(\{\varepsilon^{\text{e}}_{n+1}\}-\{\varepsilon^{\text{e}}_{tr}\}+\Delta \gamma \left\{\frac{\partial g}{\partial \tau}\right\} = \{0\}\)</span>$</p>
 <p><strong>Yield function</strong>\
 $<span class="arithmatex">\(f = 0\)</span>$</p>
+<p><strong>Solution procedure</strong>: The unknowns are obtained from the residual equations through a fully implicit backward Euler stress update procedure that applies Newton's method (aka Newton-Raphson) to obtain the updated elastic strain state and the increment in the plastic consistency parameter given an initial estimate.  The solution is updated using</p>
+<div class="arithmatex">\[ \{x\}_{k+1} = \{x\}_{k} - \left[ \frac{\partial R}{\partial x} \right]_k^{-1}\{R\}_k \]</div>
+<p>where <span class="arithmatex">\(k\)</span> is the iteration counter, until the L2 norm of the residual equations, <span class="arithmatex">\(\{R\}\)</span>, drop below a given tolerance<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. In this case the residual equation is</p>
+<div class="arithmatex">\[ \{R\} = \left\{\begin{array}{c} 
+\{\varepsilon^{\text{e}}_{n+1}\}-\{\varepsilon^{\text{e}}_{tr}\}+\Delta \gamma \left\{\frac{\partial g}{\partial \tau}\right\}\\
+f
+\end{array} \right\} \]</div>
+<p>and the vector of unknowns is</p>
+<div class="arithmatex">\[\{x\} = \left\{\begin{array}{c} 
+\{\varepsilon^{\text{e}}_{n+1}\}\\
+\Delta\gamma 
+\end{array} \right\}\]</div>
+<p>The derivative of the residual vector with respect to the unknown vector is therefore</p>
+<div class="arithmatex">\[\left[ \frac{\partial R}{\partial x} \right] = \left[\begin{array}{cc}
+  [I]-\Delta \gamma \left[\frac{\partial ^2 g}{\partial \tau}\right][D^{\text{e}}] &amp; \left\{\frac{\partial g}{\partial \tau}\right\} \\
+  \left\{\frac{\partial f}{\partial \tau}\right\}^T[D^{\text{e}}] &amp; 0
+\end{array}\right]\]</div>
+<p>where the derivatives of the yield function and the plastic potential surface will depend on the specific constitutive model. </p>
+<p><strong>Initial estimate</strong>: The initial estimate assumes fully elastic behaviour such that</p>
+<div class="arithmatex">\[\{\varepsilon^{\text{e}}_{n+1}\} = \{\varepsilon^{\text{e}}_{tr}\} \qquad \text{and} \qquad \Delta\gamma=0\]</div>
+<p>this gives an initial residual of </p>
+<div class="arithmatex">\[ \{R\}_0 = \left\{\begin{array}{c} 
+\{0\}\\
+f(\{\tau_{tr}\})
+\end{array} \right\} \]</div>
+<p><strong>Updated state</strong>: Once the Newton-Raphson process has converged the stress and elastic strain states are updated and returned by the constitutive algorithm.</p>
+<p><strong>Stiffness return</strong>: When undergoing elasto-plastic behaviour, the constitutive algorithm returns the algorithmic consistent tangent associated with the stress update procedure. The adoption of this tangent facilitates optimum convergence of the global linear system of equations as it provides an linearisation of the constitutive algorithm at the updated stress/strain state. The tangent is obtained from the top left six-by-six block of the matrix</p>
+<div class="arithmatex">\[\left[\begin{array}{cc}
+  [C^{\text{e}}]-\Delta \gamma \left[\frac{\partial ^2 g}{\partial \tau}\right] &amp; \left\{\frac{\partial g}{\partial \tau}\right\} \\
+  \left\{\frac{\partial f}{\partial \tau}\right\}^T &amp; 0
+\end{array}\right]^{-1}\]</div>
+<p>where <span class="arithmatex">\([C^{\text{e}}]=[D^{\text{e}}]^{-1}\)</span> is the elastic compliance matrix. Note that when the yield function and the plastic potential surface are not equal, <span class="arithmatex">\(f\neq g\)</span>, the algorithmic consistent tangent will be non-symmetric. </p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Note that the tolerance on the L2 norm of the residual equations, <span class="arithmatex">\(\{R\}\)</span>, will depend on the form of the yield function, <span class="arithmatex">\(f\)</span>, and it may be necessary to evaluate separately the L2 norm of the strain balance and the yield function depending on unit compatibility. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
 
 
 
