@@ -1680,13 +1680,14 @@
 <p>The flow direction, <span class="arithmatex">\(\left\{\frac{\partial g}{\partial \sigma} \right\}\)</span>, depends on the position on the plastic potential surface and therefore the updated stress (or elastic strain) state. The increment in the plastic consistency parameter, <span class="arithmatex">\(\Delta \gamma \geq 0\)</span>, is taken to be an independent scalar unknown that controls the magnitude of the plastic strain increment. </p>
 <p><strong>Unknowns</strong>: The primary unknowns, <span class="arithmatex">\(\{x\}\)</span>, for the stress update procedure are taken to be the updated elastic logarithmic strains, <span class="arithmatex">\(\{\varepsilon^{\text{e}}_{n+1}\}\)</span>, and the increment in the plastic consistency parameter, <span class="arithmatex">\(\Delta \gamma\)</span>. </p>
 <p><strong>Residuals</strong>: The residual equations, <span class="arithmatex">\(\{R\}\)</span> associated with the unknowns are </p>
-<p><strong>Strain balance</strong>\
-$<span class="arithmatex">\(\{\varepsilon^{\text{e}}_{n+1}\}-\{\varepsilon^{\text{e}}_{tr}\}+\Delta \gamma \left\{\frac{\partial g}{\partial \tau}\right\} = \{0\}\)</span>$</p>
-<p><strong>Yield function</strong>\
-$<span class="arithmatex">\(f = 0\)</span>$</p>
+<p><strong>Strain balance</strong></p>
+<div class="arithmatex">\[\{\varepsilon^{\text{e}}_{n+1}\}-\{\varepsilon^{\text{e}}_{tr}\}+\Delta \gamma \left\{\frac{\partial g}{\partial \tau}\right\} = \{0\}\]</div>
+<p><strong>Yield function</strong></p>
+<div class="arithmatex">\[f = 0\]</div>
 <p><strong>Solution procedure</strong>: The unknowns are obtained from the residual equations through a fully implicit backward Euler stress update procedure that applies Newton's method (aka Newton-Raphson) to obtain the updated elastic strain state and the increment in the plastic consistency parameter given an initial estimate.  The solution is updated using</p>
 <div class="arithmatex">\[ \{x\}_{k+1} = \{x\}_{k} - \left[ \frac{\partial R}{\partial x} \right]_k^{-1}\{R\}_k \]</div>
-<p>where <span class="arithmatex">\(k\)</span> is the iteration counter, until the L2 norm of the residual equations, <span class="arithmatex">\(\{R\}\)</span>, drop below a given tolerance<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. In this case the residual equation is</p>
+<p>where <span class="arithmatex">\(k\)</span> is the iteration counter, until the L2 norm of the residual equations, <span class="arithmatex">\(\{R\}\)</span>, drop below a given tolerance<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. </p>
+<p>In the case of perfect plasticity the residual equation is</p>
 <div class="arithmatex">\[ \{R\} = \left\{\begin{array}{c} 
 \{\varepsilon^{\text{e}}_{n+1}\}-\{\varepsilon^{\text{e}}_{tr}\}+\Delta \gamma \left\{\frac{\partial g}{\partial \tau}\right\}\\
 f
