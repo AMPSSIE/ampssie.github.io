@@ -1655,7 +1655,7 @@
 <p>The stress update algorithm used in the software is based on the approached detailed in Coombs (2011). </p>
 <p>The first step is to determine the trial elastic strain state by assuming that the increment in the logarithmic strain associated with the current time step <span class="arithmatex">\(\{\Delta \varepsilon\}\)</span>, results in elastic behaviour</p>
 <div class="arithmatex">\[\{\varepsilon^\text{e}_{tr}\}= \{\varepsilon^\text{e}_{n}\} + \{\Delta \varepsilon\}\]</div>
-<p>where <span class="arithmatex">\(\{\varepsilon^\text{e}_{n}\}\)</span> is the initial logarithmic elastic strain or the converged logarithmic elastic strain from the previous time step.  This elastic trail strain state can be used to determine an estimate of the stress state by assuming linear isotropic material behaviour </p>
+<p>where <span class="arithmatex">\(\{\varepsilon^\text{e}_{n}\}\)</span> is the initial logarithmic elastic strain or the converged logarithmic elastic strain from the previous time step.  This elastic trial strain state can be used to determine an estimate of the stress state by assuming linear isotropic material behaviour </p>
 <div class="arithmatex">\[\{\tau_{tr}\} = [D^{\text{e}}]\{\varepsilon^\text{e}_{tr}\}\]</div>
 <p>where <span class="arithmatex">\([D^{\text{e}}]\)</span> is the isotropic elastic stiffness matrix of the material. This stiffness matrix can be expressed as</p>
 <div class="arithmatex">\[ [D^{\text{e}}] =  \frac{E}{(1+\nu)(1-2\nu)}\left[\begin{array}{cccccc}
@@ -1669,7 +1669,7 @@
 <p>where <span class="arithmatex">\(E\)</span> is Young's modulus and <span class="arithmatex">\(\nu\)</span> is Poisson's ratio. </p>
 <p>The next step is to check <span class="arithmatex">\(\{\tau_{tr}\}\)</span> against the selected yield criteria. </p>
 <ul>
-<li><strong>If <span class="arithmatex">\(f(\{\tau_{tr}\})\leq 0\)</span></strong>: the material is undergoing elastic behaviour and the updated stress and elastic strain states at equal to the trail values. The material stiffness is the elastic stiffness matrix, <span class="arithmatex">\([D^{\text{e}}]\)</span></li>
+<li><strong>If <span class="arithmatex">\(f(\{\tau_{tr}\})\leq 0\)</span></strong>: the material is undergoing elastic behaviour and the updated stress and elastic strain states at equal to the trial values. The material stiffness is the elastic stiffness matrix, <span class="arithmatex">\([D^{\text{e}}]\)</span></li>
 <li><strong>Else <span class="arithmatex">\(f(\{\tau_{tr}\})&gt; 0\)</span></strong>: the trial state is outside of the yield surface, which is not admissible. This means that the material will be undergoing elasto-plastic behaviour and the trial stress state needs to be returned to an admissible state of stress on the yield surface, $f=0. </li>
 </ul>
 <h3 id="backward-euler-elasto-plastic-stress-update">Backward Euler elasto-plastic stress update<a class="headerlink" href="#backward-euler-elasto-plastic-stress-update" title="Permanent link">¶</a></h3>
