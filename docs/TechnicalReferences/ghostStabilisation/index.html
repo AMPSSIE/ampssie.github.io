@@ -1638,6 +1638,12 @@
 {[K_G]} = \frac{\gamma_k h^3}{3}  \int_{\Gamma} \Bigl([G]^T[m][G]\Bigr) d\Gamma = \gamma_k {[J_G]}
 \]</div>
 <h3 id="mass-stabilisation">Mass stabilisation<a class="headerlink" href="#mass-stabilisation" title="Permanent link">¶</a></h3>
+<p>For dynamic problems, the consistent mass matrix can be stabilised by the addition of </p>
+<div class="arithmatex">\[
+[M_G] = \gamma_M [J_G]
+\]</div>
+<p>where <span class="arithmatex">\(\gamma_M\)</span> is the ghost stabilisation mass penalty parameter, which is typically to set <span class="arithmatex">\(\gamma_M=\rho/4\)</span>, where <span class="arithmatex">\(\rho\)</span> is the density of the material being analysed.</p>
+<p>Note that the sum of the rows/columns in <span class="arithmatex">\([J_G]\)</span> is equal to zero. This means that no additional physical mass is introduced into the linear system. However, it also means that stabilising the consistent mass matrix and then lumping entries into a diagonal lumped mass matrix removes any stabilisation in the resultant matrix.  </p>
 
 
 
