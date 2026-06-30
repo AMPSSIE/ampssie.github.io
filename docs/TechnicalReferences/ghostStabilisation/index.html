@@ -1557,6 +1557,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#penalty-parameter-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Penalty parameter value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#numerical-integration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1598,7 +1609,7 @@
 <h2 id="small-cut-instability">Small cut instability<a class="headerlink" href="#small-cut-instability" title="Permanent link">¶</a></h2>
 <p>Without stabilisation the material point method has the potential to be highly unstable. This is because the nature of the linear system of equations being solved is highly dependent on the positioning of material points relative to the background grid. There is the potential for very small values of mass/stiffness to be generated at background grid degrees of freedom if small overlaps are generated between the physical body (i.e. the material points) and the background grid. This can result in large spurious incremental displacements/velocities/accelerations being generated at the boundary of the physical body, which have the potential to lead to failure of the numerical solver within a time step. An example of this is shown below for a quasi-static elasto-plastic collapse problem, where at a given time step the original, non-stabilised, Generalised Interpolation Material Point Method (GIMPM) predicts very large spurious incremental nodal displacements, which are removed with stabilisation.  </p>
 <p><figure id="_figure-1"><img alt="Elasto-plastic collapse: background mesh incremental displacements" src="../../../img/ghostCollapseVectors.png"><figcaption>Figure 1: Elasto-plastic collapse: background mesh incremental displacements</figcaption></figure></p>
-<p>To explore this issue in more detail, consider the simpler problem shown in Figure 2, which a block of material is displaced with a value of <span class="arithmatex">\(a\)</span>, as a rigid body through a 2D background mesh with element size <span class="arithmatex">\(h\)</span>. The condition number (the ratio of the largest to smallest eigenvalue) of the mass and stiffness matrices are determined at each displaced solution.  </p>
+<p>To explore this issue in more detail, consider the simpler problem shown in Figure 2, which a block of material is displaced with a value of <span class="arithmatex">\(a\)</span>, as a rigid body through a 2D background mesh with element size <span class="arithmatex">\(h\)</span>. The condition number (the ratio of the largest to smallest eigenvalue) of the mass and stiffness matrices are determined at each displaced solution. The test case assumes linear elastic material behaviour with a Young's modulus of <span class="arithmatex">\(E=1\)</span> Pa, a Poisson's ratio of <span class="arithmatex">\(\nu=0\)</span> and a density of <span class="arithmatex">\(\rho=1~\text{kg/m}^3\)</span>.   </p>
 <p><figure id="_figure-2"><img alt="Rigid translation test case" src="../../../img/ghostTestProblemSetup.png"><figcaption>Figure 2: Rigid translation test case</figcaption></figure></p>
 <p>Figure 3 provides the condition numbers of the unstabilised consistent mass, <span class="arithmatex">\([M_v]\)</span>, lumped mass, <span class="arithmatex">\([\bar{M}_v]\)</span>, and stiffness, <span class="arithmatex">\([K]\)</span>, matrices for the standard Material Point Method (MPM) and the GIMPM. Although the stiffness matrix for the standard MPM is well behaved, all other matrices show condition number spikes generate by small material point-background mesh node interactions. </p>
 <p><figure id="_figure-3"><img alt="Unstabilised condition numbers" src="../../../img/ghostTestProblemCond.png"><figcaption>Figure 3: Unstabilised condition numbers</figcaption></figure></p>
@@ -1674,6 +1685,7 @@
 <p>Note that the sum of the rows/columns in <span class="arithmatex">\([J_G]\)</span> is equal to zero. This means that no additional physical mass is introduced into the linear system. However, it also means that stabilising the consistent mass matrix and then lumping entries into a diagonal lumped mass matrix removes any stabilisation in the resultant matrix.  </p>
 <h2 id="practical-application">Practical application<a class="headerlink" href="#practical-application" title="Permanent link">¶</a></h2>
 <p>The implemented MPM software utilises stiffness matrix ghost stabilisation for quasi-static and dynamic analysis. It is possible to apply stiffness and mass stabilisation when using implicit methods to solve dynamic problems, however it has been found that stiffness stabilisation is sufficient to mitigate the small cut instability. </p>
+<h3 id="penalty-parameter-value">Penalty parameter value<a class="headerlink" href="#penalty-parameter-value" title="Permanent link">¶</a></h3>
 <p>The stiffness penalty parameter is set to</p>
 <div class="arithmatex">\[
 \gamma_k = \frac{\bar{E}}{30}
@@ -1684,7 +1696,7 @@
 <div class="arithmatex">\[
 {[K_G]} = \frac{\gamma_k h^3}{3}  \sum_{i=1}^{n_{Gp}}\Bigl([G_i]^T[m][G_i]\det([J])w_i\Bigr)  
 \]</div>
-<p>where <span class="arithmatex">\(n_{Gp}\)</span> is the number of Gauss points, <span class="arithmatex">\(w_i\)</span> is the weight associated with the Gauss point and <span class="arithmatex">\([J]\)</span> is the Jacobian that links the local face and global coordinate systems. The determinant of <span class="arithmatex">\([J]\)</span> provides the ratio of the global to local areas of the face. Note that <span class="arithmatex">\([G]\)</span> can vary between Gauss points whereas <span class="arithmatex">\([m]\)</span> is constant for a given face. The polynomial order of the terms in <span class="arithmatex">\([K_G]\)</span> means that a 2-by-2 grid of quadrature points is used, such that <span class="arithmatex">\(n_{Gp}=4\)</span>. </p>
+<p>where <span class="arithmatex">\(n_{Gp}\)</span> is the number of Gauss points, <span class="arithmatex">\(w_i\)</span> is the weight associated with the Gauss point and <span class="arithmatex">\([J]\)</span> is the Jacobian that links the local face and global coordinate systems. The determinant of <span class="arithmatex">\([J]\)</span> provides the ratio of the global to local areas of the face; for cubic elements <span class="arithmatex">\(\det([J])=h^2/4\)</span>. Note that <span class="arithmatex">\([G]\)</span> can vary between Gauss points whereas <span class="arithmatex">\([m]\)</span> is constant for a given face. The polynomial order of the terms in <span class="arithmatex">\([K_G]\)</span> means that a 2-by-2 grid of quadrature points is used, such that <span class="arithmatex">\(n_{Gp}=4\)</span>. </p>
 
 
 
