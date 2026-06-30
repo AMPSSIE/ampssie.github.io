@@ -1496,12 +1496,13 @@
 
 
 <h1 id="constitutive-models">Constitutive models<a class="headerlink" href="#constitutive-models" title="Permanent link">¶</a></h1>
-<p>Constitutive models provide the fundamental link between stress and strain within any stress analysis algorithm. The following forms constitutive models are included within AMPSSIE:</p>
+<p>Constitutive models provide the fundamental link between stress and strain within any stress analysis algorithm. The following forms constitutive models are included in the software:</p>
 <ul>
 <li><a href="../LinearElasticity/">linear elasticity</a></li>
 <li><a href="../ElastoPlasticity/">linear elasticity-perfect plasticity</a></li>
 </ul>
 <p>All of the constitutive models adopt a Hencky material assumption, where the stress-strain relationship is formulated in terms of logarithmic (or Hencky) strain and Kirchhoff stress. This choice of stress and strain measures, along with an exponential map of the plastic flow, allows small strain constitutive model implementations to be used in large deformation analysis without modifying the core stress update algorithm. </p>
+<p>A <strong>tension positive</strong> assumption is made in all constitutive models.</p>
 
 
 
