@@ -1684,7 +1684,7 @@
 <p>where <span class="arithmatex">\(\gamma_M\)</span> is the ghost stabilisation mass penalty parameter, which is typically to set <span class="arithmatex">\(\gamma_M=\rho/4\)</span>, where <span class="arithmatex">\(\rho\)</span> is the density of the material being analysed.</p>
 <p>Note that the sum of the rows/columns in <span class="arithmatex">\([J_G]\)</span> is equal to zero. This means that no additional physical mass is introduced into the linear system. However, it also means that stabilising the consistent mass matrix and then lumping entries into a diagonal lumped mass matrix removes any stabilisation in the resultant matrix.  </p>
 <h2 id="practical-application">Practical application<a class="headerlink" href="#practical-application" title="Permanent link">¶</a></h2>
-<p>The implemented MPM software utilises stiffness matrix ghost stabilisation for quasi-static and dynamic analysis. It is possible to apply stiffness and mass stabilisation when using implicit methods to solve dynamic problems, however it has been found that stiffness stabilisation is sufficient to mitigate the small cut instability. </p>
+<p>The implemented MPM software includes stiffness matrix ghost stabilisation as standard for all quasi-static and dynamic analyses. It is possible to apply stiffness and mass stabilisation when using implicit methods to solve dynamic problems, however it has been found that stiffness stabilisation is sufficient to mitigate the small cut instability. </p>
 <h3 id="penalty-parameter-value">Penalty parameter value<a class="headerlink" href="#penalty-parameter-value" title="Permanent link">¶</a></h3>
 <p>The stiffness penalty parameter is set to</p>
 <div class="arithmatex">\[
