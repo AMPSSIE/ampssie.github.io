@@ -1649,9 +1649,18 @@
 
 <p>The implemented Material Point Method (MPM) code is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">1</a></sup> provides the scientific basis of the code. Key aspects of the formulation are described below.</p>
 <h2 id="strong-statement-of-equilbrium">Strong statement of equilbrium<a class="headerlink" href="#strong-statement-of-equilbrium" title="Permanent link">¶</a></h2>
+<p>The strong form equilibrium equation is the condition that must be satisfied at all points within a continuum body. Here a strong form equilibrium equation for the balance of linear momentum in the current configuration of the body can be expressed as</p>
 <div class="arithmatex">\[
-\nabla \sigma_{ij} - f^b_i = 0
+\nabla \sigma_{ij} - f^b_i = \rho \ddot{u} \qquad \text{in} \qquad \varphi(\Omega)
 \]</div>
+<p>subject to</p>
+<div class="arithmatex">\[
+    t_{i} = \sigma_{ij} n_j \qquad \text{on} \qquad \varphi(\partial\Omega_N)
+\]</div>
+<div class="arithmatex">\[
+    u_{i} = \bar{u}_i \qquad \text{on} \qquad \varphi(\partial\Omega_D)
+\]</div>
+<p>where <span class="arithmatex">\(n_j\)</span> is the outward normal to the boundary of the physical domain, <span class="arithmatex">\(\partial\Omega\)</span>.</p>
 <h2 id="weak-equilibrium">Weak equilibrium<a class="headerlink" href="#weak-equilibrium" title="Permanent link">¶</a></h2>
 <p>The code adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
