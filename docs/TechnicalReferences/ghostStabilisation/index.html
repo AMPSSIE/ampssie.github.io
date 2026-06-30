@@ -1544,6 +1544,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#practical-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical application
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numerical-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Numerical integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1644,6 +1672,19 @@
 \]</div>
 <p>where <span class="arithmatex">\(\gamma_M\)</span> is the ghost stabilisation mass penalty parameter, which is typically to set <span class="arithmatex">\(\gamma_M=\rho/4\)</span>, where <span class="arithmatex">\(\rho\)</span> is the density of the material being analysed.</p>
 <p>Note that the sum of the rows/columns in <span class="arithmatex">\([J_G]\)</span> is equal to zero. This means that no additional physical mass is introduced into the linear system. However, it also means that stabilising the consistent mass matrix and then lumping entries into a diagonal lumped mass matrix removes any stabilisation in the resultant matrix.  </p>
+<h2 id="practical-application">Practical application<a class="headerlink" href="#practical-application" title="Permanent link">¶</a></h2>
+<p>The implemented MPM software utilises stiffness matrix ghost stabilisation for quasi-static and dynamic analysis. It is possible to apply stiffness and mass stabilisation when using implicit methods to solve dynamic problems, however it has been found that stiffness stabilisation is sufficient to mitigate the small cut instability. </p>
+<p>The stiffness penalty parameter is set to</p>
+<div class="arithmatex">\[
+\gamma_k = \frac{\bar{E}}{30}
+\]</div>
+<p>where <span class="arithmatex">\(\bar{E}\)</span> is the volume weighted average Young's modulus of the material points that occupy the elements that share the element boundary where the stabilisation is applied.</p>
+<h3 id="numerical-integration">Numerical integration<a class="headerlink" href="#numerical-integration" title="Permanent link">¶</a></h3>
+<p>The integrals required to calculate <span class="arithmatex">\([K_G]\)</span> are evaluated using standard Gauss-Legendre quadrature on each stabilised face</p>
+<div class="arithmatex">\[
+{[K_G]} = \frac{\gamma_k h^3}{3}  \sum_{i=1}^{n_{Gp}}\Bigl([G_i]^T[m][G_i]\det([J])w_i\Bigr)  
+\]</div>
+<p>where <span class="arithmatex">\(n_{Gp}\)</span> is the number of Gauss points, <span class="arithmatex">\(w_i\)</span> is the weight associated with the Gauss point and <span class="arithmatex">\([J]\)</span> is the Jacobian that links the local face and global coordinate systems. The determinant of <span class="arithmatex">\([J]\)</span> provides the ratio of the global to local areas of the face. Note that <span class="arithmatex">\([G]\)</span> can vary between Gauss points whereas <span class="arithmatex">\([m]\)</span> is constant for a given face. The polynomial order of the terms in <span class="arithmatex">\([K_G]\)</span> means that a 2-by-2 grid of quadrature points is used, such that <span class="arithmatex">\(n_{Gp}=4\)</span>. </p>
 
 
 
