@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#equilibrium" class="md-skip">
+        <a href="#strong-statement-of-equilbrium" class="md-skip">
           Skip to content
         </a>
       
@@ -1352,10 +1352,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#equilibrium" class="md-nav__link">
+  <a href="#strong-statement-of-equilbrium" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Equilibrium
+        Strong statement of equilbrium
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weak-equilibrium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak equilibrium
       
     </span>
   </a>
@@ -1571,10 +1582,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#equilibrium" class="md-nav__link">
+  <a href="#strong-statement-of-equilbrium" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Equilibrium
+        Strong statement of equilbrium
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weak-equilibrium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak equilibrium
       
     </span>
   </a>
@@ -1625,12 +1647,15 @@
 
   <h1>Static weak form</h1>
 
-<hr>
-<p>AMPSSIE is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">1</a></sup> provides the scientific basis of AMPSSIE. Key aspects of the formulation are described below.</p>
-<h2 id="equilibrium">Equilibrium<a class="headerlink" href="#equilibrium" title="Permanent link">¶</a></h2>
-<p>AMPSSIE adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
+<p>The implemented Material Point Method (MPM) code is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">1</a></sup> provides the scientific basis of the code. Key aspects of the formulation are described below.</p>
+<h2 id="strong-statement-of-equilbrium">Strong statement of equilbrium<a class="headerlink" href="#strong-statement-of-equilbrium" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+\nabla \sigma_{ij} - f^b_i = 0
+\]</div>
+<h2 id="weak-equilibrium">Weak equilibrium<a class="headerlink" href="#weak-equilibrium" title="Permanent link">¶</a></h2>
+<p>The code adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
-<p>where <span class="arithmatex">\(\varphi_t\)</span> is the motion of the material body which is subjected to tractions, <span class="arithmatex">\(\{t\}\)</span>, on its boundary, <span class="arithmatex">\(\partial E\)</span> with surface, <span class="arithmatex">\(s\)</span>, and body forces, <span class="arithmatex">\(\{b\}\)</span>, acting over its volume, <span class="arithmatex">\(v\)</span>. These external forces lead to a Cauchy stress field, <span class="arithmatex">\(\{\sigma\}\)</span>, through the body. <span class="arithmatex">\([\nabla_x S_{vp}]\)</span> is the tensorial form of the strain-displacement matrix containing derivatives of the basis functions, <span class="arithmatex">\([S_{vp}]\)</span>, with respect to the updated coordinates, <span class="arithmatex">\(\{x\}\)</span>. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. The equilibrium equation is non-linear in terms of the unknown nodal displacements and can be efficiently solved using the standard implicit Newton-Raphson procedure (see below).</p>
+<p>where <span class="arithmatex">\(\varphi_t\)</span> is the motion of the material body which is subjected to tractions, <span class="arithmatex">\(\{t\}\)</span>, on its boundary, <span class="arithmatex">\(\partial E\)</span> with surface, <span class="arithmatex">\(s\)</span>, and body forces, <span class="arithmatex">\(\{b\}\)</span>, acting over its volume, <span class="arithmatex">\(v\)</span>. These external forces lead to a Cauchy stress field, <span class="arithmatex">\(\{\sigma\}\)</span>, through the body. <span class="arithmatex">\([\nabla_x S_{vp}]\)</span> is the tensorial form of the strain-displacement matrix containing derivatives of the basis functions, <span class="arithmatex">\([S_{vp}]\)</span>, with respect to the updated coordinates, <span class="arithmatex">\(\{x\}\)</span>. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. The equilibrium equation is non-linear in terms of the unknown nodal displacements and can be efficiently solved using the standard implicit Newton-Raphson procedure.</p>
 <h2 id="large-deformation-mechanics">Large deformation mechanics<a class="headerlink" href="#large-deformation-mechanics" title="Permanent link">¶</a></h2>
 <p>In large deformation analysis the deformation gradient provides the fundamental link between the original and the deformed states of a body. For elasto-plasticity this deformation gradient can be multiplicatively decomposed into elastic and plastic components. In AMPSSIE, this multiplicative decomposition is combined with a linear relationship between elastic logarithmic (or Hencky) strains and Kirchhoff stress. This allows any small strain constitutive model to be included within the code without modification.</p>
 <h2 id="constitutive-model">Constitutive model<a class="headerlink" href="#constitutive-model" title="Permanent link">¶</a></h2>
