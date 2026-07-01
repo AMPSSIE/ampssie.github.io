@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/StaticWeakFormNormalContact/">
       
       
-        <link rel="prev" href="../StaticWeakForm/">
+        <link rel="prev" href="../TechnicalReference/">
       
       
         <link rel="next" href="../../Understanding/">
@@ -1296,7 +1296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../StaticWeakForm/" class="md-nav__link">
+      <a href="../StaticWeakForm.md" class="md-nav__link">
         
   
   
@@ -1648,11 +1648,11 @@
   <h1>Static weak form with normal contact</h1>
 
 <hr>
-<p>This page extends the <a href="../StaticWeakForm/">Static weak form</a> used in AMPSSIE to include the normal-contact forces being imposed on the material points, following the approach of Bird <em>et al.</em> <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>.</p>
+<p>This page extends the <a href="StaticWeakForm.md">Static weak form</a> used in AMPSSIE to include the normal-contact forces being imposed on the material points, following the approach of Bird <em>et al.</em> <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>.</p>
 <h2 id="weak-statement-of-equilibrium-with-normal-contact">Weak statement of equilibrium with normal contact<a class="headerlink" href="#weak-statement-of-equilibrium-with-normal-contact" title="Permanent link">¶</a></h2>
-<p>The Galerkin weak statement of equilibrium given on the <a href="../StaticWeakForm/">Static weak form</a> is extended with a normal contact term which imposes a load on the material points. The weak form which includes contact is defined:</p>
+<p>The Galerkin weak statement of equilibrium given on the <a href="StaticWeakForm.md">Static weak form</a> is extended with a normal contact term which imposes a load on the material points. The weak form which includes contact is defined:</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s- \int_{\varphi_t(\partial\Omega)}\{F_{N,v}^{\partial\Omega}\}\,\text{d}s  = \{0\}\]</div>
-<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first three are terms are repeated and described on the <a href="../StaticWeakForm/">Static weak form</a> page. </p>
+<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first three are terms are repeated and described on the <a href="StaticWeakForm.md">Static weak form</a> page. </p>
 <h2 id="gap-function">Gap function<a class="headerlink" href="#gap-function" title="Permanent link">¶</a></h2>
 <p>The <em>gap function</em> is used to both detect contact and measure the overlap between contact surfaces. Here a point-to-surface formulation is used, see Wriggers <sup id="fnref:wriggers2006computational"><a class="footnote-ref" href="#fn:wriggers2006computational">2</a></sup> and the work of Curnier and coworkers <sup id="fnref:pietrzak1999large"><a class="footnote-ref" href="#fn:pietrzak1999large">3</a></sup><sup id="fnref:curnier1995continuum"><a class="footnote-ref" href="#fn:curnier1995continuum">4</a></sup> for exceptional pieces of literature.</p>
 <p>The geometric measure of overlap between the deformable material and the rigid body is the <em>normal gap function</em>, <span class="arithmatex">\(g_N\)</span>, defined as the signed projection of a material-point position, <span class="arithmatex">\(\mathbf{x}\)</span>, onto its closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, on the rigid-body surface along the outward surface normal, <span class="arithmatex">\(\mathbf{n}\)</span>:</p>
