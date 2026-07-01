@@ -1622,16 +1622,49 @@
 <div class="arithmatex">\[
  u_i = \sum_{\forall v} S_{v} ~ u_i^v = [S_v]\{d\}
 \]</div>
-<p>where <span class="arithmatex">\(S_{v}\)</span> are the basis functions that link a given location in the problem to the nodes or vertices of the finite element mesh, <span class="arithmatex">\(v\)</span>. <span class="arithmatex">\([S_v]\)</span> and <span class="arithmatex">\(\{d\}\)</span> are the global   </p>
+<p>where <span class="arithmatex">\(S_{v}\)</span> are the basis functions that link a given location in the problem to the nodes or vertices of the finite element mesh, <span class="arithmatex">\(v\)</span>. <span class="arithmatex">\(\{d\}\)</span> is a global vector of vertex displacements and <span class="arithmatex">\([S_v]\)</span> is a global matrix of basis functions, with the following format</p>
+<div class="arithmatex">\[
+[S_v] = \left[\begin{array}{ccc c ccc} 
+    S_1 &amp; 0 &amp; 0 &amp; \ldots &amp; S_{n_v} &amp; 0 &amp; 0 \\
+    0 &amp; S_1 &amp; 0 &amp; \ldots &amp; 0 &amp; S_{n_v} &amp; 0 \\
+    0 &amp; 0 &amp; S_1 &amp; \ldots &amp; 0 &amp; 0 &amp; S_{n_v} 
+\end{array}\right]
+\]</div>
+<p>where <span class="arithmatex">\(n_v\)</span> is the total number of vertices in the problem.</p>
 <p>The different weighted residual methods are classified based on adopted <em>test</em> (or weighing) function, here we select a particular variant of the method known as <strong>Galerkin's method</strong> that uses the same basis functions that are used to describe the displacement variation, <span class="arithmatex">\(S_{v}\)</span>, as the weight function, such that</p>
 <div class="arithmatex">\[
  \eta_i = \sum_{\forall v} S_{v} ~ \eta_i^v = [S_v]\{d_\eta\}
 \]</div>
+<p>where <span class="arithmatex">\(\{d_\eta\}\)</span> is a global vector of vertex test function coefficients. </p>
 <p>Introducing these approximations into the weak equilibrium statement results in</p>
 <div class="arithmatex">\[
-\int_{\varphi_t(\Omega)} \Bigl(\sigma_{ij} (\nabla_x S)_{ij}-b_i \eta_i \Bigr)  \text{d} v
-- \int_{\varphi_t(\partial\Omega)} \Bigl(t_i \eta_i \Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \ddot{u}_i \eta_i\Bigr) \text{d} v = 0
+\int_{\varphi_t(\Omega)} \Bigl(\sigma_{ij} (\nabla_x [S_v]\{d_\eta\})_{ij}-b_i [S_v]\{d_\eta\} \Bigr)  \text{d} v
+- \int_{\varphi_t(\partial\Omega)} \Bigl(t_i [S_v]\{d_\eta\} \Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \ddot{u}_i [S_v]\{d_\eta\}\Bigr) \text{d} v = 0
 \]</div>
+<p>Note that <span class="arithmatex">\(\{d_\eta\}\)</span> are values at specific locations within the finite element mesh and therefore are constants for the purpose of integration. They also post-multiply all terms in the equilibrium statement, which allows them to be eliminated. These points, along with introducing vector notation for the Cauchy stress, body forces, tractions and accelerations results in </p>
+<div class="arithmatex">\[
+\int_{\varphi_t(\Omega)} \Bigl(\{\sigma\}^T [\nabla_x S_v]-\{b\}^T [S_v] \Bigr)  \text{d} v
+- \int_{\varphi_t(\partial\Omega)} \Bigl(\{t\}^T [S_v]\Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \{\ddot{u}\}^T [S_v]\Bigr) \text{d} v = 0
+\]</div>
+<p>Note that for the Cauchy stress, Vogt notation is assumed where </p>
+<div class="arithmatex">\[
+\{\sigma\} = \{\begin{array}{cccccc}
+    \sigma_{xx} &amp; \sigma_{yy} &amp; \sigma_{zz} &amp; \sigma_{xy} &amp; \sigma_{yz} &amp; \sigma_{zx}
+  \end{array}\}^T
+\]</div>
+<p>and the spatial gradient operator, when applied to <span class="arithmatex">\([S_v]\)</span> results in </p>
+<div class="arithmatex">\[ 
+[\nabla_x S_v] = \left[\begin{array}{ccc c} 
+    \frac{\partial S_1}{\partial x} &amp; 0 &amp; 0 &amp; \ldots \\
+    0 &amp; \frac{\partial S_1}{\partial y} &amp; 0 &amp; \ldots \\
+    0 &amp; 0 &amp; \frac{\partial S_1}{\partial z} &amp; \ldots \\
+    \frac{\partial S_1}{\partial y} &amp; \frac{\partial S_1}{\partial x} &amp; 0 &amp; \ldots\\
+    0 &amp; \frac{\partial S_1}{\partial z} &amp; \frac{\partial S_1}{\partial y} &amp; \ldots\\
+    \frac{\partial S_1}{\partial z} &amp; 0 &amp; \frac{\partial S_1}{\partial x}&amp; \ldots\\
+\end{array}\right]
+\]</div>
+<p>Using the standard property of matrix transposes the equilibrium statement can be expressed in the standard form</p>
+<div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho [S_v]^T\{\ddot{u}\}\Bigr) \text{d} v = \{0\}\]</div>
 <h3 id="quasi-static-analysis_2">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_2" title="Permanent link">¶</a></h3>
 <p>The code adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
