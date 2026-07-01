@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#strong-statement-of-equilibrium" class="md-skip">
+        <a href="#equilibrium-equations" class="md-skip">
           Skip to content
         </a>
       
@@ -1302,6 +1302,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -1343,6 +1345,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -1574,6 +1578,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1645,8 +1651,7 @@
   
 
 
-  <h1>Static weak form</h1>
-
+<h1 id="equilibrium-equations">Equilibrium equations<a class="headerlink" href="#equilibrium-equations" title="Permanent link">¶</a></h1>
 <p>The implemented Material Point Method (MPM) code is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">1</a></sup> provides the scientific basis of the code. Key aspects of the formulation are described below.</p>
 <h2 id="strong-statement-of-equilibrium">Strong statement of equilibrium<a class="headerlink" href="#strong-statement-of-equilibrium" title="Permanent link">¶</a></h2>
 <p>The strong form equilibrium equation is the condition that must be satisfied at all points within a continuum body, <span class="arithmatex">\(\Omega\)</span>. For solid mechanics problems, the strong form equilibrium equation for the balance of linear momentum in the current configuration of the body, which has been subject to some motion, <span class="arithmatex">\(\varphi\)</span>, can be expressed as</p>
