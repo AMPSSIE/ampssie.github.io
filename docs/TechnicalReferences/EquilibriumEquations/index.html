@@ -1533,6 +1533,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#integration-and-material-point-discretisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration and material point discretisation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration and material point discretisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quasi-static-analysis_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quasi-static analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution approaches
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1577,7 +1616,7 @@
 <p>For general problems, assumptions that are made about the variation of physical quantities such as displacements over the physical domain mean that it is not possible to exactly satisfy the strong form of equilibrium at every point in an analysis, instead the condition is relaxed into a weak form that satisfies equilibrium in a volume average sense over the discretised physical body.  There are various ways to achieve the same resulting weak statement of equilibrium, such as weighted residual and virtual work techniques. Here a weight residual technique is adopted a general approach to transfer between strong and weak statements of equilibrium.</p>
 <p>The starting point for a <strong>weighted residual</strong> technique is to relax the strong equilibrium statement to </p>
 <div class="arithmatex">\[
-\nabla_x \sigma_{ij} + b_i + \rho \ddot{u}_i = R_i  \qquad \text{in} \qquad \varphi(\Omega)
+\nabla_x \sigma_{ij} + b_i + \rho \ddot{u}_i = R_i 
 \]</div>
 <p>where <span class="arithmatex">\(R_i\)</span> is a residual. The introduction of this residual accepts that it is not possible to exactly satisfy the strong statement of equilibrium and instead we will seek the solution that minimises this residual.  </p>
 <p>The primary unknown is the displacement solution over the physical domain as from this we can obtain the deformation gradient, the strains and then the stresses at any point. The solution that we want is to find the displacement solution that minimises the residual, which is achieved via three steps:</p>
@@ -1664,11 +1703,21 @@
 \end{array}\right]
 \]</div>
 <p>Using the standard property of matrix transposes the equilibrium statement can be expressed in the standard form</p>
-<div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho [S_v]^T\{\ddot{u}\}\Bigr) \text{d} v = \{0\}\]</div>
+<div class="arithmatex">\[\int_{\varphi_t(\Omega)}[\nabla_x S_{v}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(\Omega)}[S_{v}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial \Omega)}[S_{v}]^{T}\{t\} \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho [S_v]^T\{\ddot{u}\}\Bigr) \text{d} v = \{0\}\]</div>
 <h3 id="quasi-static-analysis_2">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_2" title="Permanent link">¶</a></h3>
-<p>The code adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
-<div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
-<p>where <span class="arithmatex">\(\varphi_t\)</span> is the motion of the material body which is subjected to tractions, <span class="arithmatex">\(\{t\}\)</span>, on its boundary, <span class="arithmatex">\(\partial E\)</span> with surface, <span class="arithmatex">\(s\)</span>, and body forces, <span class="arithmatex">\(\{b\}\)</span>, acting over its volume, <span class="arithmatex">\(v\)</span>. These external forces lead to a Cauchy stress field, <span class="arithmatex">\(\{\sigma\}\)</span>, through the body. <span class="arithmatex">\([\nabla_x S_{vp}]\)</span> is the tensorial form of the strain-displacement matrix containing derivatives of the basis functions, <span class="arithmatex">\([S_{vp}]\)</span>, with respect to the updated coordinates, <span class="arithmatex">\(\{x\}\)</span>. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. The equilibrium equation is non-linear in terms of the unknown nodal displacements and can be efficiently solved using the standard implicit Newton-Raphson procedure.</p>
+<p>Under quasi-static conditions the spatial weak statement of equilibrium reduces to</p>
+<div class="arithmatex">\[\int_{\varphi_t(\Omega)}[\nabla_x S_{v}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(\Omega)}[S_{v}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial \Omega)}[S_{v}]^{T}\{t\} \text{d}s  = \{0\}\]</div>
+<p>as it is assumed that accelerations are negligible. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. </p>
+<h2 id="integration-and-material-point-discretisation">Integration and material point discretisation<a class="headerlink" href="#integration-and-material-point-discretisation" title="Permanent link">¶</a></h2>
+<p>The final step is introducing the numerical approximation for the integral equations. In the MPM, the physical body is split into a number of points that have associated volume, mass and material properties. The material points act as integration, or quadrature, points and allow the equilibrium statement to be expressed as</p>
+<div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s - \sum_{\forall p}  [S_{vp}]^T\{\ddot{u_p}\}m_p = \{0\}
+\]</div>
+<p>where <span class="arithmatex">\(v_p\)</span> and <span class="arithmatex">\(m_p\)</span> are the mass and volume associated with a material point, <span class="arithmatex">\(p\)</span>. Note that the subscript <span class="arithmatex">\(p\)</span> has been introduced into <span class="arithmatex">\([S_{vp}]\)</span>, <span class="arithmatex">\(\{\sigma_p\}\)</span>, etc. explicitly tie associated quantities to specific material points. The traction term remains as a integral expressed over the boundary of the physical domain.</p>
+<h3 id="quasi-static-analysis_3">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_3" title="Permanent link">¶</a></h3>
+<p>Under quasi-static conditions the equilibrium statement reduces to</p>
+<div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s  = \{0\}
+\]</div>
+<h2 id="solution-approaches">Solution approaches<a class="headerlink" href="#solution-approaches" title="Permanent link">¶</a></h2>
 <div class="footnote">
 <hr>
 <ol>
