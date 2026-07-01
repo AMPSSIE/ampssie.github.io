@@ -1674,7 +1674,20 @@
 \]</div>
 <p>as it is assumed that accelerations are negligible. </p>
 <h2 id="discretised-weak-form">Discretised weak form<a class="headerlink" href="#discretised-weak-form" title="Permanent link">¶</a></h2>
-<p>The different weighted residual methods are classified based on adopted <em>test</em> (or weighing) function, here we select a particular variant of the method known as <strong>Galerkin's method</strong> that uses the shape functions as the weight function.</p>
+<p>In order to express the weak statement of equilibrium in a discrete form (as opposed to the continuous form written so far), it is necessary to introduce how the primary variable, namely the displacements are represented across the physical domain. The MPM adopts a finite element-like approximation for the displacement solution, where displacements are solved at discrete nodal locations and interpolation/shape/basis functions are used to describe the displacement variation over the discretised space. This allows the displacement at a given point to be written as</p>
+<div class="arithmatex">\[
+ u_i = \sum S_{v} ~ u_i^v
+\]</div>
+<p>where <span class="arithmatex">\(S_{v}\)</span> are the basis functions that link a given location in the problem to the nodes or vertices of the finite element mesh, <span class="arithmatex">\(v\)</span>.  </p>
+<p>The different weighted residual methods are classified based on adopted <em>test</em> (or weighing) function, here we select a particular variant of the method known as <strong>Galerkin's method</strong> that uses the same basis functions that are used to describe the displacement variation, <span class="arithmatex">\(S_{v}\)</span>, as the weight function, such that</p>
+<div class="arithmatex">\[
+ \eta_i = \sum S_{v} ~ \eta_i^v
+\]</div>
+<p>Introducing these approximations into the weak equilibrium statement results in</p>
+<div class="arithmatex">\[
+\int_{\varphi_t(\Omega)} \Bigl(\sigma_{ij} (\nabla_x \eta)_{ij}-b_i \eta_i \Bigr)  \text{d} v
+- \int_{\varphi_t(\partial\Omega)} \Bigl(t_i \eta_i \Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \ddot{u}_i \eta_i\Bigr) \text{d} v = 0
+\]</div>
 <h3 id="quasi-static-analysis_2">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_2" title="Permanent link">¶</a></h3>
 <p>The code adopts an updated Lagrangian weak statement of equilibrium for quasi-static analysis. The Galerkin form of the weak statement of equilibrium over each background grid element, E, can be expressed as</p>
 <div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s = \{0\}\]</div>
