@@ -1467,6 +1467,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#volume-ratio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volume ratio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stretch-and-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stretch and rotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strain-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strain measures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stress-strain-formulation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1545,6 +1578,28 @@ u_i(X_i,t) = \varphi(X_i,t) - X_i = x_i - X_i
 <p>It is assumed that the deformation gradient can be multiplicatively decomposed (Lee decomposition) into elastic and plastic components </p>
 <div class="arithmatex">\[F_{ij} = F^{\text{e}}_{ik}F^{\text{p}}_{kj},\]</div>
 <p>where the superscripts e and p denote the elastic and plastic components.  </p>
+<h2 id="volume-ratio">Volume ratio<a class="headerlink" href="#volume-ratio" title="Permanent link">¶</a></h2>
+<p>In finite deformation mechanics the volume ratio</p>
+<div class="arithmatex">\[ J = \frac{d v}{dV} = \det(F_{ij})\]</div>
+<p>defines the change in volume between the current volume, <span class="arithmatex">\(v\)</span>, and original (or reference) volume, <span class="arithmatex">\(V\)</span>.  For physically meaningful deformations the volume ratio must be strictly positive, <span class="arithmatex">\(J&gt;0\)</span>, as a zero or negative volume ration would imply that a material with an initially finite volume had collapsed to something occupying zero volume or inverted into a negative volume, respectively.    </p>
+<h2 id="stretch-and-rotation">Stretch and rotation<a class="headerlink" href="#stretch-and-rotation" title="Permanent link">¶</a></h2>
+<p>The deformation gradient can be polar decomposed into </p>
+<div class="arithmatex">\[ F_{ij} = R_{ik} U_{kj} = V_{ik} R_{kj}\]</div>
+<p>where <span class="arithmatex">\(R_{ij}\)</span> is an orthogonal rotation tensor and <span class="arithmatex">\(U_{ij}\)</span> and <span class="arithmatex">\(V_{ij}\)</span> are the symmetric right and left stretch tensors, which are linked through</p>
+<div class="arithmatex">\[ V_{ij} = R_{ik} U_{kl} R_{jl} \]</div>
+<p>and individually defined as</p>
+<div class="arithmatex">\[U_{ij} = \sqrt{C_{ij}} = \sqrt{F_{ki}F_{kj}} \qquad \text{and} \qquad 
+V_{ij} = \sqrt{b_{ij}} = \sqrt{F_{ik}F_{jk}} \]</div>
+<p>where <span class="arithmatex">\(C_{ij}\)</span> and <span class="arithmatex">\(b_{ij}\)</span> are the right and left Cauchy-Green strain tensors. Note that the terms <em>right</em> and <em>left</em> are linked to the location of the non transpose deformation gradient in the above expressions. In tensor notation a transpose is denoted by swapping the order of the indices on the second order tensor, for example from <span class="arithmatex">\(F_{kj}\)</span> to <span class="arithmatex">\(F_{jk}\)</span>. </p>
+<p>When considering the stress-strain behaviour of materials it is important to only consider the stretch component of the deformation gradient in order to obtain a continuum formulation that is <em>frame invariant</em>. A non frame invariant formulation, such as classical small strain elasticity, will predict different results when using different reference frames and spurious results when considering motions/deformations that include a large rotation component. </p>
+<h2 id="strain-measures">Strain measures<a class="headerlink" href="#strain-measures" title="Permanent link">¶</a></h2>
+<p>The right and left Cauchy-Green strain tensors are not suitable for use as conventional measures of <em>strain</em> in a material as they are equal to an identity tensor when there is zero deformation. Any large deformation strain tensor must remove this non-zero component, which permits the definition of a <em>Lagrangian</em> family of strain measures with the form</p>
+<div class="arithmatex">\[
+\varepsilon_{ij}^m = \left\{ \begin{array}{ll}\frac{1}{m}\left(U^m_{ij} - \delta_{ij}\right) &amp; \quad m \neq 0\\
+\ln(U_{ij}) &amp; \quad m=0
+\end{array} \right.
+\]</div>
+<p>where <span class="arithmatex">\(m\)</span> is a real integer. </p>
 <h2 id="stress-strain-formulation">Stress-strain formulation<a class="headerlink" href="#stress-strain-formulation" title="Permanent link">¶</a></h2>
 <p>The code adopts logarithmic strains and Kirchhoff stresses and combine these measures with an exponential map of the plastic flow rule to allow the use of conventional small-strain stress integration algorithms with a finite deformation framework.  This is a powerful combination as it allows existing constitutive formulations to be used directly rather than reformulating them for the particular choice of stress and strain measures used in the large deformation mechanics.   Within this formulation, the elastic logarithmic strain is defined as</p>
 <p>$<span class="arithmatex">\(\varepsilon^{\text{e}}_{ij} = \frac{1}{2} \ln\bigl( b^{\text{e}}_{ij} \bigr),
