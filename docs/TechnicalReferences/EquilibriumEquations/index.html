@@ -1593,7 +1593,7 @@
 
 
 <h1 id="equilibrium-equations">Equilibrium equations<a class="headerlink" href="#equilibrium-equations" title="Permanent link">¶</a></h1>
-<p>The implemented Material Point Method (MPM) code is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">1</a></sup> provides the scientific basis of the code. Key aspects of the formulation are described below.</p>
+<p>The implemented Material Point Method (MPM) code is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">2</a></sup> provides the scientific basis of the code. Key aspects of the formulation are described below.</p>
 <h2 id="strong-statement-of-equilibrium">Strong statement of equilibrium<a class="headerlink" href="#strong-statement-of-equilibrium" title="Permanent link">¶</a></h2>
 <p>The strong form equilibrium equation is the condition that must be satisfied at all points within a continuum body, <span class="arithmatex">\(\Omega\)</span>. For solid mechanics problems, the strong form equilibrium equation for the balance of linear momentum in the current configuration of the body, which has been subject to some motion, <span class="arithmatex">\(\varphi\)</span>, can be expressed as</p>
 <div class="arithmatex">\[
@@ -1709,10 +1709,10 @@
 <div class="arithmatex">\[\int_{\varphi_t(\Omega)}[\nabla_x S_{v}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(\Omega)}[S_{v}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial \Omega)}[S_{v}]^{T}\{t\} \text{d}s  = \{0\}\]</div>
 <p>as it is assumed that accelerations are negligible. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. </p>
 <h2 id="integration-and-material-point-discretisation">Integration and material point discretisation<a class="headerlink" href="#integration-and-material-point-discretisation" title="Permanent link">¶</a></h2>
-<p>The final step is introducing the numerical approximation for the integral equations. In the MPM, the physical body is split into a number of points that have associated volume, mass and material properties. The material points act as integration, or quadrature, points and allow the equilibrium statement to be expressed as</p>
+<p>The final step is introducing the numerical approximation for the integral equations. In the MPM, the physical body is split into a number of points that have associated volume, <span class="arithmatex">\(v_p\)</span>, mass, <span class="arithmatex">\(m_p\)</span>, and material properties. The material points act as integration, or quadrature, points and allow the equilibrium statement to be expressed as</p>
 <div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s - \sum_{\forall p}  [S_{vp}]^T\{\ddot{u_p}\}m_p = \{0\}
 \]</div>
-<p>where <span class="arithmatex">\(v_p\)</span> and <span class="arithmatex">\(m_p\)</span> are the mass and volume associated with a material point, <span class="arithmatex">\(p\)</span>. Note that the subscript <span class="arithmatex">\(p\)</span> has been introduced into <span class="arithmatex">\([S_{vp}]\)</span>, <span class="arithmatex">\(\{\sigma_p\}\)</span>, etc. explicitly tie associated quantities to specific material points. The traction term remains as a integral expressed over the boundary of the physical domain.</p>
+<p>Note that the subscript <span class="arithmatex">\(p\)</span> has been introduced into <span class="arithmatex">\([S_{vp}]\)</span>, <span class="arithmatex">\(\{\sigma_p\}\)</span>, etc. explicitly tie associated quantities to specific material points. The traction term remains as a integral expressed over the boundary of the physical domain<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
 <h3 id="quasi-static-analysis_3">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_3" title="Permanent link">¶</a></h3>
 <p>Under quasi-static conditions the equilibrium statement reduces to</p>
 <div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s  = \{0\}
@@ -1727,8 +1727,11 @@
 <div class="footnote">
 <hr>
 <ol>
+<li id="fn:1">
+<p>Note that the application of general traction boundary conditions in the material point method is an area of ongoing research. The reason for this is that most material point method implementations do not explicitly track the boundary of the physical domain. The reconstruction of the domain boundary based on material point locations is challenging when large deformations can result in the generation of new external boundaries and the merger of others. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
 <li id="fn:charlton2017igimp">
-<p>TJ Charlton, WM Coombs, and CE Augarde. Igimp: an implicit generalised interpolation material point method for large deformations. <em>Computers &amp; Structures</em>, 190:108–125, 2017. <a class="footnote-backref" href="#fnref:charlton2017igimp" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>TJ Charlton, WM Coombs, and CE Augarde. Igimp: an implicit generalised interpolation material point method for large deformations. <em>Computers &amp; Structures</em>, 190:108–125, 2017. <a class="footnote-backref" href="#fnref:charlton2017igimp" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
