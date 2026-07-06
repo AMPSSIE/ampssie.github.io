@@ -12,7 +12,7 @@
         <meta name="author" content="Durham University">
       
       
-        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/EquilibriumEquations/">
+        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/TechnicalReferences/Kinematics/">
       
       
       
@@ -25,7 +25,7 @@
     
     
       
-        <title>Equilibrium equations - MPM for Net Zero</title>
+        <title>Large deformation continuum formulation - MPM for Net Zero</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#equilibrium-equations" class="md-skip">
+        <a href="#large-deformation-continuum-formulation" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Equilibrium equations
+              Large deformation continuum formulation
             
           </span>
         </div>
@@ -1428,22 +1428,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#strong-statement-of-equilibrium" class="md-nav__link">
+  <a href="#kinematics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Strong statement of equilibrium
+        Kinematics
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Strong statement of equilibrium">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deformation-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deformation gradient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deformation gradient">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#quasi-static-analysis" class="md-nav__link">
+  <a href="#elasto-plastic-split" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quasi-static analysis
+        Elasto-plastic split
       
     </span>
   </a>
@@ -1456,116 +1467,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#weak-equilibrium" class="md-nav__link">
+  <a href="#stress-strain-formulation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Weak equilibrium
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Weak equilibrium">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#weighting-the-residual" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Weighting the residual
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#integration-over-the-physical-domain" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Integration over the physical domain
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quasi-static-analysis_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quasi-static analysis
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#discretised-weak-form" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Discretised weak form
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Discretised weak form">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quasi-static-analysis_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quasi-static analysis
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#material-point-discretisation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Material point discretisation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Material point discretisation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quasi-static-analysis_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quasi-static analysis
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#solution-approaches" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Solution approaches
+        Stress-strain formulation
       
     </span>
   </a>
@@ -1592,151 +1497,74 @@
   
 
 
-<h1 id="equilibrium-equations">Equilibrium equations<a class="headerlink" href="#equilibrium-equations" title="Permanent link">¶</a></h1>
-<p>The implemented Material Point Method (MPM) code is based on a number of published papers that describe fully the underlying continuum mechanics framework, include the weak form of the governing equilibrium equations. In particular, Charlton <em>et al.</em>’s 2017 Generalised Interpolation Material Point Method paper <sup id="fnref:charlton2017igimp"><a class="footnote-ref" href="#fn:charlton2017igimp">2</a></sup> provides the scientific basis of the code. Key aspects of the formulation are described below.</p>
-<h2 id="strong-statement-of-equilibrium">Strong statement of equilibrium<a class="headerlink" href="#strong-statement-of-equilibrium" title="Permanent link">¶</a></h2>
-<p>The strong form equilibrium equation is the condition that must be satisfied at all points within a continuum body, <span class="arithmatex">\(\Omega\)</span>. For solid mechanics problems, the strong form equilibrium equation for the balance of linear momentum in the current configuration of the body, which has been subject to some motion, <span class="arithmatex">\(\varphi\)</span>, can be expressed as</p>
+<h1 id="large-deformation-continuum-formulation">Large deformation continuum formulation<a class="headerlink" href="#large-deformation-continuum-formulation" title="Permanent link">¶</a></h1>
+<h2 id="kinematics">Kinematics<a class="headerlink" href="#kinematics" title="Permanent link">¶</a></h2>
+<p>In large deformation analysis it is important to distinguish between the original, <span class="arithmatex">\(X_i\)</span>, and current, <span class="arithmatex">\(x_i\)</span>, coordinates of a given point within a continuum body. The current (or updated) coordinates are defined as</p>
 <div class="arithmatex">\[
-\nabla_x \sigma_{ij} + b_i + \rho \ddot{u}_i =0 \qquad \text{in} \qquad \varphi(\Omega)
+x_i = \varphi(X_i,t)
 \]</div>
-<p>where <span class="arithmatex">\(\sigma_{ij}\)</span> is the Cauchy stress in the material, <span class="arithmatex">\(b_i\)</span> are the body forces (such as gravitational loads acting on the solid body), <span class="arithmatex">\(\rho\)</span> is the density of the material and <span class="arithmatex">\(\ddot{u}\)</span> is acceleration. The equilibrium equation is subject to boundary Neumann (traction) and Dirichlet (displacement) constraints</p>
+<p>where <span class="arithmatex">\(\varphi\)</span> is the motion of the body at a given time, <span class="arithmatex">\(t\)</span>. The single subscript denotes <span class="arithmatex">\(x_i\)</span> as a first order tensor, where <span class="arithmatex">\(i\in[1,2,3]\)</span> denote the three cartesian components <span class="arithmatex">\(x_i\)</span>. In vector form, <span class="arithmatex">\(x_i\)</span> can be expressed as <span class="arithmatex">\(\{x\}=\{x_1 \quad x_2 \quad x_3\}^T\)</span>.   </p>
+<p>The displacement of a point is then defined as</p>
 <div class="arithmatex">\[
-    t_{i} = \sigma_{ij} n_j \qquad \text{on} \qquad \varphi(\partial\Omega_N)
+u_i(X_i,t) = \varphi(X_i,t) - X_i = x_i - X_i
 \]</div>
+<p>or alternatively, in spatial form </p>
 <div class="arithmatex">\[
-    u_{i} = \bar{u}_i \qquad \text{on} \qquad \varphi(\partial\Omega_D)
+ u_i(x_i,t) = x_i - \varphi^{-1}(x_i,t)
 \]</div>
-<p>where <span class="arithmatex">\(n_j\)</span> is the outward normal to the boundary of the physical domain, <span class="arithmatex">\(\partial\Omega = \partial\Omega_N \cup \partial\Omega_D\)</span>, <span class="arithmatex">\(t_i\)</span> is the imposed traction over <span class="arithmatex">\(\partial\Omega_N\)</span> and <span class="arithmatex">\(\bar{u}_i\)</span> is the imposed displacement on <span class="arithmatex">\(\partial\Omega_D\)</span>.</p>
-<h3 id="quasi-static-analysis">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis" title="Permanent link">¶</a></h3>
-<p>For quasi-static analysis it is assumed that the accelerations of the physical material are negligible and the strong equilibrium condition reduces to </p>
+<p>where <span class="arithmatex">\(\varphi^{-1}\)</span> is the <em>reference map</em> that reverses the motion of a material point back into the reference, or original, frame. </p>
+<h2 id="deformation-gradient">Deformation gradient<a class="headerlink" href="#deformation-gradient" title="Permanent link">¶</a></h2>
+<p>In large deformation analysis, the second order tensor deformation gradient, <span class="arithmatex">\(F_{ij}\)</span>, provides the fundamental link between the original and deformed configurations</p>
 <div class="arithmatex">\[
-\nabla_x \sigma_{ij} + b_i = 0 \qquad \text{in} \qquad \varphi(\Omega)
+  F_{ij} = \frac{\partial x_i}{\partial X_j} = 
+  \left[\begin{array}{ccc}
+    \frac{\partial x_1}{\partial X_1} &amp; \frac{\partial x_1}{\partial X_2} &amp; \frac{\partial x_1}{\partial X_3}\\
+    \frac{\partial x_2}{\partial X_1} &amp; \frac{\partial x_2}{\partial X_2} &amp; \frac{\partial x_2}{\partial X_3}\\
+    \frac{\partial x_3}{\partial X_1} &amp; \frac{\partial x_3}{\partial X_2} &amp; \frac{\partial x_3}{\partial X_3}
+  \end{array} \right]
 \]</div>
-<h2 id="weak-equilibrium">Weak equilibrium<a class="headerlink" href="#weak-equilibrium" title="Permanent link">¶</a></h2>
-<p>For general problems, assumptions that are made about the variation of physical quantities such as displacements over the physical domain mean that it is not possible to exactly satisfy the strong form of equilibrium at every point in an analysis, instead the condition is relaxed into a weak form that satisfies equilibrium in a volume average sense over the discretised physical body.  There are various ways to achieve the same resulting weak statement of equilibrium, such as weighted residual and virtual work techniques. Here a weight residual technique is adopted a general approach to transfer between strong and weak statements of equilibrium.</p>
-<p>The starting point for a <strong>weighted residual</strong> technique is to relax the strong equilibrium statement to </p>
+<p>or alternatively</p>
 <div class="arithmatex">\[
-\nabla_x \sigma_{ij} + b_i + \rho \ddot{u}_i = R_i 
+  F_{ij} = \delta_{ij} + \frac{\partial u_i}{\partial X_j} = 
+  \left[\begin{array}{ccc}
+    1+\frac{\partial u_1}{\partial X_1} &amp; \frac{\partial u_1}{\partial X_2} &amp; \frac{\partial u_1}{\partial X_3}\\
+    \frac{\partial u_2}{\partial X_1} &amp; 1+ \frac{\partial u_2}{\partial X_2} &amp; \frac{\partial u_2}{\partial X_3}\\
+    \frac{\partial u_3}{\partial X_1} &amp; \frac{\partial u_3}{\partial X_2} &amp; 1+\frac{\partial u_3}{\partial X_3}
+  \end{array} \right]
 \]</div>
-<p>where <span class="arithmatex">\(R_i\)</span> is a residual. The introduction of this residual accepts that it is not possible to exactly satisfy the strong statement of equilibrium and instead we will seek the solution that minimises this residual.  </p>
-<p>The primary unknown is the displacement solution over the physical domain as from this we can obtain the deformation gradient, the strains and then the stresses at any point. The solution that we want is to find the displacement solution that minimises the residual, which is achieved via three steps:</p>
-<ul>
-<li>weighting each residual by the a <em>test</em> function, <span class="arithmatex">\(\eta_i\)</span>;</li>
-<li>integrating over physical domain; and</li>
-<li>setting the resultant equation to zero (minimising the residual).</li>
-</ul>
-<p>It is important to distinguish the <em>test</em> functions, which we use to weight the solution and are also known as virtual displacements, from the set of physical <em>trial</em> functions, <span class="arithmatex">\(u_i\)</span>, that satisfy the boundary conditions imposed on the physical problem and represent the actual solution to the problem.  </p>
-<h3 id="weighting-the-residual">Weighting the residual<a class="headerlink" href="#weighting-the-residual" title="Permanent link">¶</a></h3>
-<p>Weighting the relaxed strong form by the test function gives</p>
+<p>where <span class="arithmatex">\(\delta_{ij}\)</span> is the Kronecker delta second order tensor with </p>
+<div class="arithmatex">\[\delta_{ij}=1 \quad \text{if} \quad i=j, \qquad \text{and} \qquad
+  \delta_{ij}=0 \quad \text{if} \quad i\neq j\]</div>
+<p>which is the equivalent of an identity matrix in tensor index notation. </p>
+<p>In the material point method it is often more convenient to calculate the deformation gradient based on the spatial frame</p>
 <div class="arithmatex">\[
-(\nabla_x \sigma_{ij}) \eta_i + (b_i + \rho \ddot{u}_i)\eta_i = R_i \eta_i 
+  F_{ij} = \left(\frac{\partial \varphi^{-1}(x_i,t)}{\partial x_j} \right)^{-1} = \left( \delta_{ij} - \frac{\partial u_i}{\partial x_j} \right)^{-1}
 \]</div>
-<h3 id="integration-over-the-physical-domain">Integration over the physical domain<a class="headerlink" href="#integration-over-the-physical-domain" title="Permanent link">¶</a></h3>
-<p>Integrating the weighted equilibrium equation over the problem domain and setting the resultant equation to zero gives</p>
-<div class="arithmatex">\[
-\int_{\varphi_t(\Omega)}  (\nabla_x \sigma_{ij}) \eta_i ~\text{d}v + \int_{\varphi_t(\Omega)}  (b_i + \rho \ddot{u}_i)\eta_i~\text{d}v = 0
-\]</div>
-<p>The <span class="arithmatex">\((\nabla_x \sigma_{ij})\)</span> in this equation is problematic as is constrains the form of the solution. In order to remove this issue it is necessary to introduce Green's theorem</p>
-<div class="arithmatex">\[
- \int (\nabla_x \sigma_{ij}) \eta_i ~\text{d}v = -\int \sigma_{ij} (\nabla_x \eta_{i})  ~\text{d}v + \int (\underbrace{\sigma_{ij} n_j}_{t_i})\eta_i~\text{d}s
-\]</div>
-<p>which also naturally introduces the traction boundary condition, <span class="arithmatex">\(t_i\)</span> into the equilibrium condition. This allows the weighted equilibrium equation over the problem domain to be expressed as</p>
-<div class="arithmatex">\[
--\int_{\varphi_t(\Omega)}  \sigma_{ij} (\nabla_x \eta_{i}) ~\text{d}v + \int_{\varphi_t(\partial \Omega)}  t_i\eta_i~\text{d}s + \int_{\varphi_t(\Omega)}  (b_i + \rho \ddot{u}_i)\eta_i~\text{d}v = 0
-\]</div>
-<p>Finally, the spatial form of the weak equilibrium equation, that is the equilibrium equation defined at the current, deformed state, states that equilibrium is weakly satisfied if the Cauchy stress field, <span class="arithmatex">\(\sigma_{ij}\)</span>, satisfies  </p>
-<div class="arithmatex">\[
-\int_{\varphi_t(\Omega)} \Bigl(\sigma_{ij} (\nabla_x \eta)_{ij}-b_i \eta_i \Bigr)  \text{d} v
-- \int_{\varphi_t(\partial\Omega)} \Bigl(t_i \eta_i \Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \ddot{u}_i \eta_i\Bigr) \text{d} v = 0
-\]</div>
-<h3 id="quasi-static-analysis_1">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_1" title="Permanent link">¶</a></h3>
-<p>Under quasi-static conditions the spatial weak statement of equilibrium reduces to</p>
-<div class="arithmatex">\[
-\int_{\varphi_t(\Omega)} \Bigl(\sigma_{ij} (\nabla_x \eta)_{ij}-b_i \eta_i \Bigr)  \text{d} v
-- \int_{\varphi_t(\partial\Omega)} \Bigl(t_i \eta_i \Bigr) \text{d}s =  0
-\]</div>
-<p>as it is assumed that accelerations are negligible. </p>
-<h2 id="discretised-weak-form">Discretised weak form<a class="headerlink" href="#discretised-weak-form" title="Permanent link">¶</a></h2>
-<p>In order to express the weak statement of equilibrium in a discrete form (as opposed to the continuous form written so far), it is necessary to introduce how the primary variable, namely the displacements are represented across the physical domain. The MPM adopts a finite element-like approximation for the displacement solution, where displacements are solved at discrete nodal locations and interpolation/shape/basis functions are used to describe the displacement variation over the discretised space. This allows the displacement at a given point to be written as</p>
-<div class="arithmatex">\[
- u_i = \sum_{\forall v} S_{v} ~ u_i^v = [S_v]\{d\}
-\]</div>
-<p>where <span class="arithmatex">\(S_{v}\)</span> are the basis functions that link a given location in the problem to the nodes or vertices of the finite element mesh, <span class="arithmatex">\(v\)</span>. <span class="arithmatex">\(\{d\}\)</span> is a global vector of vertex displacements and <span class="arithmatex">\([S_v]\)</span> is a global matrix of basis functions, with the following format</p>
-<div class="arithmatex">\[
-[S_v] = \left[\begin{array}{ccc c ccc} 
-    S_1 &amp; 0 &amp; 0 &amp; \ldots &amp; S_{n_v} &amp; 0 &amp; 0 \\
-    0 &amp; S_1 &amp; 0 &amp; \ldots &amp; 0 &amp; S_{n_v} &amp; 0 \\
-    0 &amp; 0 &amp; S_1 &amp; \ldots &amp; 0 &amp; 0 &amp; S_{n_v} 
-\end{array}\right]
-\]</div>
-<p>where <span class="arithmatex">\(n_v\)</span> is the total number of vertices in the problem.</p>
-<p>The different weighted residual methods are classified based on adopted <em>test</em> (or weighing) function, here we select a particular variant of the method known as <strong>Galerkin's method</strong> that uses the same basis functions that are used to describe the displacement variation, <span class="arithmatex">\(S_{v}\)</span>, as the weight function, such that</p>
-<div class="arithmatex">\[
- \eta_i = \sum_{\forall v} S_{v} ~ \eta_i^v = [S_v]\{d_\eta\}
-\]</div>
-<p>where <span class="arithmatex">\(\{d_\eta\}\)</span> is a global vector of vertex test function coefficients. </p>
-<p>Introducing these approximations into the weak equilibrium statement results in</p>
-<div class="arithmatex">\[
-\int_{\varphi_t(\Omega)} \Bigl(\sigma_{ij} (\nabla_x [S_v]\{d_\eta\})_{ij}-b_i [S_v]\{d_\eta\} \Bigr)  \text{d} v
-- \int_{\varphi_t(\partial\Omega)} \Bigl(t_i [S_v]\{d_\eta\} \Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \ddot{u}_i [S_v]\{d_\eta\}\Bigr) \text{d} v = 0
-\]</div>
-<p>Note that <span class="arithmatex">\(\{d_\eta\}\)</span> are values at specific locations within the finite element mesh and therefore are constants for the purpose of integration. They also post-multiply all terms in the equilibrium statement, which allows them to be eliminated. These points, along with introducing vector notation for the Cauchy stress, body forces, tractions and accelerations results in </p>
-<div class="arithmatex">\[
-\int_{\varphi_t(\Omega)} \Bigl(\{\sigma\}^T [\nabla_x S_v]-\{b\}^T [S_v] \Bigr)  \text{d} v
-- \int_{\varphi_t(\partial\Omega)} \Bigl(\{t\}^T [S_v]\Bigr) \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho \{\ddot{u}\}^T [S_v]\Bigr) \text{d} v = 0
-\]</div>
-<p>Note that for the Cauchy stress, Vogt notation is assumed where </p>
-<div class="arithmatex">\[
-\{\sigma\} = \{\begin{array}{cccccc}
-    \sigma_{xx} &amp; \sigma_{yy} &amp; \sigma_{zz} &amp; \sigma_{xy} &amp; \sigma_{yz} &amp; \sigma_{zx}
-  \end{array}\}^T
-\]</div>
-<p>and the spatial gradient operator, when applied to <span class="arithmatex">\([S_v]\)</span> results in </p>
-<div class="arithmatex">\[ 
-[\nabla_x S_v] = \left[\begin{array}{ccc c} 
-    \frac{\partial S_1}{\partial x} &amp; 0 &amp; 0 &amp; \ldots \\
-    0 &amp; \frac{\partial S_1}{\partial y} &amp; 0 &amp; \ldots \\
-    0 &amp; 0 &amp; \frac{\partial S_1}{\partial z} &amp; \ldots \\
-    \frac{\partial S_1}{\partial y} &amp; \frac{\partial S_1}{\partial x} &amp; 0 &amp; \ldots\\
-    0 &amp; \frac{\partial S_1}{\partial z} &amp; \frac{\partial S_1}{\partial y} &amp; \ldots\\
-    \frac{\partial S_1}{\partial z} &amp; 0 &amp; \frac{\partial S_1}{\partial x}&amp; \ldots\\
-\end{array}\right]
-\]</div>
-<p>Using the standard property of matrix transposes the equilibrium statement can be expressed in the standard form</p>
-<div class="arithmatex">\[\int_{\varphi_t(\Omega)}[\nabla_x S_{v}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(\Omega)}[S_{v}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial \Omega)}[S_{v}]^{T}\{t\} \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho [S_v]^T\{\ddot{u}\}\Bigr) \text{d} v = \{0\}\]</div>
-<h3 id="quasi-static-analysis_2">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_2" title="Permanent link">¶</a></h3>
-<p>Under quasi-static conditions the spatial weak statement of equilibrium reduces to</p>
-<div class="arithmatex">\[\int_{\varphi_t(\Omega)}[\nabla_x S_{v}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(\Omega)}[S_{v}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial \Omega)}[S_{v}]^{T}\{t\} \text{d}s  = \{0\}\]</div>
-<p>as it is assumed that accelerations are negligible. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. </p>
-<h2 id="material-point-discretisation">Material point discretisation<a class="headerlink" href="#material-point-discretisation" title="Permanent link">¶</a></h2>
-<p>The final step is introducing the numerical approximation for the integral equations. In the MPM, the physical body is split into a number of points that have associated volume, <span class="arithmatex">\(v_p\)</span>, mass, <span class="arithmatex">\(m_p\)</span>, and material properties. The material points act as integration, or quadrature, points and allow the equilibrium statement to be expressed as</p>
-<div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s - \sum_{\forall p}  [S_{vp}]^T\{\ddot{u_p}\}m_p = \{0\}
-\]</div>
-<p>Note that the subscript <span class="arithmatex">\(p\)</span> has been introduced into <span class="arithmatex">\([S_{vp}]\)</span>, <span class="arithmatex">\(\{\sigma_p\}\)</span>, etc. explicitly tie associated quantities to specific material points. The traction term remains as a integral expressed over the boundary of the physical domain<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
-<h3 id="quasi-static-analysis_3">Quasi-static analysis<a class="headerlink" href="#quasi-static-analysis_3" title="Permanent link">¶</a></h3>
-<p>Under quasi-static conditions the equilibrium statement reduces to</p>
-<div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s  = \{0\}
-\]</div>
-<p>where, as before, the acceleration term is assumed to be zero. </p>
-<h2 id="solution-approaches">Solution approaches<a class="headerlink" href="#solution-approaches" title="Permanent link">¶</a></h2>
-<p>The solution of the equilibrium equations for dynamic and quasi-static are detailed in other parts of this technical documentation, see:</p>
-<ul>
-<li>?? for dynamic solution methods</li>
-<li>?? for quasi-static solution methods</li>
-</ul>
-<hr>
-<p>Next section: <a href="../EquilibriumEquationsContact/">Equilibrium equations with rigid body interaction</a></p>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Note that the application of general traction boundary conditions in the material point method is an area of ongoing research. The reason for this is that most material point method implementations do not explicitly track the boundary of the physical domain. The reconstruction of the domain boundary based on material point locations is challenging when large deformations can result in the generation of new external boundaries and the merger of others. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-<li id="fn:charlton2017igimp">
-<p>TJ Charlton, WM Coombs, and CE Augarde. Igimp: an implicit generalised interpolation material point method for large deformations. <em>Computers &amp; Structures</em>, 190:108–125, 2017. <a class="footnote-backref" href="#fnref:charlton2017igimp" title="Jump back to footnote 2 in the text">↩</a></p>
-</li>
-</ol>
-</div>
+<p>this is because information on the reference frame is not available on the background mesh after the initial time step.  </p>
+<h3 id="elasto-plastic-split">Elasto-plastic split<a class="headerlink" href="#elasto-plastic-split" title="Permanent link">¶</a></h3>
+<p>It is assumed that the deformation gradient can be multiplicatively decomposed (Lee decomposition) into elastic and plastic components </p>
+<div class="arithmatex">\[F_{ij} = F^{\text{e}}_{ik}F^{\text{p}}_{kj},\]</div>
+<p>where the superscripts e and p denote the elastic and plastic components.  </p>
+<h2 id="stress-strain-formulation">Stress-strain formulation<a class="headerlink" href="#stress-strain-formulation" title="Permanent link">¶</a></h2>
+<p>The code adopts logarithmic strains and Kirchhoff stresses and combine these measures with an exponential map of the plastic flow rule to allow the use of conventional small-strain stress integration algorithms with a finite deformation framework.  This is a powerful combination as it allows existing constitutive formulations to be used directly rather than reformulating them for the particular choice of stress and strain measures used in the large deformation mechanics.   Within this formulation, the elastic logarithmic strain is defined as</p>
+<p>$<span class="arithmatex">\(\varepsilon^{\text{e}}_{ij} = \frac{1}{2} \ln\bigl( b^{\text{e}}_{ij} \bigr),
+  \qquad \text{where} \qquad
+  b^{\text{e}}_{ij} = F^{\text{e}}_{ik} F^{\text{e}}_{jk}\)</span>$</p>
+<p>is the left elastic Cauchy-Green strain and the Kirchhoff stress, <span class="arithmatex">\(\tau_{ij}\)</span>, can be obtained using</p>
+<p>$<span class="arithmatex">\(\tau_{ij} = D^{\text{e}}_{ijkl}\varepsilon^{\text{e}}_{kl},\)</span>$</p>
+<p>where <span class="arithmatex">\(D^{\text{e}}_{ijkl}\)</span> is the linear elastic stiffness matrix.  The Cauchy stress can be obtained from the Kirchhoff stress through</p>
+<div class="arithmatex">\[  \sigma_{ij} = \frac{1}{J}\tau_{ij},
+  \qquad \text{where} \qquad
+  J=\text{det}(F_{ij})\]</div>
+<p>is the volume ratio between the deformed and reference configurations.   In order to advance the non-linear solution, the finite deformation equations are discretised in pseudo-time by imposing the deformation over a number of load (or pseudo-time) steps.  This allows the current deformation gradient to be defined using</p>
+<p>$<span class="arithmatex">\(F_{ij} = \Delta F_{ik} (F_n)_{kj},\)</span>$</p>
+<p>where <span class="arithmatex">\(\Delta F_{ij}\)</span> is the increment in the deformation gradient between the previously converged state, denoted using a subscript <span class="arithmatex">\(n\)</span>, and the current state. In order to obtain the updated Kirchhoff stress state for the current deformation gradient, a constitutive model requires an initial estimate (or trial) of the elastic strain (or stress) state.  In this approach the trial elastic Cauchy-Green strain tensor is given by</p>
+<div class="arithmatex">\[  (b^{\text{e}}_t)_{ij} = \Delta F_{ik} (b^{\text{e}}_{n})_{kl} \Delta F_{jl},\]</div>
+<p>where the subscript <span class="arithmatex">\(t\)</span> denotes a quantity defined in the trial state.  The previous elastic Cauchy-Green strain tensor, <span class="arithmatex">\((b^{\text{e}}_{n})_{ij}\)</span>, can be obtained from the previous elastic strain state through</p>
+<div class="arithmatex">\[   (b^{\text{e}}_{n})_{ij} = \exp\Bigl( 2(\varepsilon^{\text{e}}_{n})_{ij} \Bigr)\]</div>
+<p>and the trial elastic strain state follows as</p>
+<div class="arithmatex">\[  (\varepsilon^{\text{e}}_t)_{ij} = \frac{1}{2} \ln\Bigl(( b^{\text{e}}_t)_{ij} \Bigr).\]</div>
+<p>The adopted constitutive algorithm can then be used to return the updated elastic strain, $\varepsilon^{\text{e}}_{ij} $, and Kirchhoff stress, <span class="arithmatex">\(\tau_{ij}\)</span>, states.  </p>
 
 
 
