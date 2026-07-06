@@ -25,7 +25,7 @@
     
     
       
-        <title>EquilibriumEquationsContact - MPM for Net Zero</title>
+        <title>Equilibrium equations with rigid body interaction - MPM for Net Zero</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#weak-statement-of-equilibrium-with-normal-contact" class="md-skip">
+        <a href="#equilibrium-equations-with-rigid-body-interaction" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              EquilibriumEquationsContact
+              Equilibrium equations with rigid body interaction
             
           </span>
         </div>
@@ -1418,6 +1418,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1426,10 +1428,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#weak-statement-of-equilibrium-with-normal-contact" class="md-nav__link">
+  <a href="#weak-statement-of-equilibrium-with-rigid-body-interaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Weak statement of equilibrium with normal contact
+        Weak statement of equilibrium with rigid body interaction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material-point-discretisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material point discretisation
       
     </span>
   </a>
@@ -1489,14 +1502,17 @@
   
 
 
-  <h1>EquilibriumEquationsContact</h1>
-
-<hr>
-<p>This page extends the <a href="StaticWeakForm.md">Static weak form</a> used in AMPSSIE to include the normal-contact forces being imposed on the material points, following the approach of Bird <em>et al.</em> <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>.</p>
-<h2 id="weak-statement-of-equilibrium-with-normal-contact">Weak statement of equilibrium with normal contact<a class="headerlink" href="#weak-statement-of-equilibrium-with-normal-contact" title="Permanent link">¶</a></h2>
-<p>The Galerkin weak statement of equilibrium given on the <a href="StaticWeakForm.md">Static weak form</a> is extended with a normal contact term which imposes a load on the material points. The weak form which includes contact is defined:</p>
-<div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s- \int_{\varphi_t(\partial\Omega)}\{F_{N,v}^{\partial\Omega}\}\,\text{d}s  = \{0\}\]</div>
-<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> is the normal contact traction applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first three are terms are repeated and described on the <a href="StaticWeakForm.md">Static weak form</a> page. </p>
+<h1 id="equilibrium-equations-with-rigid-body-interaction">Equilibrium equations with rigid body interaction<a class="headerlink" href="#equilibrium-equations-with-rigid-body-interaction" title="Permanent link">¶</a></h1>
+<p>This page extends the <a href="../EquilibriumEquations/">Equilibrium equations</a> to include the interaction between material points and discrete rigid bodies following the approach of Bird <em>et al.</em> <sup id="fnref:bird_dynamic_2025"><a class="footnote-ref" href="#fn:bird_dynamic_2025">1</a></sup>.</p>
+<h2 id="weak-statement-of-equilibrium-with-rigid-body-interaction">Weak statement of equilibrium with rigid body interaction<a class="headerlink" href="#weak-statement-of-equilibrium-with-rigid-body-interaction" title="Permanent link">¶</a></h2>
+<p>In order to include rigid body interactions, the Galerkin weak statement of equilibrium given on the <a href="../EquilibriumEquations/">Equilibrium equations</a> is extended to include contact force terms that impose loads on the material points, giving</p>
+<div class="arithmatex">\[\int_{\varphi_t(E)}[\nabla_x S_{vp}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(E)}[S_{vp}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial E)}[S_{vp}]^{T}\{t\} \text{d}s -  \int_{\varphi_t(\Omega)}  \Bigl(\rho [S_v]^T\{\ddot{u}\}\Bigr) \text{d} v - \int_{\varphi_t(\partial\Omega)}\{F_{N,v}^{\partial\Omega}\}+\{F_{T,v}^{\partial\Omega}\}\,\text{d}s  = \{0\}\]</div>
+<p>where <span class="arithmatex">\(\{F_{N,v}^{\partial\Omega}\}\)</span> and <span class="arithmatex">\(\{F_{T,v}^{\partial\Omega}\}\)</span> are the normal and tangential contact tractions applied on the part of the material boundary, <span class="arithmatex">\(\partial\Omega\)</span>, that is in contact with the rigid body. The first four are terms are repeated from the equation given on the <a href="../EquilibriumEquations/">Equilibrium equations</a> page. </p>
+<h2 id="material-point-discretisation">Material point discretisation<a class="headerlink" href="#material-point-discretisation" title="Permanent link">¶</a></h2>
+<p>In the MPM, the physical body is split into a number of points that have associated volume, <span class="arithmatex">\(v_p\)</span>, mass, <span class="arithmatex">\(m_p\)</span>, and material properties. The material points act as integration, or quadrature, points and allow the equilibrium statement to be expressed as</p>
+<div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s - \sum_{\forall p}  [S_{vp}]^T\{\ddot{u_p}\}m_p - \sum_{p\in P_c} \left( \{F_{N,vp}^{\partial\Omega}\}+\{F_{T,vp}^{\partial\Omega}\} \right) = \{0\}
+\]</div>
+<p>where <span class="arithmatex">\(P_c\)</span> is the set of all material points that are in contact with the rigid body. Note that the subscripts on the terms <span class="arithmatex">\(\{F_{N,vp}^{\partial\Omega}\}\)</span> and <span class="arithmatex">\(\{F_{T,vp}^{\partial\Omega}\}\)</span> have been modified to explicit include the interaction with specific material points, <span class="arithmatex">\(p\in P_c\)</span>. </p>
 <h2 id="gap-function">Gap function<a class="headerlink" href="#gap-function" title="Permanent link">¶</a></h2>
 <p>The <em>gap function</em> is used to both detect contact and measure the overlap between contact surfaces. Here a point-to-surface formulation is used, see Wriggers <sup id="fnref:wriggers2006computational"><a class="footnote-ref" href="#fn:wriggers2006computational">2</a></sup> and the work of Curnier and coworkers <sup id="fnref:pietrzak1999large"><a class="footnote-ref" href="#fn:pietrzak1999large">3</a></sup><sup id="fnref:curnier1995continuum"><a class="footnote-ref" href="#fn:curnier1995continuum">4</a></sup> for exceptional pieces of literature.</p>
 <p>The geometric measure of overlap between the deformable material and the rigid body is the <em>normal gap function</em>, <span class="arithmatex">\(g_N\)</span>, defined as the signed projection of a material-point position, <span class="arithmatex">\(\mathbf{x}\)</span>, onto its closest point, <span class="arithmatex">\(\mathbf{x}'\)</span>, on the rigid-body surface along the outward surface normal, <span class="arithmatex">\(\mathbf{n}\)</span>:</p>

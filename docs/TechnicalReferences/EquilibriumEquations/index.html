@@ -1534,15 +1534,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration-and-material-point-discretisation" class="md-nav__link">
+  <a href="#material-point-discretisation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integration and material point discretisation
+        Material point discretisation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Integration and material point discretisation">
+    <nav class="md-nav" aria-label="Material point discretisation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1708,7 +1708,7 @@
 <p>Under quasi-static conditions the spatial weak statement of equilibrium reduces to</p>
 <div class="arithmatex">\[\int_{\varphi_t(\Omega)}[\nabla_x S_{v}]^{T}\{\sigma\} \text{d}v - \int_{\varphi_t(\Omega)}[S_{v}]^{T}\{b\} \text{d}v - \int_{\varphi_t(\partial \Omega)}[S_{v}]^{T}\{t\} \text{d}s  = \{0\}\]</div>
 <p>as it is assumed that accelerations are negligible. The first term in the equilibrium equation is the internal force within an element and the combination of the second (body forces) and third (tractions) terms is the external force vector. </p>
-<h2 id="integration-and-material-point-discretisation">Integration and material point discretisation<a class="headerlink" href="#integration-and-material-point-discretisation" title="Permanent link">¶</a></h2>
+<h2 id="material-point-discretisation">Material point discretisation<a class="headerlink" href="#material-point-discretisation" title="Permanent link">¶</a></h2>
 <p>The final step is introducing the numerical approximation for the integral equations. In the MPM, the physical body is split into a number of points that have associated volume, <span class="arithmatex">\(v_p\)</span>, mass, <span class="arithmatex">\(m_p\)</span>, and material properties. The material points act as integration, or quadrature, points and allow the equilibrium statement to be expressed as</p>
 <div class="arithmatex">\[ \sum_{\forall p}[\nabla_x S_{vp}]^{T}\{\sigma_p\} v_p - \sum_{\forall p}[S_{vp}]^{T}\{b\} v_p - \int_{\varphi_t(\partial \Omega)}[S_{vp}]^{T}\{t\} \text{d}s - \sum_{\forall p}  [S_{vp}]^T\{\ddot{u_p}\}m_p = \{0\}
 \]</div>
