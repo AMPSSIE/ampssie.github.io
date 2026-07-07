@@ -1561,9 +1561,13 @@ V_{ij} = \sqrt{b_{ij}} = \sqrt{F_{ik}F_{jk}} \]</div>
 <p>where <span class="arithmatex">\(C_{ij}\)</span> and <span class="arithmatex">\(b_{ij}\)</span> are the right and left Cauchy-Green strain tensors. Note that the terms <em>right</em> and <em>left</em> are linked to the location of the non transpose deformation gradient in the above expressions. In tensor notation a transpose is denoted by swapping the order of the indices on the second order tensor, for example from <span class="arithmatex">\(F_{kj}\)</span> to <span class="arithmatex">\(F_{jk}\)</span>. </p>
 <p>When considering the stress-strain behaviour of materials it is important to only consider the stretch component of the deformation gradient in order to obtain a continuum formulation that is <em>frame invariant</em>. A non frame invariant formulation, such as classical small strain elasticity, will predict different results when using different reference frames and spurious results when considering motions/deformations that include a large rotation component. </p>
 <h2 id="elasto-plasticity">Elasto-plasticity<a class="headerlink" href="#elasto-plasticity" title="Permanent link">¶</a></h2>
-<p>It is assumed that the deformation gradient can be multiplicatively decomposed (Lee decomposition) into elastic and plastic components </p>
+<p>In order to account for elasto-plastic behaviour, it is assumed that the deformation gradient can be multiplicatively decomposed (Lee decomposition) into elastic and plastic components </p>
 <div class="arithmatex">\[F_{ij} = F^{\text{e}}_{ik}F^{\text{p}}_{kj},\]</div>
-<p>where the superscripts e and p denote the elastic and plastic components.  </p>
+<p>where the superscripts <span class="arithmatex">\(\text{e}\)</span> and <span class="arithmatex">\(\text{p}\)</span> denote the elastic and plastic components. This split allows the definition of right and left elastic Cauchy-Green strain tensors that follow the same format as before, but with <span class="arithmatex">\(F_{ij}\)</span> replaced by <span class="arithmatex">\(F^{\text{e}}_{ij}\)</span>, that is    </p>
+<div class="arithmatex">\[
+C^{\text{e}}_{ij} = F^{\text{e}}_{ki}F^{\text{e}}_{kj} \qquad \text{and} \qquad 
+b^{\text{e}}_{ij} = F^{\text{e}}_{ik}F^{\text{e}}_{jk} 
+\]</div>
 <hr>
 <p><strong>Next section:</strong> <a href="../StressStrain/">Stress and strain measures</a> </p>
 
