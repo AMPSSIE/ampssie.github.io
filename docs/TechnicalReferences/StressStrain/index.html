@@ -1480,17 +1480,15 @@
 <p>where <span class="arithmatex">\(m\)</span> is a real integer. </p>
 <h2 id="stress-strain-formulation">Stress-strain formulation<a class="headerlink" href="#stress-strain-formulation" title="Permanent link">¶</a></h2>
 <p>The code adopts logarithmic strains and Kirchhoff stresses and combine these measures with an exponential map of the plastic flow rule to allow the use of conventional small-strain stress integration algorithms with a finite deformation framework.  This is a powerful combination as it allows existing constitutive formulations to be used directly rather than reformulating them for the particular choice of stress and strain measures used in the large deformation mechanics.   Within this formulation, the elastic logarithmic strain is defined as</p>
-<p>$<span class="arithmatex">\(\varepsilon^{\text{e}}_{ij} = \frac{1}{2} \ln\bigl( b^{\text{e}}_{ij} \bigr),
-  \qquad \text{where} \qquad
-  b^{\text{e}}_{ij} = F^{\text{e}}_{ik} F^{\text{e}}_{jk}\)</span>$</p>
+<div class="arithmatex">\[\varepsilon^{\text{e}}_{ij} = \frac{1}{2} \ln\bigl( b^{\text{e}}_{ij} \bigr) \qquad \text{where} \qquad b^{\text{e}}_{ij} = F^{\text{e}}_{ik} F^{\text{e}}_{jk}\]</div>
 <p>is the left elastic Cauchy-Green strain and the Kirchhoff stress, <span class="arithmatex">\(\tau_{ij}\)</span>, can be obtained using</p>
-<p>$<span class="arithmatex">\(\tau_{ij} = D^{\text{e}}_{ijkl}\varepsilon^{\text{e}}_{kl},\)</span>$</p>
+<div class="arithmatex">\[\tau_{ij} = D^{\text{e}}_{ijkl}\varepsilon^{\text{e}}_{kl},\]</div>
 <p>where <span class="arithmatex">\(D^{\text{e}}_{ijkl}\)</span> is the linear elastic stiffness matrix.  The Cauchy stress can be obtained from the Kirchhoff stress through</p>
 <div class="arithmatex">\[  \sigma_{ij} = \frac{1}{J}\tau_{ij},
   \qquad \text{where} \qquad
   J=\text{det}(F_{ij})\]</div>
 <p>is the volume ratio between the deformed and reference configurations.   In order to advance the non-linear solution, the finite deformation equations are discretised in pseudo-time by imposing the deformation over a number of load (or pseudo-time) steps.  This allows the current deformation gradient to be defined using</p>
-<p>$<span class="arithmatex">\(F_{ij} = \Delta F_{ik} (F_n)_{kj},\)</span>$</p>
+<div class="arithmatex">\[F_{ij} = \Delta F_{ik} (F_n)_{kj},\]</div>
 <p>where <span class="arithmatex">\(\Delta F_{ij}\)</span> is the increment in the deformation gradient between the previously converged state, denoted using a subscript <span class="arithmatex">\(n\)</span>, and the current state. In order to obtain the updated Kirchhoff stress state for the current deformation gradient, a constitutive model requires an initial estimate (or trial) of the elastic strain (or stress) state.  In this approach the trial elastic Cauchy-Green strain tensor is given by</p>
 <div class="arithmatex">\[  (b^{\text{e}}_t)_{ij} = \Delta F_{ik} (b^{\text{e}}_{n})_{kl} \Delta F_{jl},\]</div>
 <p>where the subscript <span class="arithmatex">\(t\)</span> denotes a quantity defined in the trial state.  The previous elastic Cauchy-Green strain tensor, <span class="arithmatex">\((b^{\text{e}}_{n})_{ij}\)</span>, can be obtained from the previous elastic strain state through</p>
