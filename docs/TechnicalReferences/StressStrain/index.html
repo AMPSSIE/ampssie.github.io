@@ -1439,6 +1439,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#stress-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stress measures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stress-strain-formulation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1478,6 +1489,7 @@
 \end{array} \right.
 \]</div>
 <p>where <span class="arithmatex">\(m\)</span> is a real integer. </p>
+<h2 id="stress-measures">Stress measures<a class="headerlink" href="#stress-measures" title="Permanent link">¶</a></h2>
 <h2 id="stress-strain-formulation">Stress-strain formulation<a class="headerlink" href="#stress-strain-formulation" title="Permanent link">¶</a></h2>
 <p>The code adopts logarithmic strains and Kirchhoff stresses and combine these measures with an exponential map of the plastic flow rule to allow the use of conventional small-strain stress integration algorithms with a finite deformation framework.  This is a powerful combination as it allows existing constitutive formulations to be used directly rather than reformulating them for the particular choice of stress and strain measures used in the large deformation mechanics.   Within this formulation, the elastic logarithmic strain is defined as</p>
 <div class="arithmatex">\[\varepsilon^{\text{e}}_{ij} = \frac{1}{2} \ln\bigl( b^{\text{e}}_{ij} \bigr) \qquad \text{where} \qquad b^{\text{e}}_{ij} = F^{\text{e}}_{ik} F^{\text{e}}_{jk}\]</div>
