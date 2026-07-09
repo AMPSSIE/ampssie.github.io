@@ -1546,6 +1546,15 @@ u_i(X_i,t) = \varphi(X_i,t) - X_i = x_i - X_i
   F_{ij} = \left(\frac{\partial \varphi^{-1}(x_i,t)}{\partial x_j} \right)^{-1} = \left( \delta_{ij} - \frac{\partial u_i}{\partial x_j} \right)^{-1}
 \]</div>
 <p>this is because information on the reference frame is not available on the background mesh after the initial time step.  </p>
+<p>The deformation gradient can also be determined between time steps using </p>
+<div class="arithmatex">\[
+  (F_{ij})_{n+1} = \Delta F_{ik} (F_{kj})_{n}
+\]</div>
+<p>where <span class="arithmatex">\((F_{ij})_{n}\)</span> is the deformation gradient from the end of the previous time step and <span class="arithmatex">\(\Delta F_{ij}\)</span> is the increment in the deformation for the current time step </p>
+<div class="arithmatex">\[
+ \Delta F_{ij} = \delta_{ij} + \frac{\partial \Delta u_i}{\partial \tilde{X}_j}
+\]</div>
+<p><span class="arithmatex">\(\tilde{X}_i=x_i-\Delta u_i\)</span> are the coordinates at the start of the current time step and <span class="arithmatex">\(\Delta u_i\)</span> is the displacement increment associated with the current time step. </p>
 <h2 id="volume-ratio">Volume ratio<a class="headerlink" href="#volume-ratio" title="Permanent link">¶</a></h2>
 <p>In finite deformation mechanics the volume ratio</p>
 <div class="arithmatex">\[ J = \frac{d v}{dV} = \det(F_{ij})\]</div>
