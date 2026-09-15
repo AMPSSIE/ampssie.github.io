@@ -1019,6 +1019,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vertical penetration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1055,7 +1083,7 @@
   <span class="md-ellipsis">
     
   
-    Reference input data
+    Dynamic
   
 
     
@@ -1068,6 +1096,120 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dynamic
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rolling sphere
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drag anchor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_4" id="__nav_4_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference input data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1120,6 +1262,90 @@
     
   
     Compaction via a rigid body
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_3_input_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vertical penetration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_5_input_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rolling sphere
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tutorial_6_input_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drag anchor
   
 
     
@@ -2058,24 +2284,24 @@
 
 
 <h1 id="tutorial-problems">Tutorial problems<a class="headerlink" href="#tutorial-problems" title="Permanent link">¶</a></h1>
-<p>The AMPSSIE tutorial set walks you through six benchmark problems, each one isolating a different capability of the solver - convergence under self-weight, rigid-body contact, plastic soil, dynamic time integration, articulated rigid bodies, and adaptive mesh refinement following a moving body. Every tutorial uses the same <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> format</a>, so once you've completed Tutorial 1 the workflow is the same the whole way through; later tutorials add capabilities one at a time.</p>
-<p>The recommended order is top to bottom - each tutorial reuses material settings, contact penalties or solver choices established in earlier ones, and the descriptions explicitly point back when they do.</p>
+<p>The AMPSSIE tutorial set walks you through benchmark problems, each one isolating a different capability of the solver - large deformation under self-weight, rigid-body contact, plastic soil, dynamic time integration, articulated rigid bodies, and adaptive mesh refinement following a moving body. Every tutorial uses the same <a href="../../UsingTheSoftware/InputFormat/"><code>input_data.json</code> format</a>, so once you've completed Tutorial 1 the workflow is the same the whole way through; later tutorials add capabilities one at a time.</p>
+<p>The recommended order is top to bottom - each tutorial reuses material settings, contact settings or solver choices established in earlier ones, and the descriptions explicitly point back when they do.</p>
 <h2 id="static">Static<a class="headerlink" href="#static" title="Permanent link">¶</a></h2>
-<p>Quasi-static problems solved with Newton-Raphson over a small number of load increments.</p>
+<p>Quasi-static problems solved with Newton-Raphson over a sequence of load steps.</p>
 <ul>
-<li><strong><a href="../Tutorial_1/">Tutorial 1 - Self-weight column</a></strong> - A homogeneous elastic column compressed by gravity. The simplest problem in the set: no contact, no plasticity, no adaptive refinement following a body. Exercises the static weak form and the GIMP discretisation, with an analytical stress solution to validate the numerical result against.</li>
-<li><strong><a href="../Tutorial_2/">Tutorial 2 - Compaction via a rigid body</a></strong> - A cube compressed by a rigid plate through 25% of its height. Introduces normal-contact penalty enforcement and the hanging-node formulation around the contact face, with elasticity holding everything else constant.</li>
-<li><strong>Tutorial 3 - Vertical penetration (CPT)</strong> <em>(coming soon)</em> - A quarter-symmetric cone penetration test in dry sand. Adds adaptive octree refinement that follows the cone, frictional contact and a Hencky hyperelastic-perfectly plastic constitutive model calibrated to centrifuge data.</li>
+<li><strong><a href="../Tutorial_1/">Tutorial 1 - Self-weight column</a></strong> - A tall, soft elastic column compressed by its own weight. The simplest problem in the set: no contact, no plasticity and no mesh refinement, but large deformation, with an analytical stress solution to validate the numerical result against. Introduces the input file, running AMPSSIE and viewing the output.</li>
+<li><strong><a href="../Tutorial_2/">Tutorial 2 - Compaction via a rigid body</a></strong> - A cube compressed by a rigid platen through 25% of its height. Introduces rigid bodies defined by an STL surface, prescribed displacements and penalty contact, with elasticity holding everything else simple.</li>
+<li><strong><a href="../Tutorial_3/">Tutorial 3 - Vertical penetration (CPT)</a></strong> - A quarter-symmetric cone penetration test in dry sand. Adds a two-stage analysis, Willam-Warnke sand with depth-dependent stiffness, frictional contact and mesh refinement that follows the cone.</li>
 <li><strong>Tutorial 4 - Plough (horizontal penetration)</strong> <em>(coming soon)</em> - A seabed cable plough dragged through dry sand. The most geometrically complex problem: a non-convex rigid body, a Signorini exit-face condition, and adaptive refinement that travels with the plough across 20 m of horizontal travel.</li>
 </ul>
 <h2 id="dynamic">Dynamic<a class="headerlink" href="#dynamic" title="Permanent link">¶</a></h2>
 <p>Implicit dynamic problems using the same Newton-Raphson framework but with inertia and time integration active.</p>
 <ul>
-<li><strong>Tutorial 5 - Rolling sphere</strong> <em>(coming soon)</em> - A rigid sphere rolling down a 45° slope, with a friction-coefficient sweep validated against the analytical slip/stick solution. The transition point between Tutorial 2's contact mechanics and full dynamic time integration.</li>
-<li><strong>Tutorial 6 - Drag anchor</strong> <em>(coming soon)</em> - A 3D dynamic simulation of an AC-14 drag anchor pulled through dry sand. Combines Tutorial 3's soil model, Tutorial 5's dynamics and a two-part articulated rigid body, with a partitioned moving domain that follows the anchor across the full 19 m drag.</li>
+<li><strong><a href="../Tutorial_5/">Tutorial 5 - Rolling sphere</a></strong> - A rigid sphere rolling down a 45° slope, with a friction-coefficient sweep validated against the analytical slip/stick solution. Introduces dynamic stages, a free rigid body and a boundary track that follows the sphere.</li>
+<li><strong><a href="../Tutorial_6/">Tutorial 6 - Drag anchor</a></strong> - A half-symmetric AC-14 drag anchor pulled through very loose, submerged sand. Combines Tutorial 3's soil model and Tutorial 5's dynamics and moving boundaries with an anchor made of two hinged parts, an angle stop and a pull line, over three analysis stages.</li>
 </ul>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">¶</a></h2>
-<p>Every tutorial has its complete <code>input_data.json</code> listed verbatim in the <a href="../Tutorial_1_input_data/">Reference input data</a> sub-section, so you can copy any of them as a starting template before adapting to your own problem.</p>
+<p>Every tutorial has its complete <code>input_data.json</code> listed verbatim in the <a href="../Tutorial_1_input_data/">Reference input data</a> sub-section, so you can copy any of them as a starting template before adapting it to your own problem.</p>
 
 
 
