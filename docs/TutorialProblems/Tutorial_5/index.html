@@ -271,7 +271,7 @@
           
   
   
-  AMPSSIE
+  S3-MPM
 
         </a>
       </li>
@@ -591,7 +591,7 @@
   <span class="md-ellipsis">
     
   
-    AMPSSIE
+    S3-MPM
   
 
     
@@ -607,7 +607,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AMPSSIE
+    S3-MPM
   
 
           </label>
@@ -2637,7 +2637,7 @@
 
 <h1 id="tutorial-5-rolling-sphere">Tutorial 5: Rolling sphere<a class="headerlink" href="#tutorial-5-rolling-sphere" title="Permanent link">¶</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
-<p>This is the first dynamic tutorial in AMPSSIE. A rigid sphere rolls down a slope under gravity, and the distance it travels is compared against the analytical slip/stick solution for a range of friction coefficients.</p>
+<p>This is the first dynamic tutorial in S3-MPM. A rigid sphere rolls down a slope under gravity, and the distance it travels is compared against the analytical slip/stick solution for a range of friction coefficients.</p>
 <p>The problem validates frictional contact and dynamic time integration together. As the sphere moves, the elements beneath it are refined to a fine mesh that travels with it, and a boundary track keeps only the part of the slope around the sphere active.</p>
 <p>This tutorial has four sections:</p>
 <ul>
@@ -2819,7 +2819,7 @@ d_x(t) =
 </div>
 </div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
-<p>AMPSSIE is written in the <a href="https://julialang.org/">Julia</a> programming language. See the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and AMPSSIE, and <a href="../Tutorial_1/#deploying-and-running-the-problem">Tutorial 1</a> for a first, small run.</p>
+<p>S3-MPM is written in the <a href="https://julialang.org/">Julia</a> programming language. See the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and S3-MPM, and <a href="../Tutorial_1/#deploying-and-running-the-problem">Tutorial 1</a> for a first, small run.</p>
 <div class="json-side-header">
 <div>Deployment instructions</div>
 <div><code>terminal</code></div>
@@ -2831,17 +2831,17 @@ d_x(t) =
 <p>Create a folder for the run containing:</p>
 <ul>
 <li><code>input_data.json</code>, copied from the <a href="../Tutorial_5_input_data/">complete input file</a>;</li>
-<li><code>sphere.stl</code> and <code>sphere_mesh.txt</code>, from the top level of the AMPSSIE repository.</li>
+<li><code>sphere.stl</code> and <code>sphere_mesh.txt</code>, from the top level of the S3-MPM repository.</li>
 </ul>
 <p>The STL and mesh-cache paths in the input file are relative to the input file, and the output folders are created in the folder Julia is started from.</p>
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
-<p>Start Julia in the run folder with the AMPSSIE project active (<code>--project</code>) and every CPU thread available (<code>-t auto</code>), then load AMPSSIE and run the input file. The analysis runs on a workstation CPU but takes a while; set <code>"GPU": "on"</code> if a GPU is available.</p>
+<p>Start Julia in the run folder with the S3-MPM project active (<code>--project</code>) and every CPU thread available (<code>-t auto</code>), then load S3-MPM and run the input file. The analysis runs on a workstation CPU but takes a while; set <code>"GPU": "on"</code> if a GPU is available.</p>
 <p>The progress line shows the simulated time out of the <span class="arithmatex">\(1\)</span> s final time. Its fields are explained in <a href="../Tutorial_1/#reading-the-output">Tutorial 1</a>.</p>
 </div>
 <div class="js-code">
 <div class="terminal terminal-full">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>path/to/run_folder
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/AMPSSIE<span class="w"> </span>-t<span class="w"> </span>auto
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/S3-MPM<span class="w"> </span>-t<span class="w"> </span>auto
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go">julia&gt; using S3MPM</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>

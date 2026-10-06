@@ -271,7 +271,7 @@
           
   
   
-  AMPSSIE
+  S3-MPM
 
         </a>
       </li>
@@ -591,7 +591,7 @@
   <span class="md-ellipsis">
     
   
-    AMPSSIE
+    S3-MPM
   
 
     
@@ -607,7 +607,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AMPSSIE
+    S3-MPM
   
 
           </label>
@@ -2739,7 +2739,7 @@
 </table>
 </div>
 <p>The density is entered as the unit weight divided by <span class="arithmatex">\(10\)</span> m/s<span class="arithmatex">\(^2\)</span>.</p>
-<p>The Young's modulus increases with depth. Brinkgreve's stiffness law is written in terms of the horizontal stress <span class="arithmatex">\(K_0 \sigma_v\)</span> and a reference pressure <span class="arithmatex">\(p^{ref} = 100\)</span> kPa, whereas AMPSSIE's <a href="../../UsingTheSoftware/InputFormat/#stress-dependent-stiffness">stress-dependent stiffness</a> uses the vertical stress <span class="arithmatex">\(\sigma_v\)</span>. The two are the same when the reference stress is <span class="arithmatex">\(p^{ref}/K_0\)</span>:</p>
+<p>The Young's modulus increases with depth. Brinkgreve's stiffness law is written in terms of the horizontal stress <span class="arithmatex">\(K_0 \sigma_v\)</span> and a reference pressure <span class="arithmatex">\(p^{ref} = 100\)</span> kPa, whereas S3-MPM's <a href="../../UsingTheSoftware/InputFormat/#stress-dependent-stiffness">stress-dependent stiffness</a> uses the vertical stress <span class="arithmatex">\(\sigma_v\)</span>. The two are the same when the reference stress is <span class="arithmatex">\(p^{ref}/K_0\)</span>:</p>
 <div class="arithmatex">\[
 E = E^{ref} \left( \frac{K_0\, \sigma_v}{p^{ref}} \right)^{m} = E^{ref} \left( \frac{\sigma_v}{\sigma^{ref}} \right)^{m}, \qquad \sigma^{ref} = \frac{p^{ref}}{K_0} = 217.85 \text{ kPa}.
 \]</div>
@@ -2921,7 +2921,7 @@ E = E^{ref} \left( \frac{K_0\, \sigma_v}{p^{ref}} \right)^{m} = E^{ref} \left( \
 </div>
 </div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
-<p>AMPSSIE is written in the <a href="https://julialang.org/">Julia</a> programming language. See the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and AMPSSIE, and <a href="../Tutorial_1/#deploying-and-running-the-problem">Tutorial 1</a> for a first, small run.</p>
+<p>S3-MPM is written in the <a href="https://julialang.org/">Julia</a> programming language. See the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and S3-MPM, and <a href="../Tutorial_1/#deploying-and-running-the-problem">Tutorial 1</a> for a first, small run.</p>
 <div class="json-side-header">
 <div>Deployment instructions</div>
 <div><code>terminal</code></div>
@@ -2933,18 +2933,18 @@ E = E^{ref} \left( \frac{K_0\, \sigma_v}{p^{ref}} \right)^{m} = E^{ref} \left( \
 <p>Create a folder for the run containing:</p>
 <ul>
 <li><code>input_data.json</code>, copied from the <a href="../Tutorial_3_input_data/">complete input file</a>;</li>
-<li><code>CPT.stl</code> and <code>CPT_mesh.txt</code>, from the top level of the AMPSSIE repository.</li>
+<li><code>CPT.stl</code> and <code>CPT_mesh.txt</code>, from the top level of the S3-MPM repository.</li>
 </ul>
 <p>The STL and mesh-cache paths in the input file are relative to the input file, and the output folders <code>vtk_CPT_dr38</code> and <code>csv_CPT_dr38</code> are created in the folder Julia is started from.</p>
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
-<p>Start Julia in the run folder with the AMPSSIE project active (<code>--project</code>) and every CPU thread available (<code>-t auto</code>), then load AMPSSIE and run the input file.</p>
+<p>Start Julia in the run folder with the S3-MPM project active (<code>--project</code>) and every CPU thread available (<code>-t auto</code>), then load S3-MPM and run the input file.</p>
 <p>This is a large analysis: with <span class="arithmatex">\(0.025\)</span> m elements around the cone it is intended for a GPU or an HPC node. On a workstation without a GPU, set <code>"GPU": "off"</code> and use <code>"element size": 0.1</code> in stage 2.</p>
 <p>The progress line shows <code>stage 1/2</code> while the initial stresses are set up and <code>stage 2/2</code> during penetration. Its fields are explained in <a href="../Tutorial_1/#reading-the-output">Tutorial 1</a>.</p>
 </div>
 <div class="js-code">
 <div class="terminal terminal-full">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>path/to/run_folder
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/AMPSSIE<span class="w"> </span>-t<span class="w"> </span>auto
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/S3-MPM<span class="w"> </span>-t<span class="w"> </span>auto
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">julia&gt; using S3MPM</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>

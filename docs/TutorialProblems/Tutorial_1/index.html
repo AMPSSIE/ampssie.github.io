@@ -271,7 +271,7 @@
           
   
   
-  AMPSSIE
+  S3-MPM
 
         </a>
       </li>
@@ -589,7 +589,7 @@
   <span class="md-ellipsis">
     
   
-    AMPSSIE
+    S3-MPM
   
 
     
@@ -605,7 +605,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AMPSSIE
+    S3-MPM
   
 
           </label>
@@ -2677,7 +2677,7 @@
 
 <h1 id="tutorial-1-self-weight-column">Tutorial 1: Self-weight column<a class="headerlink" href="#tutorial-1-self-weight-column" title="Permanent link">¶</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
-<p>This quick start tutorial walks through the steps of running your first AMPSSIE problem.</p>
+<p>This quick start tutorial walks through the steps of running your first S3-MPM problem.</p>
 <p>This tutorial analyses a column deforming under its own weight and solves the static <a href="../../TechnicalReferences/EquilibriumEquations/">equilibrium equations</a>. It is simple but introduces you to all components of the code: setting up the input file, running the analysis and viewing the output data.</p>
 <p>This tutorial has three main sections after the introduction:</p>
 <ul>
@@ -2686,7 +2686,7 @@
 <li><a href="#viewing-the-results">Viewing the results</a></li>
 </ul>
 <h3 id="background-the-gimpm">Background: the GIMPM<a class="headerlink" href="#background-the-gimpm" title="Permanent link">¶</a></h3>
-<p>This problem introduces you to the AMPSSIE code, and how it is different to methods such as finite element analysis. The GIMPM can be classed as a fictitious domain method: the mesh and boundary conditions do not necessarily align with the material domain, the body that is being modelled by the material points. This enables the GIMPM to avoid the distorted mesh issues normally associated with finite elements.</p>
+<p>This problem introduces you to the S3-MPM code, and how it is different to methods such as finite element analysis. The GIMPM can be classed as a fictitious domain method: the mesh and boundary conditions do not necessarily align with the material domain, the body that is being modelled by the material points. This enables the GIMPM to avoid the distorted mesh issues normally associated with finite elements.</p>
 <p>The GIMPM broadly works in three steps:
 <figure id="_figure-1"><img alt="The three steps to a GIMPM solution step." id="fig-example-GIMPM" src="../../../img/GIMP_example2.png" width="70%"><figcaption>Figure 1: The three steps to a GIMPM solution step.</figcaption></figure></p>
 <ul>
@@ -2694,7 +2694,7 @@
 <li>(b) deforming the mesh and the material points together</li>
 <li>(c) resetting the mesh but not the material points, distorting the body relative to the mesh</li>
 </ul>
-<p>Under this framework you define two things: the background mesh on which the equations are solved, through its element size, and the material points - the modelled body, which carries all the material and kinematic data at the Generalised Interpolation Material Points (GIMPs). In AMPSSIE both are set in the <code>"material points"</code> section of the input file. Boundary conditions (roller or fixed faces) are applied to the nodes of the background mesh, whereas body forces such as gravity are applied to the material points directly.</p>
+<p>Under this framework you define two things: the background mesh on which the equations are solved, through its element size, and the material points - the modelled body, which carries all the material and kinematic data at the Generalised Interpolation Material Points (GIMPs). In S3-MPM both are set in the <code>"material points"</code> section of the input file. Boundary conditions (roller or fixed faces) are applied to the nodes of the background mesh, whereas body forces such as gravity are applied to the material points directly.</p>
 <h2 id="input-setup">Input setup<a class="headerlink" href="#input-setup" title="Permanent link">¶</a></h2>
 <h3 id="problem-summary">Problem summary<a class="headerlink" href="#problem-summary" title="Permanent link">¶</a></h3>
 <p>The aim is to recover the vertical stress field that develops in a column compressed by its own weight, and to compare it against the analytical solution</p>
@@ -2834,7 +2834,7 @@
 </div>
 </div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
-<p>AMPSSIE is written in the <a href="https://julialang.org/">Julia</a> programming language, and there are two ways to run the code, both explored on the <a href="../../UsingTheSoftware/DeployingTheSoftware/">deployment page</a>. As this is a small problem that runs quickly, this tutorial uses Julia directly; see the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and AMPSSIE.</p>
+<p>S3-MPM is written in the <a href="https://julialang.org/">Julia</a> programming language, and there are two ways to run the code, both explored on the <a href="../../UsingTheSoftware/DeployingTheSoftware/">deployment page</a>. As this is a small problem that runs quickly, this tutorial uses Julia directly; see the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and S3-MPM.</p>
 <div class="json-side-header">
 <div>Deployment instructions</div>
 <div><code>terminal</code></div>
@@ -2844,19 +2844,19 @@
 <div class="js-text">
 <h3 id="setting-up-and-running-the-problem">Setting up and running the problem<a class="headerlink" href="#setting-up-and-running-the-problem" title="Permanent link">¶</a></h3>
 <p>Create a folder for the run and copy into it the <code>input_data.json</code> provided <a href="../Tutorial_1_input_data/">here</a>. The output folders <code>vtk_column</code> and <code>csv_column</code> are created in the folder Julia is started from.</p>
-<p>Open a terminal (a command prompt or PowerShell on Windows), change into the run folder and start Julia with the AMPSSIE project active. <code>--project</code> points to the folder where you downloaded AMPSSIE, and <code>-t auto</code> makes every CPU core available:</p>
+<p>Open a terminal (a command prompt or PowerShell on Windows), change into the run folder and start Julia with the S3-MPM project active. <code>--project</code> points to the folder where you downloaded S3-MPM, and <code>-t auto</code> makes every CPU core available:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cd path/to/run_folder
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>julia --project=path/to/AMPSSIE -t auto
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>julia --project=path/to/S3-MPM -t auto
 </code></pre></div>
-<p>Then load AMPSSIE:</p>
+<p>Then load S3-MPM:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>using S3MPM
 </code></pre></div>
-<p>The commands work the same on Windows, macOS and Linux. The first time you use AMPSSIE, install its dependencies as described in the <a href="../../GettingStarted/Installation/">installation guide</a>.</p>
+<p>The commands work the same on Windows, macOS and Linux. The first time you use S3-MPM, install its dependencies as described in the <a href="../../GettingStarted/Installation/">installation guide</a>.</p>
 </div>
 <div class="js-code">
 <div class="terminal terminal-full">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>path/to/run_folder
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/AMPSSIE<span class="w"> </span>-t<span class="w"> </span>auto
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/S3-MPM<span class="w"> </span>-t<span class="w"> </span>auto
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">               _</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">   _       _ _(_)_     |  Documentation: https://docs.julialang.org</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">  (_)     | (_) (_)    |</span>
@@ -2874,12 +2874,12 @@
 <div class="json-side">
 <div class="js-text">
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
-<p>With Julia running in the run folder and AMPSSIE loaded, start the simulation by calling the AMPSSIE entry point:</p>
+<p>With Julia running in the run folder and S3-MPM loaded, start the simulation by calling the S3-MPM entry point:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>S3MPM.non_linear_solve("input_data.json");
 </code></pre></div>
 <p>This reads <code>input_data.json</code> from the current folder, steps through the 50 load steps and writes the VTK and CSV output as it goes. The semicolon stops Julia printing the returned material-point data. The first run in a Julia session takes longer, because the code is compiled as it is first used.</p>
 <h4 id="reading-the-output">Reading the output<a class="headerlink" href="#reading-the-output" title="Permanent link">¶</a></h4>
-<p>AMPSSIE prints a single progress line, redrawn in place after every step; in a log file a new line is kept for every whole percent. When the analysis finishes, the line reads:</p>
+<p>S3-MPM prints a single progress line, redrawn in place after every step; in a log file a new line is kept for every whole percent. When the analysis finishes, the line reads:</p>
 <ul>
 <li><code>stage 1/1</code> - the current stage and the number of stages.</li>
 <li>the bar and <code>100.0%</code> - progress through the stage.</li>
@@ -3026,7 +3026,7 @@
 <a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
 <a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">rho</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">9.81</span><span class="p">,</span> <span class="mf">0.8</span>
 <a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="n">szz</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"AMPSSIE"</span><span class="p">)</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="n">szz</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"S3-MPM"</span><span class="p">)</span>
 <a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="n">z</span><span class="p">),</span> <span class="n">z</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"analytical"</span><span class="p">)</span>
 <a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"vertical compressive stress (Pa)"</span><span class="p">)</span>
 <a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"initial height (m)"</span><span class="p">)</span>

@@ -271,7 +271,7 @@
           
   
   
-  AMPSSIE
+  S3-MPM
 
         </a>
       </li>
@@ -589,7 +589,7 @@
   <span class="md-ellipsis">
     
   
-    AMPSSIE
+    S3-MPM
   
 
     
@@ -605,7 +605,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AMPSSIE
+    S3-MPM
   
 
           </label>
@@ -793,10 +793,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#direct-interaction-with-julia" class="md-nav__link">
+  <a href="#julia-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Direct interaction with Julia
+        Julia runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container Runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualisation-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualisation installation
       
     </span>
   </a>
@@ -2225,10 +2247,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#direct-interaction-with-julia" class="md-nav__link">
+  <a href="#julia-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Direct interaction with Julia
+        Julia runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container Runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualisation-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualisation installation
       
     </span>
   </a>
@@ -2259,41 +2303,166 @@
 
 <hr>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">¶</a></h2>
-<p>AMPSSIE is a Julia package and runs anywhere Julia is supported.</p>
+<p>S3-MPM is a Julia package and runs anywhere Julia is supported.</p>
 <p><strong>Operating system:</strong> Linux, macOS, and Windows are all supported. Most development and testing has been done on Linux.</p>
 <p><strong>Julia version:</strong> 1.12 or newer. Earlier releases may work but are not actively tested.</p>
-<p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes it is recommended to use an HPC with at least 10 cores, at least 60 GB of RAM and 10 GB of free disk for outputs.</p>
-<p><strong>Required tooling:</strong></p>
+<p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes it is recommended to use an HPC with at least 10 cores, at least 60 GB of RAM and 10 GB of free disk for outputs. If you are using a GPU it is also recommended that the GPU has 60 GB of GPU memory (data-centre GPUs such as the NVIDIA A100 or H100 have 40-80 GB).</p>
+<p><strong>Software requrements tooling:</strong></p>
 <ul>
-<li><a href="https://julialang.org/downloads/">Julia</a> - the language runtime itself.</li>
+<li><a href="https://julialang.org/downloads/">Julia</a> - at least version 1.12.</li>
 <li>A text editor with JSON support for editing <code>input_data.json</code> files - <a href="https://code.visualstudio.com/">VS Code</a> with the <a href="https://www.julia-vscode.org/">Julia extension</a> is a sensible default.</li>
-<li><a href="https://www.paraview.org/">ParaView</a> or <a href="https://visit-dav.github.io/visit-website/">VisIt</a> for visualising the VTU/VTK output.</li>
+<li><a href="https://www.paraview.org/">ParaView</a> or <a href="https://visit-dav.github.io/visit-website/">VisIt</a> for visualising the VTU/VTK output, support and tutorial detail is only provided for Paraview.</li>
 </ul>
 <p><strong>Optional:</strong></p>
 <ul>
 <li><a href="https://git-scm.com/">Git</a> for cloning the source repository.</li>
-<li><a href="https://www.docker.com/">Docker</a> <em>(coming soon)</em> if you'd rather not install Julia directly - see <a href="#deploying-via-docker">Deploying via Docker</a>.</li>
+<li>A container runtime (<a href="https://www.docker.com/">Docker</a>, or <a href="https://apptainer.org/">Apptainer</a>/<a href="https://sylabs.io/singularity/">Singularity</a> on HPC) to run Julia and S3-MPM without installation - see <a href="../../UsingTheSoftware/DeployingTheSoftware/">deploying with containers</a>.</li>
 </ul>
-<h2 id="direct-interaction-with-julia">Direct interaction with Julia<a class="headerlink" href="#direct-interaction-with-julia" title="Permanent link">¶</a></h2>
-<p>The simplest deployment is to install Julia and run AMPSSIE from source.</p>
-<p><strong>1. Install Julia.</strong> Use the official installer from <a href="https://julialang.org/downloads/">julialang.org/downloads</a>, or on Linux/macOS use the <a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a> toolchain manager:</p>
+<h2 id="julia-runtime">Julia runtime<a class="headerlink" href="#julia-runtime" title="Permanent link">¶</a></h2>
+<p>The simplest deployment is to install Julia and run S3-MPM from source:</p>
+<details class="plain">
+<summary>Julia installation</summary>
+<p>Use the official installer from <a href="https://julialang.org/downloads/">julialang.org/downloads</a>, or on Linux/macOS use the <a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a> toolchain manager:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://install.julialang.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
 </code></pre></div>
 <p>Verify the install with <code>julia --version</code>.</p>
-<p><strong>2. Clone the repository.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>insert<span class="w"> </span>here<span class="o">]</span>
+</details>
+<details class="plain">
+<summary>Downloading S3-MPM from GitHub</summary>
+<p>The source lives at <a href="https://github.com/AMPSSIE/S3-MPM">github.com/AMPSSIE/S3-MPM</a>.</p>
+<p>With git, clone it - updating later is then a single <code>git pull</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AMPSSIE/S3-MPM.git
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>S3-MPM
 </code></pre></div>
-<p><strong>3. Start Julia and install the AMPSSIE package.</strong> Open a Julia REPL, change into the <code>MaterialPoints</code> directory of the cloned repository and <code>include</code> the setup script. This installs the exact dependencies recorded in <code>Manifest.toml</code> and starts the parallel workers that AMPSSIE uses:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cd</span><span class="p">(</span><span class="s">"path/to/AMPSSIE/MaterialPoints"</span><span class="p">)</span>
+<p>Without git, use the green <em>Code</em> button on the GitHub page, choose <em>Download ZIP</em> and unzip it wherever you want to keep it.</p>
+<p>Either way you end up with a folder containing <code>Project.toml</code> and <code>Manifest.toml</code>. That folder is what you point Julia at with <code>--project</code>.</p>
+</details>
+<details class="plain">
+<summary>S3-MPM installation</summary>
+<p><strong>1. Download the code</strong> from GitHub, as described above.</p>
+<p><strong>2. Start Julia and install the S3-MPM package.</strong> Open a Julia REPL, change into the <code>MaterialPoints</code> directory of the cloned repository and <code>include</code> the setup script. This installs the exact dependencies recorded in <code>Manifest.toml</code> and starts the parallel workers that S3-MPM uses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cd</span><span class="p">(</span><span class="s">"path/to/S3-MPM/MaterialPoints"</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">include</span><span class="p">(</span><span class="s">"setup_workers.jl"</span><span class="p">)</span>
 </code></pre></div>
 <p>If everything succeeds the REPL prints the package versions being resolved, the activated project path and a <code>starting sim</code> line; see the <a href="../../TutorialProblems/Tutorial_1/#setting-up-and-running-the-problem">Tutorial 1 terminal output</a> (or <a href="../../TutorialProblems/Tutorial_2/#setting-up-and-running-the-problem">Tutorial 2</a>) for the expected console.</p>
-<p><strong>4. Run a problem.</strong> Copy a tutorial <code>input_data.json</code> (for example from <a href="../../TutorialProblems/Tutorial_1_input_data/">Tutorial 1</a> or <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a>) into the <code>MaterialPoints</code> directory and call the AMPSSIE entry point from the same Julia REPL:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">AMPSSIE</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">"input_data.json"</span><span class="p">);</span>
+<p><strong>3. Run a problem.</strong> Copy a tutorial <code>input_data.json</code> (for example from <a href="../../TutorialProblems/Tutorial_1_input_data/">Tutorial 1</a> or <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a>) into the <code>MaterialPoints</code> directory and call the S3-MPM entry point from the same Julia REPL:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">S3MPM</span><span class="o">.</span><span class="n">non_linear_solve</span><span class="p">(</span><span class="s">"input_data.json"</span><span class="p">);</span>
 </code></pre></div>
 <p>This steps through the load increments configured in the JSON and writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> output files to <code>MaterialPoints/src/output</code>. Open the VTU/VTK files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and the stress / displacement fields.</p>
+</details>
+<h2 id="container-runtime">Container Runtime<a class="headerlink" href="#container-runtime" title="Permanent link">¶</a></h2>
+<p>A container image bundles Julia, S3-MPM and its dependencies, so nothing needs installing on the host machine. This is the usual route on HPC.</p>
+<p>Images are built by a GitHub Actions workflow in the S3-MPM repository and published to the GitHub container registry. The latest build of the default branch is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ghcr.io/ampssie/s3-mpm:latest
+</code></pre></div>
+<p>For work you need to reproduce later, pull a fixed version tag such as <code>ghcr.io/ampssie/s3-mpm:v1.0.0</code> rather than <code>latest</code>, so that the image cannot change underneath you.</p>
+<div class="admonition note">
+<p class="admonition-title">Placeholder</p>
+<p>This image is not published yet, so the address above will not resolve. Until it is, install S3-MPM through the <a href="#julia-runtime">Julia runtime</a> route above.</p>
+</div>
+<p>Install whichever runtime suits your machine, then pull the image:</p>
+<details class="plain">
+<summary>Docker</summary>
+<p><strong>1. Install Docker</strong> using the official guide for your system: <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Windows</a>, <a href="https://docs.docker.com/desktop/setup/install/mac-install/">macOS</a> or <a href="https://docs.docker.com/desktop/setup/install/linux/">Linux</a>.</p>
+<p><strong>2. Pull the image and start a container</strong> from the folder holding your <code>input_data.json</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><input id="__tabbed_1_5" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Windows (CPU)</label><label for="__tabbed_1_2">Windows (GPU)</label><label for="__tabbed_1_3">Linux (CPU)</label><label for="__tabbed_1_4">Linux (GPU)</label><label for="__tabbed_1_5">macOS (CPU)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="n">-v</span> <span class="p">${</span><span class="n">PWD</span><span class="p">}:/</span><span class="n">work</span> <span class="n">-w</span> <span class="p">/</span><span class="n">work</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Requirements: Docker Desktop's WSL 2 engine, which is the default. The NVIDIA driver you already have on Windows is all that is needed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="p">-</span><span class="n">-gpus</span> <span class="n">all</span> <span class="n">-v</span> <span class="p">${</span><span class="n">PWD</span><span class="p">}:/</span><span class="n">work</span> <span class="n">-w</span> <span class="p">/</span><span class="n">work</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Requirements: Needs the <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Requirements: Macs have no NVIDIA GPU, so S3-MPM runs on the CPU.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Docker runs in the folder you call it from, so keep <code>input_data.json</code> there and the <code>.vtu</code> and <code>.csv</code> results appear beside it.</p>
+</details>
+<details class="plain">
+<summary>Apptainer (Linux only)</summary>
+<p>Apptainer is the usual choice on HPC as it runs without administrator rights. Check whether your cluster already provides it, if not ask your administrator.    </p>
+<p>To install locally on your Linux machine follow the <a href="https://apptainer.org/docs/admin/main/installation.html">installation guide</a> with details for the <a href="https://apptainer.org/docs/user/main/gpu.html">GPU support</a> - the <code>--nv</code> flag passes NVIDIA GPUs into the container.</p>
+<p>To obtain the image pull the image into a local <code>.sif</code> file in your current directory:</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>apptainer<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
+</code></pre></div>
+To run the file call in the terminal, or include in your deploy script: 
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">CPU</label><label for="__tabbed_2_2">GPU</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>apptainer<span class="w"> </span>run<span class="w"> </span>s3-mpm.sif
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>s3-mpm.sif
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Apptainer runs in the directory you call it from, so keep <code>input_data.json</code> beside <code>s3-mpm.sif</code> and the <code>.vtu</code> and <code>.csv</code> results appear there too.</p>
+</details>
+<details class="plain">
+<summary>Singularity (Linux only)</summary>
+<p>SingularityCE is a common choice on HPC as it runs without administrator rights. Check whether your cluster already provides it with <code>singularity --version</code>; if not, ask your administrator.</p>
+<p>To install locally on your Linux machine follow the <a href="https://docs.sylabs.io/guides/latest/admin-guide/installation.html">installation guide</a>, with details for the <a href="https://docs.sylabs.io/guides/latest/user-guide/gpu.html">GPU support</a> - the <code>--nv</code> flag passes NVIDIA GPUs into the container.</p>
+<p>To obtain the image pull it into a local <code>.sif</code> file in your current directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>singularity<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
+</code></pre></div>
+<p>To run the file call in the terminal, or include in your job script:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">CPU</label><label for="__tabbed_3_2">GPU</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>singularity<span class="w"> </span>run<span class="w"> </span>s3-mpm.sif
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>singularity<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>s3-mpm.sif
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Singularity runs in the directory you call it from, so keep <code>input_data.json</code> beside <code>s3-mpm.sif</code> and the <code>.vtu</code> and <code>.csv</code> results appear there too.</p>
+</details>
+<h2 id="visualisation-installation">Visualisation installation<a class="headerlink" href="#visualisation-installation" title="Permanent link">¶</a></h2>
+<p>S3-MPM writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> files. <a href="https://www.paraview.org/">ParaView</a> opens the VTU and VTK output, and is the viewer the tutorials use:</p>
+<details class="plain">
+<summary>ParaView installation</summary>
+<p>Download the latest release from <a href="https://www.paraview.org/download/">paraview.org/download</a>. The standard build is all that is needed.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><input id="__tabbed_4_3" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Windows</label><label for="__tabbed_4_2">macOS</label><label for="__tabbed_4_3">Linux</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Download the <code>.msi</code> installer and run it.</p>
+</div>
+<div class="tabbed-block">
+<p>Download the <code>.dmg</code>, choosing the Apple silicon or Intel build to match your Mac, then drag ParaView into <em>Applications</em>. If macOS refuses to open it, right-click the app and choose <em>Open</em>.</p>
+</div>
+<div class="tabbed-block">
+<p>Install your distribution's package, for example <code>sudo apt install paraview</code> on Debian and Ubuntu, or <code>sudo dnf install paraview</code> on Fedora. Alternatively download the <code>.tar.gz</code>, unpack it and run <code>bin/paraview</code>.</p>
+</div>
+</div>
+</div>
+</details>
 
 
 

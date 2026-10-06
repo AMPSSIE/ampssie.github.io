@@ -271,7 +271,7 @@
           
   
   
-  AMPSSIE
+  S3-MPM
 
         </a>
       </li>
@@ -589,7 +589,7 @@
   <span class="md-ellipsis">
     
   
-    AMPSSIE
+    S3-MPM
   
 
     
@@ -605,7 +605,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AMPSSIE
+    S3-MPM
   
 
           </label>
@@ -2689,7 +2689,7 @@
 <div class="json-side">
 <div class="js-text">
 <p>This tutorial extends <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> to include normal contact. A brief overview is provided here for context; see <a href="../../TechnicalReferences/EquilibriumEquationsContact/">equilibrium with rigid-body contact</a> for the full technical details. <a href="#fig-contact-schematic">Figure 1</a> provides a schematic overview of how the contact between the rigid body and the material points works.</p>
-<p>When contact is detected between a GIMP and the rigid body, (a) initial state, a normal contact force is applied at the corners of the GIMP's domain to resist the overlap. This force is proportional to the amount of overlap and can be thought of as a spring whose stiffness resists the overlap. AMPSSIE calculates the spring stiffness automatically from the GIMP size and material properties,</p>
+<p>When contact is detected between a GIMP and the rigid body, (a) initial state, a normal contact force is applied at the corners of the GIMP's domain to resist the overlap. This force is proportional to the amount of overlap and can be thought of as a spring whose stiffness resists the overlap. S3-MPM calculates the spring stiffness automatically from the GIMP size and material properties,</p>
 <div class="arithmatex">\[
 \epsilon_N = 50\, E_p\, A_p^0,
 \]</div>
@@ -2709,7 +2709,7 @@
 <p>where <span class="arithmatex">\(L_0 = 0.8\)</span> m is the initial cube height, <span class="arithmatex">\(\Delta z = -0.2\)</span> m is the prescribed compression and <span class="arithmatex">\(L = L_0 + \Delta z = 0.6\)</span> m is the final height after the <span class="arithmatex">\(25\%\)</span> axial compression.</p>
 <p>As in <a href="../Tutorial_1/#background-the-gimpm">Tutorial 1</a> the material is homogeneous Hencky elastic, here with <span class="arithmatex">\(E = 10^6\)</span> Pa, <span class="arithmatex">\(\nu = 0\)</span> and <span class="arithmatex">\(\rho = 1000\)</span> kg/m<span class="arithmatex">\(^3\)</span>. The cube is discretised by a uniform <span class="arithmatex">\(0.4\)</span> m mesh (<span class="arithmatex">\(2 \times 2 \times 2 = 8\)</span> elements) with a <span class="arithmatex">\(2 \times 2 \times 2\)</span> grid of GIMPs per element. Roller boundaries are imposed on the four side faces and the base, and the top face is left free for the platen to push on.</p>
 <p>The rigid platen is a <span class="arithmatex">\(1.2 \times 1.2 \times 1.0\)</span> m box that overhangs the top of the cube on every side. It starts resting on the cube and is pushed down <span class="arithmatex">\(0.2\)</span> m over 20 load steps.</p>
-<p>Gravity is included. AMPSSIE measures convergence relative to the weight of the soil, so every analysis needs gravity; here the weight of the soil adds at most <span class="arithmatex">\(\rho g L_0 \approx 7.8\)</span> kPa at the base, about <span class="arithmatex">\(2\%\)</span> of the stress from the platen.</p>
+<p>Gravity is included. S3-MPM measures convergence relative to the weight of the soil, so every analysis needs gravity; here the weight of the soil adds at most <span class="arithmatex">\(\rho g L_0 \approx 7.8\)</span> kPa at the base, about <span class="arithmatex">\(2\%\)</span> of the stress from the platen.</p>
 <div class="grid">
 <p><figure id="_figure-2"><img alt="Initial uniform mesh for the contact-cube problem, with 0.4 m elements discretisating the cube." id="fig-cube-mesh" src="../../../img/example_mesh_ref_GIMPM_contact.png" style="width: 100%; height: 30em; object-fit: contain;"><figcaption>Figure 2: Initial uniform mesh for the contact-cube problem, with 0.4 m elements discretisating the cube.</figcaption></figure></p>
 <p><figure id="_figure-3"><img alt="Boundary conditions and rigid-body imposition: the red line marks the 0.2 m compression imposed by the rigid body across 20 load steps." id="fig-cube-bcs" src="../../../img/example_mesh_ref_GIMP_cube.png" style="width: 100%; height: 20em; object-fit: contain;"><figcaption>Figure 3: Boundary conditions and rigid-body imposition: the red line marks the 0.2 m compression imposed by the rigid body across 20 load steps.</figcaption></figure></p>
@@ -2765,7 +2765,7 @@
 <h3 id="rigid-body">Rigid body<a class="headerlink" href="#rigid-body" title="Permanent link">¶</a></h3>
 <p>A rigid body is a <em>system</em> of one or more <em>points</em>. Each point has six degrees of freedom - three displacements and three rotations - and carries a mass and rotational inertia. The platen is a single point at its centre, <span class="arithmatex">\((0.4, 0.5, 1.3)\)</span> m.</p>
 <p>Its <code>"boundary conditions"</code> list the six degrees of freedom in the order <span class="arithmatex">\([u_x, u_y, u_z, \theta_x, \theta_y, \theta_z]\)</span>. Five are <code>"fixed"</code>, and the vertical displacement is prescribed as <span class="arithmatex">\(-0.01\)</span> m per load step, so the platen moves <span class="arithmatex">\(0.2\)</span> m down over the 20 load steps. Because every degree of freedom is held, the mass and inertia have no effect.</p>
-<p>The geometry comes from <code>platen.stl</code>, welded to point 1. It is drawn in global coordinates - the same frame as the point - with its base on the top of the soil. On the first run AMPSSIE builds a tetrahedral mesh of the platen and stores it in <code>platen_mesh.txt</code> for later runs.</p>
+<p>The geometry comes from <code>platen.stl</code>, welded to point 1. It is drawn in global coordinates - the same frame as the point - with its base on the top of the soil. On the first run S3-MPM builds a tetrahedral mesh of the platen and stores it in <code>platen_mesh.txt</code> for later runs.</p>
 </div>
 <div class="js-code">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"rigid bodies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2853,7 +2853,7 @@
 </div>
 </div>
 <h2 id="deploying-and-running-the-problem">Deploying and running the problem<a class="headerlink" href="#deploying-and-running-the-problem" title="Permanent link">¶</a></h2>
-<p>AMPSSIE is written in the <a href="https://julialang.org/">Julia</a> programming language, and there are two ways to run the code, both explored on the <a href="../../UsingTheSoftware/DeployingTheSoftware/">deployment page</a>. As this is a small problem that runs quickly, this tutorial uses Julia directly; see the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and AMPSSIE.</p>
+<p>S3-MPM is written in the <a href="https://julialang.org/">Julia</a> programming language, and there are two ways to run the code, both explored on the <a href="../../UsingTheSoftware/DeployingTheSoftware/">deployment page</a>. As this is a small problem that runs quickly, this tutorial uses Julia directly; see the <a href="../../GettingStarted/Installation/">installation guide</a> for installing Julia and S3-MPM.</p>
 <div class="json-side-header">
 <div>Deployment instructions</div>
 <div><code>terminal</code></div>
@@ -2868,12 +2868,12 @@
 <li><code>platen.stl</code>, the geometry of the platen.</li>
 </ul>
 <p>The STL path in the input file is relative to the input file, and the output folders <code>vtk_cube</code> and <code>csv_cube</code> are created in the folder Julia is started from.</p>
-<p>As in <a href="../Tutorial_1/#setting-up-and-running-the-problem">Tutorial 1</a>, open a terminal in the run folder, start Julia with the AMPSSIE project active and load AMPSSIE.</p>
+<p>As in <a href="../Tutorial_1/#setting-up-and-running-the-problem">Tutorial 1</a>, open a terminal in the run folder, start Julia with the S3-MPM project active and load S3-MPM.</p>
 </div>
 <div class="js-code">
 <div class="terminal terminal-full">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>path/to/run_folder
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/AMPSSIE<span class="w"> </span>-t<span class="w"> </span>auto
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="gp">$ </span>julia<span class="w"> </span>--project<span class="o">=</span>path/to/S3-MPM<span class="w"> </span>-t<span class="w"> </span>auto
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go">julia&gt; using S3MPM</span>
 </code></pre></div>
@@ -2883,11 +2883,11 @@
 <div class="json-side">
 <div class="js-text">
 <h3 id="running-the-problem">Running the problem<a class="headerlink" href="#running-the-problem" title="Permanent link">¶</a></h3>
-<p>With Julia running in the run folder and AMPSSIE loaded, start the simulation:</p>
+<p>With Julia running in the run folder and S3-MPM loaded, start the simulation:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>S3MPM.non_linear_solve("input_data.json");
 </code></pre></div>
 <h4 id="reading-the-output">Reading the output<a class="headerlink" href="#reading-the-output" title="Permanent link">¶</a></h4>
-<p>Before the first load step, AMPSSIE reports the rigid body surface placement: the lowest point of the platen (<code>body base</code>) and the top of the soil (<code>material top</code>) are both at <span class="arithmatex">\(0.8\)</span> m, so the platen is moved by just <code>Δz = 2.23517e-8</code> m, a small tolerance above the soil.</p>
+<p>Before the first load step, S3-MPM reports the rigid body surface placement: the lowest point of the platen (<code>body base</code>) and the top of the soil (<code>material top</code>) are both at <span class="arithmatex">\(0.8\)</span> m, so the platen is moved by just <code>Δz = 2.23517e-8</code> m, a small tolerance above the soil.</p>
 <p>The progress line then works as in <a href="../Tutorial_1/#reading-the-output">Tutorial 1</a>. The load fraction <code>t</code> rises by <code>Δt 0.05</code> per load step, each step converges in 3 or 4 Newton-Raphson iterations (<code>NR</code>), and no steps are cut or material points deleted. The background mesh has <code>N 46</code> nodes.</p>
 </div>
 <div class="js-code">

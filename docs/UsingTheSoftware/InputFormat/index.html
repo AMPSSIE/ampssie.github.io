@@ -271,7 +271,7 @@
           
   
   
-  AMPSSIE
+  S3-MPM
 
         </a>
       </li>
@@ -589,7 +589,7 @@
   <span class="md-ellipsis">
     
   
-    AMPSSIE
+    S3-MPM
   
 
     
@@ -605,7 +605,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AMPSSIE
+    S3-MPM
   
 
           </label>
@@ -2894,10 +2894,10 @@
 
 
 <h1 id="the-input_datajson-format">The <code>input_data.json</code> format<a class="headerlink" href="#the-input_datajson-format" title="Permanent link">¶</a></h1>
-<p>AMPSSIE drives every analysis from a single <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> file, typically named <code>input_data.json</code>. The file is one JSON object whose top-level keys describe the machine, the <a href="#domain">domain</a>, the soil as <a href="#material-points">material points</a>, the <a href="#rigid-bodies">rigid bodies</a> and their <a href="#contact">contact</a>, the sequence of <a href="#analysis">analysis</a> stages, the <a href="#solver">solver</a> controls and the <a href="#output">output</a>.</p>
+<p>S3-MPM drives every analysis from a single <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> file, typically named <code>input_data.json</code>. The file is one JSON object whose top-level keys describe the machine, the <a href="#domain">domain</a>, the soil as <a href="#material-points">material points</a>, the <a href="#rigid-bodies">rigid bodies</a> and their <a href="#contact">contact</a>, the sequence of <a href="#analysis">analysis</a> stages, the <a href="#solver">solver</a> controls and the <a href="#output">output</a>.</p>
 <p>This page lists <strong>every option the solver reads</strong>, whether it is required, and the default used when an optional one is left out. For worked examples see the <a href="../../TutorialProblems/TutorialProblems/">tutorial problems</a>; each one has a <a href="#complete-examples">complete input file</a>.</p>
 <h2 id="running-an-analysis">Running an analysis<a class="headerlink" href="#running-an-analysis" title="Permanent link">¶</a></h2>
-<p>From Julia, with the AMPSSIE project active:</p>
+<p>From Julia, with the S3-MPM project active:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">using</span><span class="w"> </span><span class="n">S3MPM</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">S3MPM</span><span class="o">.</span><span class="n">non_linear_solve</span><span class="p">(</span><span class="s">"input_data.json"</span><span class="p">)</span>
 </code></pre></div>
