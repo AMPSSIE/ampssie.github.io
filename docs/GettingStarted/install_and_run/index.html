@@ -12,7 +12,7 @@
         <meta name="author" content="Durham University">
       
       
-        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/GettingStarted/Installation/">
+        <link rel="canonical" href="https://durhamarc.github.io/mpm-netzero/docs/GettingStarted/install_and_run/">
       
       
         <link rel="prev" href="../GettingStarted/">
@@ -29,7 +29,7 @@
     
     
       
-        <title>Installation - MPM for Net Zero</title>
+        <title>Install and Run - MPM for Net Zero</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              Install and Run
             
           </span>
         </div>
@@ -740,7 +740,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    Install and Run
   
 
     
@@ -758,7 +758,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    Install and Run
   
 
     
@@ -808,6 +808,17 @@
     <span class="md-ellipsis">
       
         Container Runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloud-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cloud computing
       
     </span>
   </a>
@@ -2269,6 +2280,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cloud-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cloud computing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#visualisation-installation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2299,7 +2321,7 @@
   
 
 
-  <h1>Installation</h1>
+  <h1>Install and Run</h1>
 
 <hr>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">¶</a></h2>
@@ -2346,15 +2368,35 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">include</span><span class="p">(</span><span class="s">"setup_workers.jl"</span><span class="p">)</span>
 </code></pre></div>
 <p>If everything succeeds the REPL prints the package versions being resolved, the activated project path and a <code>starting sim</code> line; see the <a href="../../TutorialProblems/Tutorial_1/#setting-up-and-running-the-problem">Tutorial 1 terminal output</a> (or <a href="../../TutorialProblems/Tutorial_2/#setting-up-and-running-the-problem">Tutorial 2</a>) for the expected console.</p>
-<p><strong>3. Run a problem.</strong> Copy a tutorial <code>input_data.json</code> (for example from <a href="../../TutorialProblems/Tutorial_1_input_data/">Tutorial 1</a> or <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a>) into the <code>MaterialPoints</code> directory and call the S3-MPM entry point from the same Julia REPL:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">S3MPM</span><span class="o">.</span><span class="n">non_linear_solve</span><span class="p">(</span><span class="s">"input_data.json"</span><span class="p">);</span>
+<p><strong>3. Run a problem.</strong> Copy a tutorial <code>input_data.json</code> (for example from <a href="../../TutorialProblems/Tutorial_1_input_data/">Tutorial 1</a> or <a href="../../TutorialProblems/Tutorial_2_input_data/">Tutorial 2</a>) into the folder you want to work in, and run it from that folder:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">CPU</label><label for="__tabbed_1_2">GPU</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>path/to/S3-MPM<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'using S3MPM; S3MPM.non_linear_solve("input_data_sim.json")'</span>
 </code></pre></div>
-<p>This steps through the load increments configured in the JSON and writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> output files to <code>MaterialPoints/src/output</code>. Open the VTU/VTK files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and the stress / displacement fields.</p>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; <code>S3MPM.non_linear_solve()</code> with no argument reads <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads. For the fastest performance on a CPU use the number of physical cores minus 2; Julia runs on one thread if <code>-t</code> is omitted.</li>
+<li>The input file must have <code>"GPU": "off"</code>.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>julia<span class="w"> </span>--project<span class="o">=</span>path/to/S3-MPM<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'using S3MPM; S3MPM.non_linear_solve("input_data_sim.json")'</span>
+</code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; <code>S3MPM.non_linear_solve()</code> with no argument reads <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when the analysis is on a GPU. Julia runs on one thread if <code>-t</code> is omitted.</li>
+<li>The input file must have <code>"GPU": "on"</code>, and the machine needs an NVIDIA GPU with CUDA.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>This steps through the load increments configured in the JSON and writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> output files into the folder you ran from. Open the VTU/VTK files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and the stress / displacement fields.</p>
 </details>
 <h2 id="container-runtime">Container Runtime<a class="headerlink" href="#container-runtime" title="Permanent link">¶</a></h2>
 <p>A container image bundles Julia, S3-MPM and its dependencies, so nothing needs installing on the host machine. This is the usual route on HPC.</p>
 <p>Images are built by a GitHub Actions workflow in the S3-MPM repository and published to the GitHub container registry. The latest build of the default branch is:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ghcr.io/ampssie/s3-mpm:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ghcr.io/ampssie/s3-mpm:latest
 </code></pre></div>
 <p>For work you need to reproduce later, pull a fixed version tag such as <code>ghcr.io/ampssie/s3-mpm:v1.0.0</code> rather than <code>latest</code>, so that the image cannot change underneath you.</p>
 <div class="admonition note">
@@ -2366,35 +2408,60 @@
 <summary>Docker</summary>
 <p><strong>1. Install Docker</strong> using the official guide for your system: <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Windows</a>, <a href="https://docs.docker.com/desktop/setup/install/mac-install/">macOS</a> or <a href="https://docs.docker.com/desktop/setup/install/linux/">Linux</a>.</p>
 <p><strong>2. Pull the image and start a container</strong> from the folder holding your <code>input_data.json</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><input id="__tabbed_1_5" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Windows (CPU)</label><label for="__tabbed_1_2">Windows (GPU)</label><label for="__tabbed_1_3">Linux (CPU)</label><label for="__tabbed_1_4">Linux (GPU)</label><label for="__tabbed_1_5">macOS (CPU)</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><input id="__tabbed_2_5" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Windows (CPU)</label><label for="__tabbed_2_2">Windows (GPU)</label><label for="__tabbed_2_3">Linux (CPU)</label><label for="__tabbed_2_4">Linux (GPU)</label><label for="__tabbed_2_5">macOS (CPU)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="n">-v</span> <span class="p">${</span><span class="n">PWD</span><span class="p">}:/</span><span class="n">work</span> <span class="n">-w</span> <span class="p">/</span><span class="n">work</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="n">-v</span> <span class="p">${</span><span class="n">PWD</span><span class="p">}:/</span><span class="n">work</span> <span class="n">-w</span> <span class="p">/</span><span class="n">work</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span> <span class="n">input_data_sim</span><span class="p">.</span><span class="n">json</span> <span class="n">-t</span> <span class="n">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; if it is not given it defaults to 4. For the fastest performance on a CPU use the number of physical cores minus 2; if the analysis is on a GPU, 4 threads is sufficient.</li>
+<li>The input file must have <code>"GPU": "off"</code>.</li>
+</ul>
 </div>
 <div class="tabbed-block">
 <p>Requirements: Docker Desktop's WSL 2 engine, which is the default. The NVIDIA driver you already have on Windows is all that is needed.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="p">-</span><span class="n">-gpus</span> <span class="n">all</span> <span class="n">-v</span> <span class="p">${</span><span class="n">PWD</span><span class="p">}:/</span><span class="n">work</span> <span class="n">-w</span> <span class="p">/</span><span class="n">work</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">docker</span> <span class="n">pull</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="n">-it</span> <span class="p">-</span><span class="n">-gpus</span> <span class="n">all</span> <span class="n">-v</span> <span class="p">${</span><span class="n">PWD</span><span class="p">}:/</span><span class="n">work</span> <span class="n">-w</span> <span class="p">/</span><span class="n">work</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ampssie</span><span class="p">/</span><span class="n">s3-mpm</span><span class="p">:</span><span class="n">latest</span> <span class="n">input_data_sim</span><span class="p">.</span><span class="n">json</span> <span class="n">-t</span> <span class="n">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when the analysis is on a GPU, and if it is not given it defaults to 4.</li>
+<li><code>--gpus all</code> only makes the GPU visible to the container; the input file must also have <code>"GPU": "on"</code>.</li>
+</ul>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; if it is not given it defaults to 4. For the fastest performance on a CPU use the number of physical cores minus 2.</li>
+<li>The input file must have <code>"GPU": "off"</code>.</li>
+</ul>
 </div>
 <div class="tabbed-block">
 <p>Requirements: Needs the <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when the analysis is on a GPU, and if it is not given it defaults to 4.</li>
+<li><code>--gpus all</code> only makes the GPU visible to the container; the input file must also have <code>"GPU": "on"</code>.</li>
+</ul>
 </div>
 <div class="tabbed-block">
 <p>Requirements: Macs have no NVIDIA GPU, so S3-MPM runs on the CPU.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; if it is not given it defaults to 4. For the fastest performance use the number of physical cores minus 2.</li>
+<li>The input file must have <code>"GPU": "off"</code>.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2405,18 +2472,28 @@
 <p>Apptainer is the usual choice on HPC as it runs without administrator rights. Check whether your cluster already provides it, if not ask your administrator.    </p>
 <p>To install locally on your Linux machine follow the <a href="https://apptainer.org/docs/admin/main/installation.html">installation guide</a> with details for the <a href="https://apptainer.org/docs/user/main/gpu.html">GPU support</a> - the <code>--nv</code> flag passes NVIDIA GPUs into the container.</p>
 <p>To obtain the image pull the image into a local <code>.sif</code> file in your current directory:</p>
-<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>apptainer<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>apptainer<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
 </code></pre></div>
 To run the file call in the terminal, or include in your deploy script: 
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">CPU</label><label for="__tabbed_2_2">GPU</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">CPU</label><label for="__tabbed_3_2">GPU</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>apptainer<span class="w"> </span>run<span class="w"> </span>s3-mpm.sif
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>apptainer<span class="w"> </span>run<span class="w"> </span>s3-mpm.sif<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; if it is not given it defaults to 4. For the fastest performance on a CPU use the number of physical cores minus 2.</li>
+<li>The input file must have <code>"GPU": "off"</code>.</li>
+</ul>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>s3-mpm.sif
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>apptainer<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>s3-mpm.sif<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when the analysis is on a GPU, and if it is not given it defaults to 4.</li>
+<li><code>--nv</code> only makes the GPU visible to the container; the input file must also have <code>"GPU": "on"</code>.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2427,29 +2504,42 @@ To run the file call in the terminal, or include in your deploy script:
 <p>SingularityCE is a common choice on HPC as it runs without administrator rights. Check whether your cluster already provides it with <code>singularity --version</code>; if not, ask your administrator.</p>
 <p>To install locally on your Linux machine follow the <a href="https://docs.sylabs.io/guides/latest/admin-guide/installation.html">installation guide</a>, with details for the <a href="https://docs.sylabs.io/guides/latest/user-guide/gpu.html">GPU support</a> - the <code>--nv</code> flag passes NVIDIA GPUs into the container.</p>
 <p>To obtain the image pull it into a local <code>.sif</code> file in your current directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>singularity<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>singularity<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
 </code></pre></div>
 <p>To run the file call in the terminal, or include in your job script:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">CPU</label><label for="__tabbed_3_2">GPU</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">CPU</label><label for="__tabbed_4_2">GPU</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>singularity<span class="w"> </span>run<span class="w"> </span>s3-mpm.sif
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>singularity<span class="w"> </span>run<span class="w"> </span>s3-mpm.sif<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; if it is not given it defaults to 4. For the fastest performance on a CPU use the number of physical cores minus 2.</li>
+<li>The input file must have <code>"GPU": "off"</code>.</li>
+</ul>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>singularity<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>s3-mpm.sif
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>singularity<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>s3-mpm.sif<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
+<ul>
+<li><code>input_data_sim.json</code> contains the simulation data; if it is not given it defaults to <code>input_data.json</code>.</li>
+<li><code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when the analysis is on a GPU, and if it is not given it defaults to 4.</li>
+<li><code>--nv</code> only makes the GPU visible to the container; the input file must also have <code>"GPU": "on"</code>.</li>
+</ul>
 </div>
 </div>
 </div>
 <p>Singularity runs in the directory you call it from, so keep <code>input_data.json</code> beside <code>s3-mpm.sif</code> and the <code>.vtu</code> and <code>.csv</code> results appear there too.</p>
 </details>
+<h2 id="cloud-computing">Cloud computing<a class="headerlink" href="#cloud-computing" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code>To do:
+</code></pre></div>
 <h2 id="visualisation-installation">Visualisation installation<a class="headerlink" href="#visualisation-installation" title="Permanent link">¶</a></h2>
 <p>S3-MPM writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> files. <a href="https://www.paraview.org/">ParaView</a> opens the VTU and VTK output, and is the viewer the tutorials use:</p>
 <details class="plain">
 <summary>ParaView installation</summary>
 <p>Download the latest release from <a href="https://www.paraview.org/download/">paraview.org/download</a>. The standard build is all that is needed.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><input id="__tabbed_4_3" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Windows</label><label for="__tabbed_4_2">macOS</label><label for="__tabbed_4_3">Linux</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"><input id="__tabbed_5_3" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">Windows</label><label for="__tabbed_5_2">macOS</label><label for="__tabbed_5_3">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Download the <code>.msi</code> installer and run it.</p>
