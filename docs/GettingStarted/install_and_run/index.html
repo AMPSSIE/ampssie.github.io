@@ -807,7 +807,7 @@
   <a href="#container-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Container Runtime
+        Container runtime
       
     </span>
   </a>
@@ -1458,34 +1458,6 @@
     
   
     Input format
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../UsingTheSoftware/DeployingTheSoftware/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Deploying the software
   
 
     
@@ -2272,7 +2244,7 @@
   <a href="#container-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Container Runtime
+        Container runtime
       
     </span>
   </a>
@@ -2329,11 +2301,11 @@
 <p><strong>Operating system:</strong> Linux, macOS, and Windows are all supported. Most development and testing has been done on Linux.</p>
 <p><strong>Julia version:</strong> 1.12 or newer. Earlier releases may work but are not actively tested.</p>
 <p><strong>Hardware:</strong> A typical desktop or laptop is sufficient for the tutorial problems. For larger 3D problems with refined meshes it is recommended to use an HPC with at least 10 cores, at least 60 GB of RAM and 10 GB of free disk for outputs. If you are using a GPU it is also recommended that the GPU has 60 GB of GPU memory (data-centre GPUs such as the NVIDIA A100 or H100 have 40-80 GB).</p>
-<p><strong>Software requrements tooling:</strong></p>
+<p><strong>Software requirements:</strong></p>
 <ul>
 <li><a href="https://julialang.org/downloads/">Julia</a> - at least version 1.12.</li>
 <li>A text editor with JSON support for editing <code>input_data.json</code> files - <a href="https://code.visualstudio.com/">VS Code</a> with the <a href="https://www.julia-vscode.org/">Julia extension</a> is a sensible default.</li>
-<li><a href="https://www.paraview.org/">ParaView</a> or <a href="https://visit-dav.github.io/visit-website/">VisIt</a> for visualising the VTU/VTK output, support and tutorial detail is only provided for Paraview.</li>
+<li><a href="https://www.paraview.org/">ParaView</a> or <a href="https://visit-dav.github.io/visit-website/">VisIt</a> for visualising the VTU/VTK output. Support and tutorial detail are only provided for ParaView.</li>
 </ul>
 <p><strong>Optional:</strong></p>
 <ul>
@@ -2352,28 +2324,27 @@
 <details class="plain">
 <summary>Downloading S3-MPM from GitHub</summary>
 <p>The source lives at <a href="https://github.com/AMPSSIE/S3-MPM">github.com/AMPSSIE/S3-MPM</a>.</p>
-<p>Use <code>git clone</code> it to pull it from GitHub your current directory, updating later is then a single <code>git pull</code>:</p>
+<p>Use <code>git clone</code> to pull the code from GitHub into your current directory; updating later is then a single <code>git pull</code> from inside the folder:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AMPSSIE/S3-MPM.git
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>S3-MPM
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>git<span class="w"> </span>pull<span class="w"> </span><span class="c1">#for updates</span>
 </code></pre></div>
-<p>If you prefer to download the zip containing the code, go to <a href="https://github.com/AMPSSIE/S3-MPM">github.com/AMPSSIE/S3-MPM</a></p>
+<p>If you prefer to download the ZIP containing the code, go to <a href="https://github.com/AMPSSIE/S3-MPM">github.com/AMPSSIE/S3-MPM</a>.</p>
 <p><figure id="_figure-1"><img alt="The green Code button on the S3-MPM GitHub page, with Download ZIP at the bottom of the menu." id="fig-github-zip" src="../../../img/github_download_zip.png" width="90%"><figcaption>Figure 1: The green Code button on the S3-MPM GitHub page, with Download ZIP at the bottom of the menu.</figcaption></figure></p>
-<p>Without git, use the green <em>Code</em> button on the GitHub page, choose <em>Download ZIP</em> and unzip it wherever you want to keep it.</p>
-<p>Both method will produce an S3-MPM folder which contains the Julia code. </p>
+<p>Then use the green <em>Code</em> button, choose <em>Download ZIP</em> and unzip it wherever you want to keep it.</p>
+<p>Both methods produce an <code>S3-MPM</code> folder containing the Julia code.</p>
 </details>
 <details class="plain">
 <summary>S3-MPM installation</summary>
 <p><strong>1. Download the code</strong> from GitHub, as described above.</p>
-<p><strong>2. Start Julia and install the S3-MPM package.</strong> Open a powershell (Windows) or terminal (Linux/mac) window and start julia with</p>
-<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">    </span>julia<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
+<p><strong>2. Start Julia and install the S3-MPM package.</strong> Open a PowerShell (Windows) or terminal (Linux/macOS) window and start Julia with:</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>julia<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
-The <code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when the analysis is on a GPU but generally for a CPU run set the number of threads to the numbe of physical cores -2. Julia runs on one thread if <code>-t</code> is omitted.
-<p>In the Julia REPL, change directory in <code>S3-MPM</code> and install the S3MPM package. This installs the exact dependencies recorded in <code>Manifest.toml</code> and starts the parallel workers that S3-MPM uses:</p>
+<code>-t 4</code> sets the number of CPU threads. Four threads is sufficient when the analysis is on a GPU; for a CPU run, set the number of threads to the number of physical cores minus 2. Julia runs on one thread if <code>-t</code> is omitted.
+<p>In the Julia REPL, change directory to <code>S3-MPM</code> and install the S3MPM package. This installs the exact dependencies recorded in <code>Manifest.toml</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cd</span><span class="p">(</span><span class="s">"path/to/S3-MPM"</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span><span class="p">;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">"."</span><span class="p">)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">S3MPM</span>
 </code></pre></div>
 <p>If everything succeeds the REPL prints the package versions being resolved.</p>
@@ -2381,18 +2352,24 @@ The <code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">CPU</label><label for="__tabbed_1_2">GPU</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">    julia&gt; S3MPM.non_linear_solve("input_data_sim.json")'</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cd</span><span class="p">(</span><span class="s">"path/to/run_folder"</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">S3MPM</span><span class="o">.</span><span class="n">non_linear_solve</span><span class="p">(</span><span class="s">"input_data_sim.json"</span><span class="p">);</span>
 </code></pre></div>
 <ul>
+<li><code>cd</code> moves the REPL to the folder holding your input file, since step 2 left it in <code>S3-MPM</code>.</li>
 <li><code>input_data_sim.json</code> contains the simulation data; <code>S3MPM.non_linear_solve()</code> with no argument reads <code>input_data.json</code>.</li>
+<li>The semicolon stops the REPL printing the material-point data that is returned.</li>
 <li>The input file must have <code>"GPU": "off"</code>.</li>
 </ul>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">    julia&gt; S3MPM.non_linear_solve("input_data_sim.json")'</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">cd</span><span class="p">(</span><span class="s">"path/to/run_folder"</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">S3MPM</span><span class="o">.</span><span class="n">non_linear_solve</span><span class="p">(</span><span class="s">"input_data_sim.json"</span><span class="p">);</span>
 </code></pre></div>
 <ul>
+<li><code>cd</code> moves the REPL to the folder holding your input file, since step 2 left it in <code>S3-MPM</code>.</li>
 <li><code>input_data_sim.json</code> contains the simulation data; <code>S3MPM.non_linear_solve()</code> with no argument reads <code>input_data.json</code>.</li>
+<li>The semicolon stops the REPL printing the material-point data that is returned.</li>
 <li>The input file must have <code>"GPU": "on"</code>, and the machine needs an NVIDIA GPU with CUDA.</li>
 </ul>
 </div>
@@ -2400,7 +2377,7 @@ The <code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when
 </div>
 <p>This steps through the load increments configured in the JSON and writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> output files into the folder you ran from. Open the VTU/VTK files in <a href="https://www.paraview.org/">ParaView</a> (or <a href="https://visit-dav.github.io/visit-website/">VisIt</a>) to inspect the deformed mesh and the stress / displacement fields.</p>
 </details>
-<h2 id="container-runtime">Container Runtime<a class="headerlink" href="#container-runtime" title="Permanent link">¶</a></h2>
+<h2 id="container-runtime">Container runtime<a class="headerlink" href="#container-runtime" title="Permanent link">¶</a></h2>
 <p>A container image bundles Julia, S3-MPM and its dependencies, so nothing needs installing on the host machine. This is the usual route on HPC.</p>
 <p>Images are built by a GitHub Actions workflow in the S3-MPM repository and published to the GitHub container registry. The latest build of the default branch is:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ghcr.io/ampssie/s3-mpm:latest
@@ -2449,7 +2426,7 @@ The <code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when
 </ul>
 </div>
 <div class="tabbed-block">
-<p>Requirements: Needs the <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a>.</p>
+<p>Requirements: the <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
@@ -2460,7 +2437,7 @@ The <code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when
 </ul>
 </div>
 <div class="tabbed-block">
-<p>Requirements: Macs have no NVIDIA GPU, so S3-MPM runs on the CPU.</p>
+<p>Note: Macs have no NVIDIA GPU, so S3-MPM runs on the CPU.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span>ghcr.io/ampssie/s3-mpm:latest<span class="w"> </span>input_data_sim.json<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
@@ -2476,12 +2453,12 @@ The <code>-t 4</code> is the number of CPU threads; 4 threads is sufficient when
 </details>
 <details class="plain">
 <summary>Apptainer (Linux only)</summary>
-<p>Apptainer is the usual choice on HPC as it runs without administrator rights. Check whether your cluster already provides it, if not ask your administrator.    </p>
-<p>To install locally on your Linux machine follow the <a href="https://apptainer.org/docs/admin/main/installation.html">installation guide</a> with details for the <a href="https://apptainer.org/docs/user/main/gpu.html">GPU support</a> - the <code>--nv</code> flag passes NVIDIA GPUs into the container.</p>
-<p>To obtain the image pull the image into a local <code>.sif</code> file in your current directory:</p>
+<p>Apptainer is the usual choice on HPC as it runs without administrator rights. Check whether your cluster already provides it with <code>apptainer --version</code>; if not, ask your administrator.</p>
+<p>To install locally on your Linux machine follow the <a href="https://apptainer.org/docs/admin/main/installation.html">installation guide</a>. The <code>--nv</code> flag passes NVIDIA GPUs into the container, as described in the <a href="https://apptainer.org/docs/user/main/gpu.html">GPU support guide</a>.</p>
+<p>To obtain the image, pull it into a local <code>.sif</code> file in your current directory:</p>
 <p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>apptainer<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
 </code></pre></div>
-To run the file call in the terminal, or include in your deploy script: 
+To run the file, call it in the terminal or include it in your job script:
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">CPU</label><label for="__tabbed_3_2">GPU</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2509,11 +2486,11 @@ To run the file call in the terminal, or include in your deploy script:
 <details class="plain">
 <summary>Singularity (Linux only)</summary>
 <p>SingularityCE is a common choice on HPC as it runs without administrator rights. Check whether your cluster already provides it with <code>singularity --version</code>; if not, ask your administrator.</p>
-<p>To install locally on your Linux machine follow the <a href="https://docs.sylabs.io/guides/latest/admin-guide/installation.html">installation guide</a>, with details for the <a href="https://docs.sylabs.io/guides/latest/user-guide/gpu.html">GPU support</a> - the <code>--nv</code> flag passes NVIDIA GPUs into the container.</p>
-<p>To obtain the image pull it into a local <code>.sif</code> file in your current directory:</p>
+<p>To install locally on your Linux machine follow the <a href="https://docs.sylabs.io/guides/latest/admin-guide/installation.html">installation guide</a>. The <code>--nv</code> flag passes NVIDIA GPUs into the container, as described in the <a href="https://docs.sylabs.io/guides/latest/user-guide/gpu.html">GPU support guide</a>.</p>
+<p>To obtain the image, pull it into a local <code>.sif</code> file in your current directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>singularity<span class="w"> </span>pull<span class="w"> </span>s3-mpm.sif<span class="w"> </span>docker://ghcr.io/ampssie/s3-mpm:latest
 </code></pre></div>
-<p>To run the file call in the terminal, or include in your job script:</p>
+<p>To run the file, call it in the terminal or include it in your job script:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">CPU</label><label for="__tabbed_4_2">GPU</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2539,8 +2516,7 @@ To run the file call in the terminal, or include in your deploy script:
 <p>Singularity runs in the directory you call it from, so keep <code>input_data.json</code> beside <code>s3-mpm.sif</code> and the <code>.vtu</code> and <code>.csv</code> results appear there too.</p>
 </details>
 <h2 id="cloud-computing">Cloud computing<a class="headerlink" href="#cloud-computing" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code>To do:
-</code></pre></div>
+<p>To do:</p>
 <h2 id="visualisation-installation">Visualisation installation<a class="headerlink" href="#visualisation-installation" title="Permanent link">¶</a></h2>
 <p>S3-MPM writes <code>.vtu</code>, <code>.vtk</code> and <code>.csv</code> files. <a href="https://www.paraview.org/">ParaView</a> opens the VTU and VTK output, and is the viewer the tutorials use:</p>
 <details class="plain">
